@@ -51,22 +51,22 @@ export default function App() {
 
   return (
     <div className="relative">
-      {/* Sidebar nav */}
-      <nav className="fixed left-0 top-0 h-screen w-14 z-50 flex flex-col items-center justify-center gap-0.5"
-        style={{ background: 'linear-gradient(to right, rgba(26,26,46,0.7), transparent)' }}>
+      {/* Sidebar — solid dark bg, 48px width */}
+      <nav className="fixed left-0 top-0 h-screen z-50 flex flex-col items-center justify-center gap-0.5"
+        style={{ width: '48px', background: 'var(--bg-dark)' }}>
         <div className="absolute top-5 left-0 w-full flex justify-center">
-          <span className="font-mono text-[13px] tracking-[0.3em] uppercase font-semibold" style={{ color: 'rgba(232,224,216,0.4)' }}>RC</span>
+          <span className="font-mono text-[11px] tracking-[0.25em] uppercase font-medium" style={{ color: 'var(--text-light-muted)' }}>RC</span>
         </div>
         {SECTIONS.map((s, i) => (
-          <button key={s.id} onClick={() => scrollTo(i)} className="group relative flex items-center justify-center w-9 h-9" title={s.label}>
+          <button key={s.id} onClick={() => scrollTo(i)} className="group relative flex items-center justify-center w-8 h-8" title={s.label}>
             <span className="block rounded-full transition-all duration-300" style={{
-              width: active === i ? 12 : 6,
-              height: active === i ? 12 : 6,
-              background: active === i ? '#C45B4D' : 'rgba(232,224,216,0.2)',
-              boxShadow: active === i ? '0 0 12px rgba(196,91,77,0.5)' : 'none',
+              width: active === i ? 10 : 6,
+              height: active === i ? 10 : 6,
+              background: active === i ? 'var(--accent)' : 'rgba(232,226,218,0.15)',
+              boxShadow: active === i ? '0 0 8px rgba(196,82,62,0.4)' : 'none',
             }} />
-            <span className="absolute left-12 px-2.5 py-1.5 rounded-lg text-[13px] font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
-              style={{ background: '#222238', color: '#E8E0D8', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 4px 16px rgba(0,0,0,0.3)' }}>
+            <span className="absolute left-11 px-2.5 py-1.5 rounded-lg text-[13px] font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
+              style={{ background: 'var(--bg-card-dark)', color: 'var(--text-light)', border: '1px solid var(--border-dark)', boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }}>
               {String(i).padStart(2, '0')} {s.label}
             </span>
           </button>
@@ -80,21 +80,25 @@ export default function App() {
             <div data-idx={i} id={SECTIONS[i].id}><Comp /></div>
             {i < COMPS.length - 1 && (
               <div className="relative h-px">
-                <div className="absolute inset-x-0 top-0 h-px" style={{ background: 'linear-gradient(to right, transparent, rgba(196,91,77,0.15), transparent)' }} />
+                <div className="absolute inset-x-0 top-0 h-px" style={{ background: 'linear-gradient(to right, transparent, rgba(196,82,62,0.1), transparent)' }} />
               </div>
             )}
           </React.Fragment>
         ))}
         {/* Footer */}
-        <div className="section-dark py-14 text-center">
-          <div className="relative z-10">
-            <p className="font-mono text-[11px] tracking-[0.3em] uppercase" style={{ color: 'rgba(232,224,216,0.25)' }}>
-              Prepared by Raktim Chakravartty · March 2026 · Confidential
-            </p>
-            <div className="mt-4 flex justify-center gap-8">
-              <a href="https://thehosteller.raktim.co" target="_blank" rel="noreferrer" className="font-mono text-[13px] transition-colors hover:text-terra" style={{ color: 'rgba(196,91,77,0.6)' }}>thehosteller.raktim.co</a>
-              <span className="font-mono text-[13px]" style={{ color: 'rgba(232,224,216,0.2)' }}>hello@raktim.co</span>
-            </div>
+        <div className="section-dark py-12 text-center">
+          <p className="font-mono text-[11px] tracking-[0.3em] uppercase" style={{ color: 'var(--text-light-muted)' }}>
+            Prepared by Raktim Chakravartty · March 2026 · Confidential
+          </p>
+          <div className="mt-3 flex justify-center gap-8">
+            <a href="https://thehosteller.raktim.co" target="_blank" rel="noreferrer"
+              className="font-mono text-[13px] transition-colors"
+              style={{ color: 'var(--accent)', opacity: 0.6 }}
+              onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
+              onMouseLeave={e => (e.currentTarget.style.opacity = '0.6')}>
+              thehosteller.raktim.co
+            </a>
+            <span className="font-mono text-[13px]" style={{ color: 'var(--text-light-muted)' }}>hello@raktim.co</span>
           </div>
         </div>
       </div>
