@@ -1,5 +1,6 @@
 import { CAREER, PROOF, QUOTES } from '../data/constants';
 import { useReveal } from '../hooks/useReveal';
+import Icon from './Icons';
 
 export default function WhyRaktim() {
   const r1 = useReveal(), r2 = useReveal(), r3 = useReveal(), r4 = useReveal(), r5 = useReveal();
@@ -37,15 +38,15 @@ export default function WhyRaktim() {
           {/* What I bring */}
           <div className="lg:col-span-2 space-y-3">
             {[
-              { icon: '🏗️', title: 'I built the original brand', desc: 'First visual identity, first social posts, first environmental branding. No other candidate has this institutional memory.' },
-              { icon: '🏢', title: 'Enterprise rigor', desc: '2.5 years at ZS Associates serving Pfizer, Moderna, Novartis under Fortune 500 brand governance. The discipline a 72+ property network demands.' },
-              { icon: '📈', title: 'Proven brand leadership', desc: 'Led complete rebrand at Soulverse. Promoted to Brand & Marketing Head in 7 months. CEO-signed, 50% salary increase.' },
-              { icon: '⚙️', title: 'Systems, not surfaces', desc: '50+ brand systems through independent practice. Positioning through identity through rollout. Exactly what The Hosteller needs.' },
-              { icon: '🤖', title: 'AI integration from 2023', desc: 'Documented AI workflow research at ZS before mainstream adoption. The AI strategy in this document is based on tools I use daily.' },
+              { icon: 'foundation', title: 'I built the original brand', desc: 'First visual identity, first social posts, first environmental branding. No other candidate has this institutional memory.' },
+              { icon: 'enterprise', title: 'Enterprise rigor', desc: '2.5 years at ZS Associates serving Pfizer, Moderna, Novartis under Fortune 500 brand governance. The discipline a 72+ property network demands.' },
+              { icon: 'trending-up', title: 'Proven brand leadership', desc: 'Led complete rebrand at Soulverse. Promoted to Brand & Marketing Head in 7 months. CEO-signed, 50% salary increase.' },
+              { icon: 'settings', title: 'Systems, not surfaces', desc: '50+ brand systems through independent practice. Positioning through identity through rollout. Exactly what The Hosteller needs.' },
+              { icon: 'cpu', title: 'AI integration from 2023', desc: 'Documented AI workflow research at ZS before mainstream adoption. The AI strategy in this document is based on tools I use daily.' },
             ].map((item, i) => (
               <div key={i} className="bg-dark-lighter border border-white/5 rounded-lg p-4 hover:border-white/8 transition-colors">
                 <div className="flex items-start gap-3">
-                  <span className="text-lg shrink-0">{item.icon}</span>
+                  <Icon name={item.icon} className="text-warm-100/60 shrink-0 mt-0.5" />
                   <div>
                     <h4 className="font-body text-xs font-semibold text-warm-100/80">{item.title}</h4>
                     <p className="font-body text-[10px] text-warm-200/45 mt-0.5 leading-relaxed">{item.desc}</p>
@@ -64,7 +65,7 @@ export default function WhyRaktim() {
               <div key={i} className={`rounded-lg p-4 transition-all ${c.highlight ? 'bg-terracotta/10 border-2 border-terracotta/25' : 'bg-dark-surface border border-white/5'}`}>
                 <div className="flex items-start justify-between mb-1.5">
                   <span className="font-mono text-[10px] text-terracotta/60 font-medium">{c.year}</span>
-                  {c.highlight && <span className="px-1.5 py-0.5 bg-terracotta/15 text-terracotta-light text-[7px] font-mono tracking-wider rounded-full uppercase">Origin</span>}
+                  {c.highlight && <span className="px-1.5 py-0.5 bg-terracotta/15 text-terracotta-light text-[10px] font-mono tracking-wider rounded-full uppercase">Origin</span>}
                 </div>
                 <h4 className="font-body text-sm font-semibold text-warm-100/80">{c.role}</h4>
                 <span className="font-mono text-[9px] text-warm-100/30 block">{c.title}</span>
@@ -82,7 +83,7 @@ export default function WhyRaktim() {
               <div key={i} className="bg-dark-surface border border-white/5 rounded-xl p-4 text-center hover:border-white/8 transition-colors">
                 <span className="font-display text-2xl font-bold text-terracotta-light">{p.val}</span>
                 <p className="font-body text-[10px] text-warm-100/60 mt-1 font-medium">{p.label}</p>
-                <p className="font-mono text-[8px] text-warm-100/25 mt-0.5">{p.sub}</p>
+                <p className="font-mono text-[10px] text-warm-100/25 mt-0.5">{p.sub}</p>
               </div>
             ))}
           </div>

@@ -43,7 +43,7 @@ export default function App() {
       <nav className="fixed left-0 top-0 h-screen w-14 z-50 flex flex-col items-center justify-center gap-0.5"
            style={{ background: 'linear-gradient(to right, rgba(26,26,46,0.6), transparent)' }}>
         <div className="absolute top-5 left-0 w-full flex justify-center">
-          <span className="font-mono text-[8px] tracking-[0.3em] text-warm-100/30 uppercase">Rak Tim</span>
+          <span className="font-mono text-[10px] tracking-[0.3em] text-warm-100/40 uppercase">RC</span>
         </div>
         {SECTIONS.map((s, i) => (
           <button key={s.id} onClick={() => scrollTo(i)} className="group relative flex items-center justify-center w-9 h-9" title={s.label}>

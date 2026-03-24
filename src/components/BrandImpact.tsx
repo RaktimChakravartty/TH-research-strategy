@@ -11,7 +11,7 @@ export default function BrandImpact() {
     <section className="section-dark grain">
       <div className="relative z-10 section-pad">
         <div ref={r1.ref} className={r1.cls}>
-          <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-terracotta/50">08</span>
+          <span className="font-mono text-[11px] tracking-[0.35em] uppercase text-terracotta/50">08</span>
           <h2 className="mt-1 font-display text-warm-100 font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>How Brand Drives Business</h2>
           <p className="mt-3 font-body text-warm-200/50 max-w-2xl text-sm leading-relaxed">Not projections — structural levers with quantifiable ranges based on current operational data.</p>
         </div>
@@ -26,7 +26,7 @@ export default function BrandImpact() {
                     <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: item.color }} />
                     <div>
                       <h4 className="font-body text-sm font-semibold text-warm-100/85">{item.lever}</h4>
-                      <p className="font-body text-[10px] text-warm-200/35 mt-0.5">{item.detail}</p>
+                      <p className="font-body text-[11px] text-warm-200/35 mt-0.5">{item.detail}</p>
                     </div>
                   </div>
                   <span className="font-display text-lg font-bold text-warm-100">₹{item.low}–{item.high}<span className="text-warm-200/30 text-xs font-mono ml-1">Cr</span></span>
@@ -42,22 +42,22 @@ export default function BrandImpact() {
           <div className="mt-8 bg-gradient-to-r from-terracotta/15 via-terracotta/8 to-transparent border border-terracotta/15 rounded-xl p-7">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
               <div>
-                <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-terracotta/40">Total brand-driven impact</span>
+                <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-terracotta/40">Total brand-driven impact</span>
                 <div className="mt-1 flex items-baseline gap-1">
                   <span className="font-display text-3xl md:text-4xl font-bold text-warm-100">₹{totalLow}–{totalHigh}</span>
                   <span className="font-mono text-terracotta-light text-base">Cr/yr</span>
                 </div>
               </div>
               <div>
-                <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-warm-100/25">Brand function cost</span>
+                <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-warm-100/25">Brand function cost</span>
                 <div className="mt-1">
                   <span className="font-display text-xl font-bold text-warm-100/60">₹1.38–2.10</span>
                   <span className="font-mono text-warm-100/25 text-xs ml-1">Cr/yr</span>
                 </div>
-                <span className="font-mono text-[9px] text-warm-100/15">11.5–17.5% of brand & marketing allocation</span>
+                <span className="font-mono text-[11px] text-warm-100/15">11.5–17.5% of brand & marketing allocation</span>
               </div>
               <div>
-                <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-gold/50">Return on investment</span>
+                <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-gold/50">Return on investment</span>
                 <div className="mt-1 flex items-baseline gap-1">
                   <span className="font-display text-3xl md:text-4xl font-bold text-gold">8–15×</span>
                   <span className="font-mono text-gold/40 text-sm">ROI</span>
@@ -75,8 +75,8 @@ export default function BrandImpact() {
             ].map((r, i) => (
               <div key={i} className="bg-dark-surface border border-white/5 rounded-lg p-3.5">
                 <span className="font-display text-sm font-semibold text-warm-100/60">{r.b}</span>
-                <p className="font-mono text-[9px] text-terracotta/50 mt-0.5">{r.m}</p>
-                <p className="font-body text-[10px] text-warm-200/30 mt-0.5">{r.e}</p>
+                <p className="font-mono text-[11px] text-terracotta/50 mt-0.5">{r.m}</p>
+                <p className="font-body text-[11px] text-warm-200/30 mt-0.5">{r.e}</p>
               </div>
             ))}
           </div>

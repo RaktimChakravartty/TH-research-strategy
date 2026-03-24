@@ -7,7 +7,7 @@ export default function QuickWinsTimeline() {
     <section className="section-light">
       <div className="section-pad">
         <div ref={r1.ref} className={r1.cls}>
-          <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-terracotta/50">07</span>
+          <span className="font-mono text-[11px] tracking-[0.35em] uppercase text-terracotta/50">07</span>
           <h2 className="mt-1 font-display text-dark font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>First 90 Days</h2>
           <p className="mt-3 font-body text-dark/55 max-w-2xl text-sm leading-relaxed">Strategic transformation takes 12 months. Credibility is built in the first 90 days. Quick wins that create visible impact before the full system is complete.</p>
         </div>
@@ -19,7 +19,7 @@ export default function QuickWinsTimeline() {
               <div className="h-1.5 rounded-full" style={{ backgroundColor: p.color + '30' }}>
                 <div className="h-full rounded-full" style={{ backgroundColor: p.color }} />
               </div>
-              <span className="font-mono text-[8px] text-dark/30 mt-1 block text-center">{p.phase}</span>
+              <span className="font-mono text-[11px] text-dark/30 mt-1 block text-center">{p.phase}</span>
             </div>
           ))}
         </div>
@@ -32,7 +32,7 @@ export default function QuickWinsTimeline() {
                   <span className="font-mono text-white text-sm font-bold">{pi + 1}</span>
                 </div>
                 <div>
-                  <span className="font-mono text-[9px] tracking-wider uppercase" style={{ color: phase.color + 'aa' }}>{phase.phase}</span>
+                  <span className="font-mono text-[11px] tracking-wider uppercase" style={{ color: phase.color + 'aa' }}>{phase.phase}</span>
                   <h3 className="font-display text-dark text-base font-bold">{phase.title}</h3>
                 </div>
               </div>
@@ -41,7 +41,7 @@ export default function QuickWinsTimeline() {
                   <div key={i} className="relative bg-white/60 border border-warm-200 rounded-lg p-3.5 hover:bg-white/90 transition-colors">
                     <div className="absolute -left-[27px] top-3.5 w-2.5 h-2.5 rounded-full border-2 bg-warm-50" style={{ borderColor: phase.color }} />
                     <h4 className="font-body text-xs font-semibold text-dark/75">{item.t}</h4>
-                    <p className="font-body text-[10px] text-dark/45 mt-0.5 leading-relaxed">{item.d}</p>
+                    <p className="font-body text-xs text-dark/45 mt-0.5 leading-relaxed">{item.d}</p>
                   </div>
                 ))}
               </div>

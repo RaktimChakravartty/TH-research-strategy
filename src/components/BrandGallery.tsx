@@ -3,24 +3,38 @@ import { GALLERY } from '../data/constants';
 import { useReveal } from '../hooks/useReveal';
 
 function GalleryCard({ item }: { item: { brand: string, note: string, ref: string } }) {
-  const [imgError, setImgError] = useState(true); // Start with placeholder, user adds real images
-  const imagePath = `/images/${item.brand.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+  const [imgError, setImgError] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const imagePath = `/images/${item.brand.toLowerCase().replace(/\s+/g, '-')}.svg`;
 
   return (
     <div className="group relative overflow-hidden rounded-lg aspect-[4/3] bg-dark-surface">
       {!imgError ? (
-        <img src={imagePath} alt={item.brand} className="w-full h-full object-cover" onError={() => setImgError(true)} />
+        <>
+          {!imgLoaded && (
+            <div className="absolute inset-0 bg-gradient-to-br from-dark-lighter via-dark to-dark-surface flex items-center justify-center">
+              <div className="w-5 h-5 border-2 border-warm-100/10 border-t-terracotta/40 rounded-full animate-spin" />
+            </div>
+          )}
+          <img
+            src={imagePath}
+            alt={item.brand}
+            className={`w-full h-full object-cover transition-opacity duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+            onLoad={() => setImgLoaded(true)}
+            onError={() => setImgError(true)}
+          />
+        </>
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-dark-lighter via-dark to-dark-surface flex flex-col items-center justify-center p-4">
           <span className="font-display text-warm-100/15 text-lg font-semibold text-center">{item.brand}</span>
-          <span className="font-mono text-[8px] text-warm-100/8 mt-1 tracking-wider uppercase">Add screenshot: {item.ref}</span>
+          <span className="font-mono text-[10px] text-warm-100/8 mt-1 tracking-wider uppercase">Add screenshot: {item.ref}</span>
         </div>
       )}
       {/* Hover overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
         <span className="font-body text-sm font-semibold text-warm-100">{item.brand}</span>
         <p className="font-body text-[10px] text-warm-200/70 mt-1 leading-snug">{item.note}</p>
-        <span className="font-mono text-[8px] text-terracotta/50 mt-1">{item.ref}</span>
+        <span className="font-mono text-[10px] text-terracotta/50 mt-1">{item.ref}</span>
       </div>
     </div>
   );
@@ -51,7 +65,7 @@ export default function BrandGallery() {
         </div>
 
         <p className="mt-6 font-mono text-[9px] text-warm-100/15 text-center tracking-wide">
-          Add curated screenshots to public/images/ — named as brand-name.jpg (lowercase, hyphenated)
+          Replace SVG placeholders in public/images/ with real screenshots (brand-name.svg or .jpg)
         </p>
       </div>
     </section>
