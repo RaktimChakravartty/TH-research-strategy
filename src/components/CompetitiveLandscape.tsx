@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { COMPETITORS, COMP_BARS } from '../data/constants';
 import { useReveal } from '../hooks/useReveal';
 
@@ -34,12 +35,26 @@ function BrandCard({ brand, isPrimary }: { brand: typeof COMPETITORS.hosteller, 
 
 function HBar({ label, items }: { label: string, items: { name: string, val: number, color: string }[] }) {
   const max = Math.max(...items.map(i => i.val));
+  const barRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = barRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.2 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   if (max === 0) return null;
   return (
-    <div>
+    <div ref={barRef}>
       <span className="font-mono text-[11px] text-warm-100/30 uppercase tracking-wider">{label}</span>
       <div className="mt-2 space-y-2">
-        {items.map(it => (
+        {items.map((it, idx) => (
           <div key={it.name} className="flex items-center gap-2.5">
             <span className="font-body text-[11px] text-warm-100/40 w-24 shrink-0 text-right">{it.name}</span>
             {it.val === 0 ? (
@@ -48,8 +63,15 @@ function HBar({ label, items }: { label: string, items: { name: string, val: num
               </div>
             ) : (
               <div className="flex-1 h-6 bg-white/5 rounded overflow-hidden">
-                <div className="h-full rounded flex items-center justify-end pr-2 transition-all duration-700" style={{ width: `${(it.val / max) * 100}%`, backgroundColor: it.color }}>
-                  <span className="font-mono text-[10px] text-white/90 font-medium">
+                <div
+                  className="h-full rounded flex items-center justify-end pr-2 transition-all duration-700"
+                  style={{
+                    width: visible ? `${(it.val / max) * 100}%` : '0%',
+                    backgroundColor: it.color,
+                    transitionDelay: `${idx * 120}ms`,
+                  }}
+                >
+                  <span className={`font-mono text-[10px] text-white/90 font-medium transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: `${idx * 120 + 400}ms` }}>
                     {it.val}
                     {it.val === max && <span className="ml-1 text-gold/80 text-[10px]">★</span>}
                   </span>
@@ -64,7 +86,7 @@ function HBar({ label, items }: { label: string, items: { name: string, val: num
 }
 
 export default function CompetitiveLandscape() {
-  const r1 = useReveal(), r2 = useReveal(), r3 = useReveal();
+  const r1 = useReveal(), r2 = useReveal(), r3 = useReveal(), r4 = useReveal();
   const { hosteller: h, zostel: z, gostops: g } = COMPETITORS;
 
   return (
@@ -96,7 +118,7 @@ export default function CompetitiveLandscape() {
           {COMP_BARS.find(b => b.note) && <p className="mt-3 font-mono text-[11px] text-warm-100/15">{COMP_BARS.find(b => b.note)!.note}</p>}
         </div>
 
-        <div className="mt-8 bg-gradient-to-r from-terracotta/10 via-dark-surface to-transparent border border-terracotta/15 rounded-xl p-6 md:p-8">
+        <div ref={r4.ref} className={`mt-8 bg-gradient-to-r from-terracotta/10 via-dark-surface to-transparent border border-terracotta/15 rounded-xl p-6 md:p-8 ${r4.cls}`}>
           <div className="flex items-start gap-4">
             <div className="text-terracotta/30 text-4xl font-display leading-none shrink-0">"</div>
             <p className="font-display text-warm-100/80 text-base md:text-lg italic leading-relaxed">No competitor currently holds both operational foundation <span className="text-terracotta-light font-medium">and</span> brand system. That's the opportunity.</p>

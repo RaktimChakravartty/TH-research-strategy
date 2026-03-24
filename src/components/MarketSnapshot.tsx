@@ -9,7 +9,7 @@ const Tip = ({ active, payload, label }: any) => {
 };
 
 export default function MarketSnapshot() {
-  const r1 = useReveal(), r2 = useReveal(), r3 = useReveal(), r4 = useReveal();
+  const r1 = useReveal(), r2 = useReveal(), r3 = useReveal(), r4 = useReveal(), r5 = useReveal();
 
   return (
     <section className="section-light">
@@ -82,9 +82,9 @@ export default function MarketSnapshot() {
         </div>
 
         {/* Tailwinds */}
-        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div ref={r5.ref} className={`mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 ${r5.cls}`}>
           {MARKET.tailwinds.map((tw, i) => (
-            <div key={i} className="border border-warm-200 rounded-lg p-3.5 bg-white/30 hover:bg-white/60 transition-colors">
+            <div key={i} className={`border border-warm-200 rounded-lg p-3.5 bg-white/30 hover:bg-white/60 transition-colors sd-${i+1}`}>
               <Icon name={tw.icon} className="text-dark/50" />
               <h4 className="mt-1.5 font-body text-xs font-semibold text-dark/75">{tw.t}</h4>
               <p className="mt-0.5 font-body text-xs text-dark/45 leading-snug">{tw.d}</p>

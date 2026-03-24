@@ -62,7 +62,7 @@ export default function WhyRaktim() {
           <h3 className="font-display text-warm-100 text-lg font-semibold mb-6">Career Arc</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {CAREER.map((c, i) => (
-              <div key={i} className={`rounded-lg p-4 transition-all ${c.highlight ? 'bg-terracotta/10 border-2 border-terracotta/25' : 'bg-dark-surface border border-white/5'}`}>
+              <div key={i} className={`rounded-lg p-4 transition-all sd-${i+1} ${c.highlight ? 'bg-terracotta/10 border-2 border-terracotta/25' : 'bg-dark-surface border border-white/5'}`}>
                 <div className="flex items-start justify-between mb-1.5">
                   <span className="font-mono text-[11px] text-terracotta/60 font-medium">{c.year}</span>
                   {c.highlight && <span className="px-1.5 py-0.5 bg-terracotta/15 text-terracotta-light text-[10px] font-mono tracking-wider rounded-full uppercase">Origin</span>}
@@ -93,7 +93,7 @@ export default function WhyRaktim() {
         <div ref={r5.ref} className={`mt-12 ${r5.cls}`}>
           <h3 className="font-display text-warm-100 text-lg font-semibold mb-2">What Colleagues Said</h3>
           <p className="font-body text-warm-200/35 text-xs mb-6">From formal performance reviews at ZS Associates (2022–2023). About Raktim, not client work.</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
             {QUOTES.map((q, i) => (
               <div key={i} className="bg-dark-lighter border border-white/5 rounded-xl p-5 flex flex-col">
                 <div className="text-terracotta/30 text-3xl font-display leading-none mb-2">"</div>

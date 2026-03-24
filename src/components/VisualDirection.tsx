@@ -66,7 +66,7 @@ function DirCard({ d, i }: { d: typeof DIRECTIONS[0], i: number }) {
 }
 
 export default function VisualDirection() {
-  const r1 = useReveal();
+  const r1 = useReveal(), r2 = useReveal(), r3 = useReveal();
   return (
     <section className="section-light">
       <div className="section-pad">
@@ -75,10 +75,12 @@ export default function VisualDirection() {
           <h2 className="mt-1 font-display text-dark font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>Visual Direction</h2>
           <p className="mt-3 font-body text-dark/55 max-w-2xl text-sm leading-relaxed">Three directions for the brand's evolution. A Creative Director walks in with instincts, not just process. The right direction emerges from discovery.</p>
         </div>
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
-          {DIRECTIONS.map((d, i) => <DirCard key={d.id} d={d} i={i} />)}
+        <div ref={r2.ref} className={`mt-10 grid grid-cols-1 md:grid-cols-3 gap-5 ${r2.cls}`}>
+          {DIRECTIONS.map((d, i) => <div key={d.id} className={`sd-${i+1}`}><DirCard d={d} i={i} /></div>)}
         </div>
-        <p className="mt-8 font-body text-xs text-dark/35 italic text-center max-w-2xl mx-auto">All three share common requirements: design manual, environmental standards, photography guidelines, template systems. The direction determines aesthetic character. The system determines whether it holds.</p>
+        <div ref={r3.ref} className={r3.cls}>
+          <p className="mt-8 font-body text-xs text-dark/35 italic text-center max-w-2xl mx-auto">All three share common requirements: design manual, environmental standards, photography guidelines, template systems. The direction determines aesthetic character. The system determines whether it holds.</p>
+        </div>
       </div>
     </section>
   );

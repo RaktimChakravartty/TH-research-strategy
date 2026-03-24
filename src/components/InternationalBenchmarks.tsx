@@ -27,7 +27,7 @@ function Card({ b, large }: { b: typeof BENCHMARKS[0]; large?: boolean }) {
 }
 
 export default function InternationalBenchmarks() {
-  const r1 = useReveal(), r2 = useReveal();
+  const r1 = useReveal(), r2 = useReveal(), r3 = useReveal(), r4 = useReveal();
   return (
     <section className="section-light">
       <div className="section-pad">
@@ -38,7 +38,7 @@ export default function InternationalBenchmarks() {
         </div>
 
         {/* Pattern */}
-        <div className="mt-8 bg-dark rounded-xl p-6 grain relative overflow-hidden">
+        <div ref={r3.ref} className={`mt-8 bg-dark rounded-xl p-6 grain relative overflow-hidden ${r3.cls}`}>
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
             <span className="font-display text-2xl md:text-3xl font-bold text-terracotta-light shrink-0">The Pattern</span>
             <p className="font-body text-warm-200/60 text-sm leading-relaxed">
@@ -70,7 +70,7 @@ export default function InternationalBenchmarks() {
         })()}
 
         {/* OYO */}
-        <div className="mt-8 border border-warm-200 rounded-xl p-5 bg-white/30 flex items-start gap-3">
+        <div ref={r4.ref} className={`mt-8 border border-warm-200 rounded-xl p-5 bg-white/30 flex items-start gap-3 ${r4.cls}`}>
           <div className="w-9 h-9 rounded-lg bg-dark flex items-center justify-center shrink-0"><span className="font-mono text-[11px] text-terracotta-light font-bold">IN</span></div>
           <div>
             <h4 className="font-body text-sm font-semibold text-dark/75">Indian Precedent: OYO × COLLINS (NY)</h4>

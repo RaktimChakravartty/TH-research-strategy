@@ -42,7 +42,7 @@ function GalleryCard({ item }: { item: { brand: string, note: string, ref: strin
 
 export default function BrandGallery() {
   const [cat, setCat] = useState(GALLERY.categories[0]);
-  const r1 = useReveal();
+  const r1 = useReveal(), r2 = useReveal();
   const items = GALLERY.items[cat as keyof typeof GALLERY.items] || [];
 
   return (
@@ -54,14 +54,16 @@ export default function BrandGallery() {
           <p className="mt-3 font-body text-warm-200/50 max-w-2xl text-sm leading-relaxed">A Creative Director's research board. What "good" looks like across hospitality brands that have solved consistency vs character.</p>
         </div>
 
-        <div className="mt-8 flex flex-wrap gap-2">
-          {GALLERY.categories.map(c => (
-            <button key={c} onClick={() => setCat(c)} className={`px-3.5 py-1.5 rounded-full font-mono text-[11px] tracking-wider transition-all ${cat === c ? 'bg-terracotta text-warm-100' : 'bg-dark-surface text-warm-100/35 border border-white/5 hover:text-warm-100/55'}`}>{c}</button>
-          ))}
-        </div>
+        <div ref={r2.ref} className={`mt-8 ${r2.cls}`}>
+          <div className="flex flex-wrap gap-2">
+            {GALLERY.categories.map((c, i) => (
+              <button key={c} onClick={() => setCat(c)} className={`px-3.5 py-1.5 rounded-full font-mono text-[11px] tracking-wider transition-all sd-${i+1} ${cat === c ? 'bg-terracotta text-warm-100' : 'bg-dark-surface text-warm-100/35 border border-white/5 hover:text-warm-100/55'}`}>{c}</button>
+            ))}
+          </div>
 
-        <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-3">
-          {items.map((item, i) => <GalleryCard key={`${cat}-${i}`} item={item} />)}
+          <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-3">
+            {items.map((item, i) => <GalleryCard key={`${cat}-${i}`} item={item} />)}
+          </div>
         </div>
 
         <p className="mt-6 font-mono text-[10px] text-warm-100/15 text-center tracking-wide">

@@ -32,6 +32,30 @@ export default function App() {
     return () => obs.disconnect();
   }, []);
 
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        setActive(prev => {
+          const next = Math.min(prev + 1, SECTION_COMPONENTS.length - 1);
+          const el = containerRef.current?.querySelector(`[data-idx="${next}"]`);
+          el?.scrollIntoView({ behavior: 'smooth' });
+          return next;
+        });
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        setActive(prev => {
+          const next = Math.max(prev - 1, 0);
+          const el = containerRef.current?.querySelector(`[data-idx="${next}"]`);
+          el?.scrollIntoView({ behavior: 'smooth' });
+          return next;
+        });
+      }
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, []);
+
   const scrollTo = (i: number) => {
     const el = containerRef.current?.querySelector(`[data-idx="${i}"]`);
     el?.scrollIntoView({ behavior: 'smooth' });
@@ -43,12 +67,12 @@ export default function App() {
       <nav className="fixed left-0 top-0 h-screen w-14 z-50 flex flex-col items-center justify-center gap-0.5"
            style={{ background: 'linear-gradient(to right, rgba(26,26,46,0.6), transparent)' }}>
         <div className="absolute top-5 left-0 w-full flex justify-center">
-          <span className="font-mono text-[10px] tracking-[0.3em] text-warm-100/40 uppercase">RC</span>
+          <span className="font-mono text-[11px] tracking-[0.3em] text-warm-100/40 uppercase">RC</span>
         </div>
         {SECTIONS.map((s, i) => (
           <button key={s.id} onClick={() => scrollTo(i)} className="group relative flex items-center justify-center w-9 h-9" title={s.label}>
             <span className={`block rounded-full transition-all duration-300 ${active === i ? 'w-2.5 h-2.5 bg-terracotta shadow-[0_0_8px_rgba(184,80,66,0.4)]' : 'w-1.5 h-1.5 bg-warm-100/25 group-hover:bg-warm-100/50'}`} />
-            <span className="absolute left-11 px-2 py-1 bg-dark-surface text-warm-100 text-[10px] font-mono rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">{String(i).padStart(2,'0')} {s.label}</span>
+            <span className="absolute left-11 px-2 py-1 bg-dark-surface text-warm-100 text-[11px] font-mono rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">{String(i).padStart(2,'0')} {s.label}</span>
           </button>
         ))}
       </nav>
@@ -68,10 +92,10 @@ export default function App() {
         {/* Footer */}
         <div className="section-dark py-10 text-center">
           <div className="relative z-10">
-            <p className="font-mono text-[10px] tracking-[0.3em] text-warm-100/20 uppercase">Prepared by Raktim Chakravartty · March 2026 · Confidential</p>
+            <p className="font-mono text-[11px] tracking-[0.3em] text-warm-100/20 uppercase">Prepared by Raktim Chakravartty · March 2026 · Confidential</p>
             <div className="mt-3 flex justify-center gap-6">
-              <a href="https://thehosteller.raktim.co" target="_blank" className="font-mono text-[10px] text-terracotta/60 hover:text-terracotta transition-colors">thehosteller.raktim.co</a>
-              <span className="font-mono text-[10px] text-warm-100/15">hello@raktim.co</span>
+              <a href="https://thehosteller.raktim.co" target="_blank" className="font-mono text-[11px] text-terracotta/60 hover:text-terracotta transition-colors">thehosteller.raktim.co</a>
+              <span className="font-mono text-[11px] text-warm-100/15">hello@raktim.co</span>
             </div>
           </div>
         </div>

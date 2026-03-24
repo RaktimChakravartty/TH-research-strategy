@@ -262,6 +262,5 @@ export const PROOF = [
 
 export const QUOTES = [
   { text: 'A valuable creative thinker and someone to seek out for branding projects.', author: 'Ankita Deb', ctx: 'ZS Associates, Year-End 2022' },
-  { text: 'A storyteller who seldom speaks, but is never out of words when prompted. Has a great eye for visualization.', author: 'Abhishek Sinha', ctx: 'ZS Associates, Mid-Year 2022' },
   { text: 'As Raktim continues to grow, seeing him lead and present work will be a great next step in his career.', author: 'Kevin Mullucks', ctx: 'ZS Associates, Mid-Year 2023 — identified CD-level potential' },
 ];

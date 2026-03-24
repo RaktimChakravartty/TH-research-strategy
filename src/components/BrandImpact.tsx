@@ -31,7 +31,7 @@ function useCountUp(end: number, duration = 1500) {
 }
 
 export default function BrandImpact() {
-  const r1 = useReveal(), r2 = useReveal();
+  const r1 = useReveal(), r2 = useReveal(), r3 = useReveal(), r4 = useReveal(), r5 = useReveal();
   const totalLow = IMPACT.reduce((s, d) => s + d.low, 0);
   const totalHigh = IMPACT.reduce((s, d) => s + d.high, 0);
   const maxVal = Math.max(...IMPACT.map(d => d.high));
@@ -65,8 +65,13 @@ export default function BrandImpact() {
                   </div>
                   <span className="font-display text-lg font-bold text-warm-100">₹{item.low}–{item.high}<span className="text-warm-200/30 text-xs font-mono ml-1">Cr</span></span>
                 </div>
-                <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-                  <div className="h-full rounded-full transition-all duration-700" style={{ width: `${((item.low + item.high) / 2 / maxVal) * 100}%`, backgroundColor: item.color }} />
+                <div className="h-2.5 bg-white/5 rounded-full overflow-hidden relative">
+                  {/* Low end */}
+                  <div className="absolute inset-y-0 left-0 rounded-full transition-all duration-700"
+                    style={{ width: `${(item.low / maxVal) * 100}%`, backgroundColor: item.color, opacity: 0.9 }} />
+                  {/* High end (lighter) */}
+                  <div className="absolute inset-y-0 left-0 rounded-full transition-all duration-700"
+                    style={{ width: `${(item.high / maxVal) * 100}%`, backgroundColor: item.color, opacity: 0.3 }} />
                 </div>
               </div>
             ))}
