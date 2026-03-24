@@ -5,7 +5,11 @@ import Icon from './Icons';
 
 const Tip = ({ active, payload, label }: any) => {
   if (!active || !payload?.length) return null;
-  return <div className="bg-dark text-warm-100 px-3 py-2 rounded-lg text-xs font-mono shadow-lg border border-white/10">{label}: <span className="text-terracotta-light font-semibold">{payload[0].value}</span></div>;
+  return (
+    <div className="px-3 py-2 rounded-lg text-[13px] font-mono shadow-lg" style={{ background: '#1A1A2E', color: '#E8E0D8', border: '1px solid rgba(255,255,255,0.08)' }}>
+      {label}: <span style={{ color: '#C45B4D' }} className="font-semibold">{payload[0].value}</span>
+    </div>
+  );
 };
 
 export default function MarketSnapshot() {
@@ -15,60 +19,63 @@ export default function MarketSnapshot() {
     <section className="section-light">
       <div className="section-pad">
         <div ref={r1.ref} className={r1.cls}>
-          <span className="font-mono text-[11px] tracking-[0.35em] uppercase text-terracotta/60">01</span>
-          <h2 className="mt-2 font-display text-dark font-bold" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>Market Opportunity</h2>
-          <p className="mt-4 font-body text-dark/60 max-w-2xl text-[15px] leading-relaxed">India's hostel segment is the fastest-growing accommodation category in Asia-Pacific. Structural growth, not cyclical.</p>
+          <span className="font-mono text-[13px] tracking-[0.35em] uppercase" style={{ color: 'rgba(196,91,77,0.5)' }}>01</span>
+          <h2 className="mt-2 font-display font-bold" style={{ fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)', color: '#2D2D2D' }}>Market Opportunity</h2>
+          <p className="mt-4 font-body text-[16px] leading-[1.7] max-w-2xl" style={{ color: '#6B6B6B' }}>India's hostel segment is the fastest-growing accommodation category in Asia-Pacific. Structural growth, not cyclical.</p>
         </div>
 
-        <div ref={r2.ref} className={`mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 ${r2.cls}`}>
+        {/* Three hero stat cards */}
+        <div ref={r2.ref} className={`mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 ${r2.cls}`}>
           {[MARKET.travel, MARKET.hospitality, MARKET.hostelCagr].map((s, i) => (
-            <div key={i} className={`border border-warm-200 rounded-xl p-6 bg-white/60 hover:bg-white/90 transition-colors sd-${i+1}`}>
-              <span className="font-display text-4xl md:text-5xl font-bold text-dark tracking-tight">{s.val}</span>
-              <p className="mt-2 font-body text-[15px] text-dark/65">{s.label}</p>
-              <p className="mt-1 font-mono text-xs text-terracotta/65">{s.sub}</p>
+            <div key={i} className={`rounded-2xl p-8 sd-${i+1}`} style={{ border: '1px solid #E0DCD7', background: 'rgba(255,255,255,0.6)' }}>
+              <span className="font-display font-bold tracking-tight" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: '#2D2D2D' }}>{s.val}</span>
+              <p className="mt-3 font-body text-[16px]" style={{ color: '#6B6B6B' }}>{s.label}</p>
+              <p className="mt-1 font-mono text-[13px]" style={{ color: 'rgba(196,91,77,0.6)' }}>{s.sub}</p>
             </div>
           ))}
         </div>
 
-        <div ref={r3.ref} className={`mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 ${r3.cls}`}>
-          <div className="border border-warm-200 rounded-xl p-6 bg-white/60">
-            <h3 className="font-body text-[15px] font-semibold text-dark/80">Hospitality Market Trajectory</h3>
-            <p className="font-mono text-xs text-dark/35 mb-4">USD Billions · Mordor Intelligence</p>
-            <ResponsiveContainer width="100%" height={270}>
+        {/* Charts */}
+        <div ref={r3.ref} className={`mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 ${r3.cls}`}>
+          <div className="rounded-2xl p-6" style={{ border: '1px solid #E0DCD7', background: 'rgba(255,255,255,0.6)' }}>
+            <h3 className="font-body text-[16px] font-semibold" style={{ color: '#2D2D2D' }}>Hospitality Market Trajectory</h3>
+            <p className="font-mono text-[13px] mb-5" style={{ color: '#999' }}>USD Billions · Mordor Intelligence</p>
+            <ResponsiveContainer width="100%" height={280}>
               <AreaChart data={MARKET.projection} margin={{ top: 5, right: 5, bottom: 0, left: 0 }}>
-                <defs><linearGradient id="gT" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#B85042" stopOpacity={0.25} /><stop offset="100%" stopColor="#B85042" stopOpacity={0} /></linearGradient></defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E8E4DF" />
+                <defs><linearGradient id="gT" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#C45B4D" stopOpacity={0.2} /><stop offset="100%" stopColor="#C45B4D" stopOpacity={0} /></linearGradient></defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E0DCD7" />
                 <XAxis dataKey="year" tick={{ fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#999' }} axisLine={false} tickLine={false} />
                 <YAxis domain={[22, 33]} tick={{ fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#999' }} axisLine={false} tickLine={false} tickFormatter={v => `$${v}B`} />
                 <Tooltip content={<Tip />} />
-                <Area type="monotone" dataKey="value" stroke="#B85042" strokeWidth={2} fill="url(#gT)" dot={{ r: 3, fill: '#B85042' }} />
+                <Area type="monotone" dataKey="value" stroke="#C45B4D" strokeWidth={2} fill="url(#gT)" dot={{ r: 3, fill: '#C45B4D' }} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
-          <div className="border border-warm-200 rounded-xl p-6 bg-white/60">
-            <h3 className="font-body text-[15px] font-semibold text-dark/80">India Hostel Count Growth</h3>
-            <p className="font-mono text-xs text-dark/35 mb-4">Number of hostels · BW Businessworld</p>
-            <ResponsiveContainer width="100%" height={270}>
+          <div className="rounded-2xl p-6" style={{ border: '1px solid #E0DCD7', background: 'rgba(255,255,255,0.6)' }}>
+            <h3 className="font-body text-[16px] font-semibold" style={{ color: '#2D2D2D' }}>India Hostel Count Growth</h3>
+            <p className="font-mono text-[13px] mb-5" style={{ color: '#999' }}>Number of hostels · BW Businessworld</p>
+            <ResponsiveContainer width="100%" height={280}>
               <BarChart data={MARKET.hostelCount} margin={{ top: 5, right: 5, bottom: 0, left: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E8E4DF" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#E0DCD7" vertical={false} />
                 <XAxis dataKey="year" tick={{ fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#999' }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#999' }} axisLine={false} tickLine={false} />
                 <Tooltip content={<Tip />} />
-                <Bar dataKey="count" fill="#D4A84B" radius={[5, 5, 0, 0]} barSize={36} />
+                <Bar dataKey="count" fill="#D4A84B" radius={[6, 6, 0, 0]} barSize={36} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        <div ref={r4.ref} className={`mt-10 ${r4.cls}`}>
-          <div className="bg-dark rounded-2xl p-8 md:p-10 grain relative overflow-hidden">
+        {/* Demographic Engine */}
+        <div ref={r4.ref} className={`mt-12 ${r4.cls}`}>
+          <div className="rounded-2xl p-8 md:p-10 grain relative overflow-hidden" style={{ background: '#1A1A2E' }}>
             <div className="relative z-10">
-              <h3 className="font-display text-warm-100 text-xl md:text-2xl font-semibold">The Demographic Engine</h3>
-              <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+              <h3 className="font-display text-[1.5rem] font-semibold" style={{ color: '#E8E0D8' }}>The Demographic Engine</h3>
+              <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-8">
                 {MARKET.demo.map((d, i) => (
                   <div key={i}>
-                    <span className="font-display text-2xl md:text-3xl font-bold text-terracotta-light">{d.val}</span>
-                    <p className="mt-1.5 font-body text-sm text-warm-200/65 leading-snug">{d.label}</p>
+                    <span className="font-display text-[2rem] font-bold" style={{ color: '#C45B4D' }}>{d.val}</span>
+                    <p className="mt-2 font-body text-[15px] leading-snug" style={{ color: 'rgba(232,224,216,0.55)' }}>{d.label}</p>
                   </div>
                 ))}
               </div>
@@ -76,12 +83,13 @@ export default function MarketSnapshot() {
           </div>
         </div>
 
-        <div ref={r5.ref} className={`mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 ${r5.cls}`}>
+        {/* Tailwinds */}
+        <div ref={r5.ref} className={`mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 ${r5.cls}`}>
           {MARKET.tailwinds.map((tw, i) => (
-            <div key={i} className={`border border-warm-200 rounded-xl p-4 bg-white/40 hover:bg-white/70 transition-colors sd-${i+1}`}>
-              <Icon name={tw.icon} className="text-dark/55" />
-              <h4 className="mt-2 font-body text-sm font-semibold text-dark/80">{tw.t}</h4>
-              <p className="mt-1 font-body text-xs text-dark/50 leading-relaxed">{tw.d}</p>
+            <div key={i} className={`rounded-2xl p-5 sd-${i+1}`} style={{ border: '1px solid #E0DCD7', background: 'rgba(255,255,255,0.4)' }}>
+              <Icon name={tw.icon} style={{ color: '#6B6B6B' }} />
+              <h4 className="mt-2 font-body text-[14px] font-semibold" style={{ color: '#2D2D2D' }}>{tw.t}</h4>
+              <p className="mt-1 font-body text-[13px] leading-relaxed" style={{ color: '#6B6B6B' }}>{tw.d}</p>
             </div>
           ))}
         </div>
