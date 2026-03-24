@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { COMPETITORS, COMP_BARS } from '../data/constants';
 import { useReveal } from '../hooks/useReveal';
 
@@ -7,26 +8,26 @@ function BrandCard({ brand, isPrimary }: { brand: typeof COMPETITORS.hosteller, 
       <div className="flex items-start justify-between mb-3">
         <div>
           <h3 className="font-display text-warm-100 text-lg font-bold">{brand.name}</h3>
-          <span className="font-mono text-[9px] tracking-wider uppercase text-warm-100/30">{brand.model}</span>
+          <span className="font-mono text-[11px] tracking-wider uppercase text-warm-100/30">{brand.model}</span>
         </div>
-        {isPrimary && <span className="px-2 py-0.5 bg-terracotta/15 text-terracotta-light text-[8px] font-mono tracking-wider rounded-full uppercase">Subject</span>}
+        {isPrimary && <span className="px-2 py-0.5 bg-terracotta/15 text-terracotta-light text-[11px] font-mono tracking-wider rounded-full uppercase">Subject</span>}
       </div>
       <div className="space-y-1.5 mb-4 flex-1">
         {brand.metrics.map(([k, v], i) => (
           <div key={i} className="flex justify-between items-baseline gap-2">
-            <span className="font-body text-[10px] text-warm-200/40 shrink-0">{k}</span>
-            <span className="font-mono text-[10px] text-warm-100/70 text-right">{v}</span>
+            <span className="font-body text-[11px] text-warm-200/40 shrink-0">{k}</span>
+            <span className="font-mono text-[11px] text-warm-100/70 text-right">{v}</span>
           </div>
         ))}
       </div>
       <div className="h-px bg-white/5 my-3" />
       <div className="mb-3">
-        <span className="font-mono text-[8px] tracking-[0.2em] uppercase text-green-400/40 block mb-1.5">Strengths</span>
-        <div className="flex flex-wrap gap-1">{brand.strengths.map((s, i) => <span key={i} className="px-1.5 py-0.5 bg-green-400/5 border border-green-400/10 rounded text-[9px] text-green-300/60">{s}</span>)}</div>
+        <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-green-400/40 block mb-1.5">Strengths</span>
+        <div className="flex flex-wrap gap-1">{brand.strengths.map((s, i) => <span key={i} className="px-1.5 py-0.5 bg-green-400/5 border border-green-400/10 rounded text-[11px] text-green-300/60">{s}</span>)}</div>
       </div>
       <div>
-        <span className="font-mono text-[8px] tracking-[0.2em] uppercase text-amber-400/40 block mb-1.5">Gaps</span>
-        <div className="flex flex-wrap gap-1">{brand.gaps.map((g, i) => <span key={i} className="px-1.5 py-0.5 bg-amber-400/5 border border-amber-400/10 rounded text-[9px] text-amber-300/60">{g}</span>)}</div>
+        <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-amber-400/40 block mb-1.5">Gaps</span>
+        <div className="flex flex-wrap gap-1">{brand.gaps.map((g, i) => <span key={i} className="px-1.5 py-0.5 bg-amber-400/5 border border-amber-400/10 rounded text-[11px] text-amber-300/60">{g}</span>)}</div>
       </div>
     </div>
   );
@@ -34,19 +35,49 @@ function BrandCard({ brand, isPrimary }: { brand: typeof COMPETITORS.hosteller, 
 
 function HBar({ label, items }: { label: string, items: { name: string, val: number, color: string }[] }) {
   const max = Math.max(...items.map(i => i.val));
+  const barRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = barRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.2 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   if (max === 0) return null;
   return (
-    <div>
-      <span className="font-mono text-[9px] text-warm-100/30 uppercase tracking-wider">{label}</span>
+    <div ref={barRef}>
+      <span className="font-mono text-[11px] text-warm-100/30 uppercase tracking-wider">{label}</span>
       <div className="mt-2 space-y-2">
-        {items.map(it => (
+        {items.map((it, idx) => (
           <div key={it.name} className="flex items-center gap-2.5">
-            <span className="font-body text-[10px] text-warm-100/40 w-24 shrink-0 text-right">{it.name}</span>
-            <div className="flex-1 h-6 bg-white/5 rounded overflow-hidden">
-              <div className="h-full rounded flex items-center justify-end pr-2 transition-all duration-700" style={{ width: `${(it.val / max) * 100}%`, backgroundColor: it.color }}>
-                <span className="font-mono text-[9px] text-white/90 font-medium">{it.val > 0 ? it.val : '—'}</span>
+            <span className="font-body text-[11px] text-warm-100/40 w-24 shrink-0 text-right">{it.name}</span>
+            {it.val === 0 ? (
+              <div className="flex-1 h-6 flex items-center">
+                <span className="font-mono text-[10px] text-warm-100/20 italic">Not publicly reported</span>
               </div>
-            </div>
+            ) : (
+              <div className="flex-1 h-6 bg-white/5 rounded overflow-hidden">
+                <div
+                  className="h-full rounded flex items-center justify-end pr-2 transition-all duration-700"
+                  style={{
+                    width: visible ? `${(it.val / max) * 100}%` : '0%',
+                    backgroundColor: it.color,
+                    transitionDelay: `${idx * 120}ms`,
+                  }}
+                >
+                  <span className={`font-mono text-[10px] text-white/90 font-medium transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: `${idx * 120 + 400}ms` }}>
+                    {it.val}
+                    {it.val === max && <span className="ml-1 text-gold/80 text-[10px]">★</span>}
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -55,14 +86,14 @@ function HBar({ label, items }: { label: string, items: { name: string, val: num
 }
 
 export default function CompetitiveLandscape() {
-  const r1 = useReveal(), r2 = useReveal(), r3 = useReveal();
+  const r1 = useReveal(), r2 = useReveal(), r3 = useReveal(), r4 = useReveal();
   const { hosteller: h, zostel: z, gostops: g } = COMPETITORS;
 
   return (
     <section className="section-dark grain">
       <div className="relative z-10 section-pad">
         <div ref={r1.ref} className={r1.cls}>
-          <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-terracotta/50">02</span>
+          <span className="font-mono text-[11px] tracking-[0.35em] uppercase text-terracotta/50">02</span>
           <h2 className="mt-1 font-display text-warm-100 font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>Competitive Landscape</h2>
           <p className="mt-3 font-body text-warm-200/50 max-w-2xl text-sm leading-relaxed">Three brands define India's hostel market. One leads operations, one leads portfolio architecture, one leads cultural voice. None holds both operational foundation <em>and</em> brand system.</p>
         </div>
@@ -84,11 +115,14 @@ export default function CompetitiveLandscape() {
               ]} />
             ))}
           </div>
-          {COMP_BARS.find(b => b.note) && <p className="mt-3 font-mono text-[9px] text-warm-100/15">{COMP_BARS.find(b => b.note)!.note}</p>}
+          {COMP_BARS.find(b => b.note) && <p className="mt-3 font-mono text-[11px] text-warm-100/15">{COMP_BARS.find(b => b.note)!.note}</p>}
         </div>
 
-        <div className="mt-8 border-l-2 border-terracotta pl-5">
-          <p className="font-display text-warm-100/80 text-base md:text-lg italic leading-relaxed">"No competitor currently holds both operational foundation <span className="text-terracotta-light">and</span> brand system. That's the opportunity."</p>
+        <div ref={r4.ref} className={`mt-8 bg-gradient-to-r from-terracotta/10 via-dark-surface to-transparent border border-terracotta/15 rounded-xl p-6 md:p-8 ${r4.cls}`}>
+          <div className="flex items-start gap-4">
+            <div className="text-terracotta/30 text-4xl font-display leading-none shrink-0">"</div>
+            <p className="font-display text-warm-100/80 text-base md:text-lg italic leading-relaxed">No competitor currently holds both operational foundation <span className="text-terracotta-light font-medium">and</span> brand system. That's the opportunity.</p>
+          </div>
         </div>
       </div>
     </section>

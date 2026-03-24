@@ -4,19 +4,19 @@ import { useReveal } from '../hooks/useReveal';
 
 export default function StrategyVisualized() {
   const [active, setActive] = useState(1);
-  const r1 = useReveal(), r2 = useReveal();
+  const r1 = useReveal(), r2 = useReveal(), r3 = useReveal();
   const current = STRATEGY_LAYERS.find(l => l.id === active)!;
 
   return (
     <section className="section-dark grain">
       <div className="relative z-10 section-pad">
         <div ref={r1.ref} className={r1.cls}>
-          <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-terracotta/50">06</span>
+          <span className="font-mono text-[11px] tracking-[0.35em] uppercase text-terracotta/50">06</span>
           <h2 className="mt-1 font-display text-warm-100 font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>The Brand Operating System</h2>
           <p className="mt-3 font-body text-warm-200/50 max-w-2xl text-sm leading-relaxed">Six layers, each building on the one below. Adapted from Generator, MEININGER, and citizenM — customized for self-operated properties across India.</p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div ref={r3.ref} className={`mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 ${r3.cls}`}>
           {/* Layer list */}
           <div className="bg-dark-surface rounded-xl p-6 border border-white/5">
             {STRATEGY_LAYERS.map(l => (
@@ -29,9 +29,9 @@ export default function StrategyVisualized() {
                     <h4 className="font-body text-sm font-semibold text-warm-100">{l.name}</h4>
                     {active === l.id && (
                       <div className="mt-1.5 overflow-hidden">
-                        <p className="font-body text-[11px] text-warm-200/50 leading-relaxed">{l.desc}</p>
+                        <p className="font-body text-xs text-warm-200/50 leading-relaxed">{l.desc}</p>
                         <div className="mt-2 flex flex-wrap gap-1.5">
-                          {l.deliverables.map((d, i) => <span key={i} className="px-2 py-0.5 bg-white/5 border border-white/8 rounded text-[9px] font-mono text-warm-100/50">{d}</span>)}
+                          {l.deliverables.map((d, i) => <span key={i} className="px-2 py-0.5 bg-white/5 border border-white/8 rounded text-[11px] font-mono text-warm-100/50">{d}</span>)}
                         </div>
                       </div>
                     )}
@@ -52,14 +52,14 @@ export default function StrategyVisualized() {
                   <div key={l.id} className="mx-auto cursor-pointer flex items-center justify-center transition-all duration-300"
                     style={{ width: `${w}%`, height: isActive ? '52px' : '40px', backgroundColor: l.color, opacity: isActive ? 1 : 0.4, borderRadius: i === 0 ? '10px 10px 0 0' : i === 5 ? '0 0 10px 10px' : '0', borderBottom: '1px solid rgba(0,0,0,0.12)', transform: isActive ? 'scale(1.04)' : 'scale(1)', boxShadow: isActive ? `0 0 20px ${l.color}25` : 'none', zIndex: isActive ? 10 : 1, position: 'relative' }}
                     onClick={() => setActive(l.id)}>
-                    <span className={`font-mono text-[9px] text-white font-medium tracking-wide transition-opacity ${isActive ? 'opacity-100' : 'opacity-40'}`}>{l.name}</span>
+                    <span className={`font-mono text-[11px] text-white font-medium tracking-wide transition-opacity ${isActive ? 'opacity-100' : 'opacity-40'}`}>{l.name}</span>
                   </div>
                 );
               })}
             </div>
             {/* Active layer detail */}
             <div className="mt-6 text-center">
-              <span className="font-mono text-[10px] tracking-wider uppercase" style={{ color: current.color }}>{current.name}</span>
+              <span className="font-mono text-xs tracking-wider uppercase" style={{ color: current.color }}>{current.name}</span>
               <p className="font-body text-xs text-warm-200/40 mt-1 max-w-xs mx-auto leading-relaxed">{current.desc}</p>
             </div>
           </div>
@@ -73,16 +73,16 @@ export default function StrategyVisualized() {
             {TOUCHPOINTS.map((tp, i) => (
               <div key={i} className="grid grid-cols-[1fr_auto_1fr] gap-3 items-start">
                 <div className="bg-red-950/20 border border-red-500/8 rounded-lg p-3">
-                  <span className="font-mono text-[8px] tracking-wider uppercase text-red-400/35 block mb-1">Before</span>
-                  <p className="font-body text-[10px] text-red-200/45 leading-relaxed">{tp.before}</p>
+                  <span className="font-mono text-[11px] tracking-wider uppercase text-red-400/35 block mb-1">Before</span>
+                  <p className="font-body text-xs text-red-200/45 leading-relaxed">{tp.before}</p>
                 </div>
                 <div className="flex flex-col items-center pt-3">
-                  <span className="font-body text-[9px] text-warm-100/50 font-medium text-center max-w-[60px] leading-tight">{tp.name}</span>
+                  <span className="font-body text-[11px] text-warm-100/50 font-medium text-center max-w-[60px] leading-tight">{tp.name}</span>
                   <span className="text-terracotta mt-1">→</span>
                 </div>
                 <div className="bg-green-950/20 border border-green-500/8 rounded-lg p-3">
-                  <span className="font-mono text-[8px] tracking-wider uppercase text-green-400/35 block mb-1">After</span>
-                  <p className="font-body text-[10px] text-green-200/50 leading-relaxed">{tp.after}</p>
+                  <span className="font-mono text-[11px] tracking-wider uppercase text-green-400/35 block mb-1">After</span>
+                  <p className="font-body text-xs text-green-200/50 leading-relaxed">{tp.after}</p>
                 </div>
               </div>
             ))}

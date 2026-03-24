@@ -15,12 +15,12 @@ export const SECTIONS = [
 ];
 
 export const HERO_STATS = [
-  { icon: '🏨', value: '72+', label: 'Properties', sub: '56 cities' },
-  { icon: '🛏️', value: '5,100', label: 'Beds', sub: '+72% YoY' },
-  { icon: '👥', value: '496K', label: 'Guests (2025)', sub: 'BW Travel' },
-  { icon: '🔄', value: '38.3%', label: 'Repeat Rate', sub: 'up from 16.4%' },
-  { icon: '📱', value: '55%', label: 'Direct Bookings', sub: 'vs OTA' },
-  { icon: '₹', value: '₹73Cr', label: 'Revenue FY25', sub: '+33% YoY' },
+  { icon: 'hotel', value: '72+', label: 'Properties', sub: '56 cities' },
+  { icon: 'bed', value: '5,100', label: 'Beds', sub: '+72% YoY' },
+  { icon: 'users', value: '496K', label: 'Guests (2025)', sub: 'BW Travel' },
+  { icon: 'repeat', value: '38.3%', label: 'Repeat Rate', sub: 'up from 16.4%' },
+  { icon: 'mobile', value: '55%', label: 'Direct Bookings', sub: 'vs OTA' },
+  { icon: 'rupee', value: '₹73Cr', label: 'Revenue FY25', sub: '+33% YoY' },
 ];
 
 export const MARKET = {
@@ -42,10 +42,10 @@ export const MARKET = {
     { val: '12–15%', label: 'YoY mini-break frequency growth' },
   ],
   tailwinds: [
-    { icon: '🚄', t: 'Vande Bharat Expansion', d: 'Rail access to Himalayan & NE corridors' },
-    { icon: '✈️', t: 'Tier-2 Airport Network', d: 'New city connectivity expanding addressable geography' },
-    { icon: '🛣️', t: 'Highway Infrastructure', d: 'Boosting road trip culture and weekend getaway demand' },
-    { icon: '🏛️', t: 'State Tourism Incentives', d: 'Rajasthan, HP, Kerala, Goa offering hostel subsidies' },
+    { icon: 'train', t: 'Vande Bharat Expansion', d: 'Rail access to Himalayan & NE corridors' },
+    { icon: 'plane', t: 'Tier-2 Airport Network', d: 'New city connectivity expanding addressable geography' },
+    { icon: 'highway', t: 'Highway Infrastructure', d: 'Boosting road trip culture and weekend getaway demand' },
+    { icon: 'govt', t: 'State Tourism Incentives', d: 'Rajasthan, HP, Kerala, Goa offering hostel subsidies' },
   ],
 };
 
@@ -262,6 +262,5 @@ export const PROOF = [
 
 export const QUOTES = [
   { text: 'A valuable creative thinker and someone to seek out for branding projects.', author: 'Ankita Deb', ctx: 'ZS Associates, Year-End 2022' },
-  { text: 'A storyteller who seldom speaks, but is never out of words when prompted. Has a great eye for visualization.', author: 'Abhishek Sinha', ctx: 'ZS Associates, Mid-Year 2022' },
   { text: 'As Raktim continues to grow, seeing him lead and present work will be a great next step in his career.', author: 'Kevin Mullucks', ctx: 'ZS Associates, Mid-Year 2023 — identified CD-level potential' },
 ];
