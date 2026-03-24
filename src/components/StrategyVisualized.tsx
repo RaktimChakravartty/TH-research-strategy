@@ -4,7 +4,7 @@ import { useReveal } from '../hooks/useReveal';
 
 export default function StrategyVisualized() {
   const [active, setActive] = useState(1);
-  const r1 = useReveal(), r2 = useReveal();
+  const r1 = useReveal(), r2 = useReveal(), r3 = useReveal();
   const current = STRATEGY_LAYERS.find(l => l.id === active)!;
 
   return (
@@ -16,7 +16,7 @@ export default function StrategyVisualized() {
           <p className="mt-3 font-body text-warm-200/50 max-w-2xl text-sm leading-relaxed">Six layers, each building on the one below. Adapted from Generator, MEININGER, and citizenM — customized for self-operated properties across India.</p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div ref={r3.ref} className={`mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 ${r3.cls}`}>
           {/* Layer list */}
           <div className="bg-dark-surface rounded-xl p-6 border border-white/5">
             {STRATEGY_LAYERS.map(l => (
