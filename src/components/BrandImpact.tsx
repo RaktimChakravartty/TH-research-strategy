@@ -54,7 +54,7 @@ export default function BrandImpact() {
           {/* Impact cards */}
           <div className="space-y-3">
             {IMPACT.map((item, i) => (
-              <div key={i} className="bg-dark-surface border border-white/5 rounded-xl p-5 hover:border-white/8 transition-all">
+              <div key={i} className={`bg-dark-surface border border-white/5 rounded-xl p-5 hover:border-white/8 transition-all sd-${i+1}`}>
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex items-center gap-2.5">
                     <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: item.color }} />
@@ -76,9 +76,10 @@ export default function BrandImpact() {
               </div>
             ))}
           </div>
+        </div>
 
           {/* Total + ROI */}
-          <div className="mt-8 bg-gradient-to-r from-terracotta/15 via-terracotta/8 to-transparent border border-terracotta/15 rounded-xl p-7">
+          <div ref={r3.ref} className={`mt-8 bg-gradient-to-r from-terracotta/15 via-terracotta/8 to-transparent border border-terracotta/15 rounded-xl p-7 ${r3.cls}`}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
               <div>
                 <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-terracotta/40">Total brand-driven impact</span>
@@ -106,13 +107,13 @@ export default function BrandImpact() {
           </div>
 
           {/* Benchmark refs */}
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div ref={r4.ref} className={`mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 ${r4.cls}`}>
             {[
               { b: 'Generator', m: '50%+ operating margins', e: 'EUR 776M exit · Brookfield 2025' },
               { b: 'MEININGER', m: 'EUR 196M revenue FY24', e: 'Centralized brand governance at scale' },
               { b: 'citizenM', m: 'Marriott acquisition 2025', e: 'Brand premium attracted strategic buyer' },
             ].map((r, i) => (
-              <div key={i} className="bg-dark-surface border border-white/5 rounded-lg p-3.5">
+              <div key={i} className={`bg-dark-surface border border-white/5 rounded-lg p-3.5 sd-${i+1}`}>
                 <span className="font-display text-sm font-semibold text-warm-100/60">{r.b}</span>
                 <p className="font-mono text-[11px] text-terracotta/50 mt-0.5">{r.m}</p>
                 <p className="font-body text-[11px] text-warm-200/30 mt-0.5">{r.e}</p>
@@ -120,10 +121,9 @@ export default function BrandImpact() {
             ))}
           </div>
 
-          <div className="mt-10 text-center">
+          <div ref={r5.ref} className={`mt-10 text-center ${r5.cls}`}>
             <p className="font-display text-warm-100/70 text-base italic max-w-lg mx-auto">"The difference between a 4× multiple and a 6–8× multiple at exit is the brand premium."</p>
           </div>
-        </div>
       </div>
     </section>
   );
