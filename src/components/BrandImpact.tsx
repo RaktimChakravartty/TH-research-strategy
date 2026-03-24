@@ -78,52 +78,52 @@ export default function BrandImpact() {
           </div>
         </div>
 
-          {/* Total + ROI */}
-          <div ref={r3.ref} className={`mt-8 bg-gradient-to-r from-terracotta/15 via-terracotta/8 to-transparent border border-terracotta/15 rounded-xl p-7 ${r3.cls}`}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-              <div>
-                <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-terracotta/40">Total brand-driven impact</span>
-                <div ref={lowCount.ref} className="mt-1 flex items-baseline gap-1">
-                  <span className="font-display text-3xl md:text-4xl font-bold text-warm-100">₹{lowCount.count}–<span ref={highCount.ref as React.Ref<HTMLSpanElement>}>{highCount.count}</span></span>
-                  <span className="font-mono text-terracotta-light text-base">Cr/yr</span>
-                </div>
+        {/* Total + ROI */}
+        <div ref={r3.ref} className={`mt-8 bg-gradient-to-r from-terracotta/15 via-terracotta/8 to-transparent border border-terracotta/15 rounded-xl p-7 ${r3.cls}`}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div>
+              <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-terracotta/40">Total brand-driven impact</span>
+              <div ref={lowCount.ref} className="mt-1 flex items-baseline gap-1">
+                <span className="font-display text-3xl md:text-4xl font-bold text-warm-100">₹{lowCount.count}–<span ref={highCount.ref as React.Ref<HTMLSpanElement>}>{highCount.count}</span></span>
+                <span className="font-mono text-terracotta-light text-base">Cr/yr</span>
               </div>
-              <div>
-                <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-warm-100/25">Brand function cost</span>
-                <div className="mt-1">
-                  <span className="font-display text-xl font-bold text-warm-100/60">₹1.38–2.10</span>
-                  <span className="font-mono text-warm-100/25 text-xs ml-1">Cr/yr</span>
-                </div>
-                <span className="font-mono text-[11px] text-warm-100/15">11.5–17.5% of brand & marketing allocation</span>
+            </div>
+            <div>
+              <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-warm-100/25">Brand function cost</span>
+              <div className="mt-1">
+                <span className="font-display text-xl font-bold text-warm-100/60">₹1.38–2.10</span>
+                <span className="font-mono text-warm-100/25 text-xs ml-1">Cr/yr</span>
               </div>
-              <div>
-                <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-gold/50">Return on investment</span>
-                <div ref={roiLow.ref} className="mt-1 flex items-baseline gap-1">
-                  <span className="font-display text-3xl md:text-4xl font-bold text-gold">{roiLow.count}–<span ref={roiHigh.ref as React.Ref<HTMLSpanElement>}>{roiHigh.count}</span>×</span>
-                  <span className="font-mono text-gold/40 text-sm">ROI</span>
-                </div>
+              <span className="font-mono text-[11px] text-warm-100/15">11.5–17.5% of brand & marketing allocation</span>
+            </div>
+            <div>
+              <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-gold/50">Return on investment</span>
+              <div ref={roiLow.ref} className="mt-1 flex items-baseline gap-1">
+                <span className="font-display text-3xl md:text-4xl font-bold text-gold">{roiLow.count}–<span ref={roiHigh.ref as React.Ref<HTMLSpanElement>}>{roiHigh.count}</span>×</span>
+                <span className="font-mono text-gold/40 text-sm">ROI</span>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Benchmark refs */}
-          <div ref={r4.ref} className={`mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 ${r4.cls}`}>
-            {[
-              { b: 'Generator', m: '50%+ operating margins', e: 'EUR 776M exit · Brookfield 2025' },
-              { b: 'MEININGER', m: 'EUR 196M revenue FY24', e: 'Centralized brand governance at scale' },
-              { b: 'citizenM', m: 'Marriott acquisition 2025', e: 'Brand premium attracted strategic buyer' },
-            ].map((r, i) => (
-              <div key={i} className={`bg-dark-surface border border-white/5 rounded-lg p-3.5 sd-${i+1}`}>
-                <span className="font-display text-sm font-semibold text-warm-100/60">{r.b}</span>
-                <p className="font-mono text-[11px] text-terracotta/50 mt-0.5">{r.m}</p>
-                <p className="font-body text-[11px] text-warm-200/30 mt-0.5">{r.e}</p>
-              </div>
-            ))}
-          </div>
+        {/* Benchmark refs */}
+        <div ref={r4.ref} className={`mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 ${r4.cls}`}>
+          {[
+            { b: 'Generator', m: '50%+ operating margins', e: 'EUR 776M exit · Brookfield 2025' },
+            { b: 'MEININGER', m: 'EUR 196M revenue FY24', e: 'Centralized brand governance at scale' },
+            { b: 'citizenM', m: 'Marriott acquisition 2025', e: 'Brand premium attracted strategic buyer' },
+          ].map((r, i) => (
+            <div key={i} className={`bg-dark-surface border border-white/5 rounded-lg p-3.5 sd-${i+1}`}>
+              <span className="font-display text-sm font-semibold text-warm-100/60">{r.b}</span>
+              <p className="font-mono text-[11px] text-terracotta/50 mt-0.5">{r.m}</p>
+              <p className="font-body text-[11px] text-warm-200/30 mt-0.5">{r.e}</p>
+            </div>
+          ))}
+        </div>
 
-          <div ref={r5.ref} className={`mt-10 text-center ${r5.cls}`}>
-            <p className="font-display text-warm-100/70 text-base italic max-w-lg mx-auto">"The difference between a 4× multiple and a 6–8× multiple at exit is the brand premium."</p>
-          </div>
+        <div ref={r5.ref} className={`mt-10 text-center ${r5.cls}`}>
+          <p className="font-display text-warm-100/70 text-base italic max-w-lg mx-auto">"The difference between a 4× multiple and a 6–8× multiple at exit is the brand premium."</p>
+        </div>
       </div>
     </section>
   );
