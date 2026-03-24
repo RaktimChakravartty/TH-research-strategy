@@ -4,10 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        warm: { 50: '#FAFAF8', 100: '#F5F0EB', 200: '#E8E4DF', 300: '#D4CFC8' },
-        dark: { DEFAULT: '#1A1A2E', surface: '#232340', lighter: '#2D2D4A' },
-        terracotta: { DEFAULT: '#B85042', light: '#D4716A', dark: '#8B3A30' },
-        gold: { DEFAULT: '#D4A84B', light: '#E8C97A', dark: '#A88535' },
+        cream: '#FAFAF8',
+        navy: '#1A1A2E',
+        surface: '#222238',
+        terra: { DEFAULT: '#C45B4D', dark: '#A84A3F' },
+        gold: { DEFAULT: '#D4A84B', light: '#E8C97A' },
+        ink: '#2D2D2D',
+        mid: '#6B6B6B',
+        cap: '#999999',
+        warm: '#E8E0D8',
+        ok: '#4A9E6B',
+        border: { light: '#E0DCD7', dark: 'rgba(255,255,255,0.08)' },
       },
       fontFamily: {
         display: ['"Playfair Display"', 'Georgia', 'serif'],

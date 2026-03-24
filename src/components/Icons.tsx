@@ -16,13 +16,13 @@ const iconPaths: Record<string, string> = {
   cpu: 'M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2ZM9 9h6v6H9ZM9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3',
 };
 
-export default function Icon({ name, className }: { name: string; className?: string }) {
+export default function Icon({ name, className, style, size = 20 }: { name: string; className?: string; style?: React.CSSProperties; size?: number }) {
   const d = iconPaths[name];
   if (!d) return null;
   return (
     <svg
-      width={20}
-      height={20}
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -30,6 +30,7 @@ export default function Icon({ name, className }: { name: string; className?: st
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
+      style={style}
     >
       <path d={d} />
     </svg>
