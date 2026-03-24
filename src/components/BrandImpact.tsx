@@ -1,11 +1,45 @@
+import { useState, useEffect, useRef } from 'react';
 import { IMPACT } from '../data/constants';
 import { useReveal } from '../hooks/useReveal';
+
+function useCountUp(end: number, duration = 1500) {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !started) {
+        setStarted(true);
+        const start = performance.now();
+        const animate = (now: number) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+          setCount(Math.round(eased * end));
+          if (progress < 1) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+      }
+    }, { threshold: 0.3 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [end, duration, started]);
+
+  return { count, ref };
+}
 
 export default function BrandImpact() {
   const r1 = useReveal(), r2 = useReveal();
   const totalLow = IMPACT.reduce((s, d) => s + d.low, 0);
   const totalHigh = IMPACT.reduce((s, d) => s + d.high, 0);
   const maxVal = Math.max(...IMPACT.map(d => d.high));
+
+  const lowCount = useCountUp(totalLow);
+  const highCount = useCountUp(totalHigh);
+  const roiLow = useCountUp(8);
+  const roiHigh = useCountUp(15);
 
   return (
     <section className="section-dark grain">
@@ -43,8 +77,8 @@ export default function BrandImpact() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
               <div>
                 <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-terracotta/40">Total brand-driven impact</span>
-                <div className="mt-1 flex items-baseline gap-1">
-                  <span className="font-display text-3xl md:text-4xl font-bold text-warm-100">₹{totalLow}–{totalHigh}</span>
+                <div ref={lowCount.ref} className="mt-1 flex items-baseline gap-1">
+                  <span className="font-display text-3xl md:text-4xl font-bold text-warm-100">₹{lowCount.count}–<span ref={highCount.ref as React.Ref<HTMLSpanElement>}>{highCount.count}</span></span>
                   <span className="font-mono text-terracotta-light text-base">Cr/yr</span>
                 </div>
               </div>
@@ -58,8 +92,8 @@ export default function BrandImpact() {
               </div>
               <div>
                 <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-gold/50">Return on investment</span>
-                <div className="mt-1 flex items-baseline gap-1">
-                  <span className="font-display text-3xl md:text-4xl font-bold text-gold">8–15×</span>
+                <div ref={roiLow.ref} className="mt-1 flex items-baseline gap-1">
+                  <span className="font-display text-3xl md:text-4xl font-bold text-gold">{roiLow.count}–<span ref={roiHigh.ref as React.Ref<HTMLSpanElement>}>{roiHigh.count}</span>×</span>
                   <span className="font-mono text-gold/40 text-sm">ROI</span>
                 </div>
               </div>

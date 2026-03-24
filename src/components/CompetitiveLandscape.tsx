@@ -42,11 +42,20 @@ function HBar({ label, items }: { label: string, items: { name: string, val: num
         {items.map(it => (
           <div key={it.name} className="flex items-center gap-2.5">
             <span className="font-body text-[11px] text-warm-100/40 w-24 shrink-0 text-right">{it.name}</span>
-            <div className="flex-1 h-6 bg-white/5 rounded overflow-hidden">
-              <div className="h-full rounded flex items-center justify-end pr-2 transition-all duration-700" style={{ width: `${(it.val / max) * 100}%`, backgroundColor: it.color }}>
-                <span className="font-mono text-[11px] text-white/90 font-medium">{it.val > 0 ? it.val : '—'}</span>
+            {it.val === 0 ? (
+              <div className="flex-1 h-6 flex items-center">
+                <span className="font-mono text-[10px] text-warm-100/20 italic">Not publicly reported</span>
               </div>
-            </div>
+            ) : (
+              <div className="flex-1 h-6 bg-white/5 rounded overflow-hidden">
+                <div className="h-full rounded flex items-center justify-end pr-2 transition-all duration-700" style={{ width: `${(it.val / max) * 100}%`, backgroundColor: it.color }}>
+                  <span className="font-mono text-[10px] text-white/90 font-medium">
+                    {it.val}
+                    {it.val === max && <span className="ml-1 text-gold/80 text-[10px]">★</span>}
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -87,8 +96,11 @@ export default function CompetitiveLandscape() {
           {COMP_BARS.find(b => b.note) && <p className="mt-3 font-mono text-[11px] text-warm-100/15">{COMP_BARS.find(b => b.note)!.note}</p>}
         </div>
 
-        <div className="mt-8 border-l-2 border-terracotta pl-5">
-          <p className="font-display text-warm-100/80 text-base md:text-lg italic leading-relaxed">"No competitor currently holds both operational foundation <span className="text-terracotta-light">and</span> brand system. That's the opportunity."</p>
+        <div className="mt-8 bg-gradient-to-r from-terracotta/10 via-dark-surface to-transparent border border-terracotta/15 rounded-xl p-6 md:p-8">
+          <div className="flex items-start gap-4">
+            <div className="text-terracotta/30 text-4xl font-display leading-none shrink-0">"</div>
+            <p className="font-display text-warm-100/80 text-base md:text-lg italic leading-relaxed">No competitor currently holds both operational foundation <span className="text-terracotta-light font-medium">and</span> brand system. That's the opportunity.</p>
+          </div>
         </div>
       </div>
     </section>

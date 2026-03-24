@@ -10,7 +10,7 @@ export default function WhyRaktim() {
       <div className="relative z-10 section-pad">
         {/* Header */}
         <div ref={r1.ref} className={r1.cls}>
-          <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-terracotta/50">09</span>
+          <span className="font-mono text-[11px] tracking-[0.35em] uppercase text-terracotta/50">09</span>
           <h2 className="mt-1 font-display text-warm-100 font-bold" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>Why Raktim</h2>
           <p className="mt-3 font-body text-warm-200/50 max-w-2xl text-sm leading-relaxed">
             The only candidate who helped build the original brand. The one who left, spent a decade acquiring the skills this moment demands, and is now ready to return.
@@ -20,7 +20,7 @@ export default function WhyRaktim() {
         {/* The Connection */}
         <div ref={r2.ref} className={`mt-10 grid grid-cols-1 lg:grid-cols-5 gap-6 ${r2.cls}`}>
           <div className="lg:col-span-3 bg-dark-surface border border-white/5 rounded-xl p-6 md:p-8">
-            <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-terracotta/40 block mb-3">The Origin</span>
+            <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-terracotta/40 block mb-3">The Origin</span>
             <p className="font-body text-sm text-warm-100/70 leading-relaxed">
               In January 2016, I walked into a building in Saket that was still being painted. I was 18 years old — the only person responsible for how The Hosteller would look, feel, and communicate to the world.
             </p>
@@ -49,7 +49,7 @@ export default function WhyRaktim() {
                   <Icon name={item.icon} className="text-warm-100/60 shrink-0 mt-0.5" />
                   <div>
                     <h4 className="font-body text-xs font-semibold text-warm-100/80">{item.title}</h4>
-                    <p className="font-body text-[10px] text-warm-200/45 mt-0.5 leading-relaxed">{item.desc}</p>
+                    <p className="font-body text-[11px] text-warm-200/45 mt-0.5 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               </div>
@@ -64,12 +64,12 @@ export default function WhyRaktim() {
             {CAREER.map((c, i) => (
               <div key={i} className={`rounded-lg p-4 transition-all ${c.highlight ? 'bg-terracotta/10 border-2 border-terracotta/25' : 'bg-dark-surface border border-white/5'}`}>
                 <div className="flex items-start justify-between mb-1.5">
-                  <span className="font-mono text-[10px] text-terracotta/60 font-medium">{c.year}</span>
+                  <span className="font-mono text-[11px] text-terracotta/60 font-medium">{c.year}</span>
                   {c.highlight && <span className="px-1.5 py-0.5 bg-terracotta/15 text-terracotta-light text-[10px] font-mono tracking-wider rounded-full uppercase">Origin</span>}
                 </div>
                 <h4 className="font-body text-sm font-semibold text-warm-100/80">{c.role}</h4>
-                <span className="font-mono text-[9px] text-warm-100/30 block">{c.title}</span>
-                <p className="font-body text-[10px] text-warm-200/45 mt-1.5 leading-relaxed">{c.desc}</p>
+                <span className="font-mono text-[10px] text-warm-100/30 block">{c.title}</span>
+                <p className="font-body text-[11px] text-warm-200/45 mt-1.5 leading-relaxed">{c.desc}</p>
               </div>
             ))}
           </div>
@@ -82,7 +82,7 @@ export default function WhyRaktim() {
             {PROOF.map((p, i) => (
               <div key={i} className="bg-dark-surface border border-white/5 rounded-xl p-4 text-center hover:border-white/8 transition-colors">
                 <span className="font-display text-2xl font-bold text-terracotta-light">{p.val}</span>
-                <p className="font-body text-[10px] text-warm-100/60 mt-1 font-medium">{p.label}</p>
+                <p className="font-body text-[11px] text-warm-100/60 mt-1 font-medium">{p.label}</p>
                 <p className="font-mono text-[10px] text-warm-100/25 mt-0.5">{p.sub}</p>
               </div>
             ))}
@@ -100,7 +100,7 @@ export default function WhyRaktim() {
                 <p className="font-body text-sm text-warm-100/65 italic leading-relaxed flex-1">{q.text}</p>
                 <div className="mt-4 pt-3 border-t border-white/5">
                   <span className="font-body text-xs font-semibold text-warm-100/50">{q.author}</span>
-                  <span className="font-mono text-[9px] text-warm-100/20 block mt-0.5">{q.ctx}</span>
+                  <span className="font-mono text-[10px] text-warm-100/20 block mt-0.5">{q.ctx}</span>
                 </div>
               </div>
             ))}
@@ -117,7 +117,7 @@ export default function WhyRaktim() {
             <a href="https://thehosteller.raktim.co" target="_blank" className="font-mono text-terracotta hover:text-terracotta-light transition-colors text-sm tracking-wider">
               Full strategy → thehosteller.raktim.co
             </a>
-            <span className="font-mono text-[10px] text-warm-100/20">hello@raktim.co · +91 84478 99705</span>
+            <span className="font-mono text-[11px] text-warm-100/20">hello@raktim.co · +91 84478 99705</span>
           </div>
         </div>
       </div>

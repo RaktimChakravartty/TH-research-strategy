@@ -1,11 +1,11 @@
 import { BENCHMARKS } from '../data/constants';
 import { useReveal } from '../hooks/useReveal';
 
-function Card({ b }: { b: typeof BENCHMARKS[0] }) {
+function Card({ b, large }: { b: typeof BENCHMARKS[0]; large?: boolean }) {
   const warn = b.cat === 'cautionary';
   return (
     <div className={`rounded-xl overflow-hidden flex flex-col h-full lift ${warn ? 'bg-red-950/30 border border-red-500/15' : 'bg-white/50 border border-warm-200'}`}>
-      <div className="p-5 flex flex-col flex-1">
+      <div className={`${large ? 'p-6' : 'p-5'} flex flex-col flex-1`}>
         <div className="flex items-start justify-between mb-2">
           <span className={`font-mono text-[11px] tracking-[0.2em] uppercase ${warn ? 'text-red-400/50' : 'text-dark/30'}`}>{b.geo}</span>
           {b.badge && <span className="font-mono text-[11px] text-green-600 bg-green-50 px-1.5 py-0.5 rounded-full">{b.badge}</span>}
@@ -50,9 +50,24 @@ export default function InternationalBenchmarks() {
           </div>
         </div>
 
-        <div ref={r2.ref} className={`mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 ${r2.cls}`}>
-          {BENCHMARKS.map((b, i) => <Card key={i} b={b} />)}
-        </div>
+        {(() => {
+          const featuredNames = ['Generator Hostels', 'MEININGER Hotels', 'citizenM', 'Selina'];
+          const featured = BENCHMARKS.filter(b => featuredNames.includes(b.name));
+          const secondary = BENCHMARKS.filter(b => !featuredNames.includes(b.name));
+          return (
+            <div ref={r2.ref} className={r2.cls}>
+              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
+                {featured.map((b, i) => <Card key={i} b={b} large />)}
+              </div>
+              <div className="mt-8">
+                <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-dark/30">Additional Benchmarks</span>
+                <div className="mt-3 grid grid-cols-2 lg:grid-cols-4 gap-3">
+                  {secondary.map((b, i) => <Card key={i} b={b} />)}
+                </div>
+              </div>
+            </div>
+          );
+        })()}
 
         {/* OYO */}
         <div className="mt-8 border border-warm-200 rounded-xl p-5 bg-white/30 flex items-start gap-3">

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SECTIONS } from './data/constants';
 import Cover from './components/Cover';
 import MarketSnapshot from './components/MarketSnapshot';
@@ -56,12 +56,19 @@ export default function App() {
       {/* Sections */}
       <div ref={containerRef} className="scroll-container">
         {SECTION_COMPONENTS.map((Comp, i) => (
-          <div key={i} data-idx={i} id={SECTIONS[i].id}><Comp /></div>
+          <React.Fragment key={i}>
+            <div data-idx={i} id={SECTIONS[i].id}><Comp /></div>
+            {i < SECTION_COMPONENTS.length - 1 && (
+              <div className="relative h-px">
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-terracotta/15 to-transparent" />
+              </div>
+            )}
+          </React.Fragment>
         ))}
         {/* Footer */}
         <div className="section-dark py-10 text-center">
           <div className="relative z-10">
-            <p className="font-mono text-[9px] tracking-[0.3em] text-warm-100/20 uppercase">Prepared by Raktim Chakravartty · March 2026 · Confidential</p>
+            <p className="font-mono text-[10px] tracking-[0.3em] text-warm-100/20 uppercase">Prepared by Raktim Chakravartty · March 2026 · Confidential</p>
             <div className="mt-3 flex justify-center gap-6">
               <a href="https://thehosteller.raktim.co" target="_blank" className="font-mono text-[10px] text-terracotta/60 hover:text-terracotta transition-colors">thehosteller.raktim.co</a>
               <span className="font-mono text-[10px] text-warm-100/15">hello@raktim.co</span>
