@@ -52,7 +52,7 @@ function GalleryCard({ item, onOpen }: { item: Item; onOpen: (item: Item) => voi
       )}
       {/* Hover overlay */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4"
-        style={{ background: 'linear-gradient(to top, rgba(12,12,12,0.9) 0%, rgba(12,12,12,0.3) 50%, transparent 100%)' }}>
+        style={{ background: 'linear-gradient(to top, var(--overlay) 0%, rgba(12,12,12,0.3) 50%, transparent 100%)' }}>
         <span className="font-body text-[15px] font-semibold" style={{ color: 'var(--text-light)' }}>{item.brand}</span>
         <p className="font-body text-[13px] mt-1 leading-snug" style={{ color: 'var(--text-light-body)' }}>{item.note}</p>
       </div>

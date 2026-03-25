@@ -42,7 +42,7 @@ function AnimBar({ pct, color, delay }: { pct: number; color: string; delay: num
   }, []);
 
   return (
-    <div ref={ref} className="h-3 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.04)' }}>
+    <div ref={ref} className="h-3 rounded-full overflow-hidden" style={{ background: 'var(--border-dark)' }}>
       <div className="h-full rounded-full bar-grow" style={{
         width: vis ? `${pct}%` : '0%',
         backgroundColor: color,
@@ -98,7 +98,7 @@ export default function BrandImpact() {
         {/* THE MONEY SLIDE */}
         <div ref={r3.ref} className={`mt-10 rounded-lg p-8 md:p-10 ${r3.cls}`} style={{
           background: 'var(--bg-card-dark)',
-          border: '1px solid rgba(196,82,62,0.2)',
+          border: '1px solid var(--accent-soft)',
         }}>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
             <div>
