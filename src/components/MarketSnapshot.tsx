@@ -27,7 +27,7 @@ export default function MarketSnapshot() {
         {/* Stat cards */}
         <div ref={r2.ref} className={`mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 ${r2.cls}`}>
           {[MARKET.travel, MARKET.hospitality, MARKET.hostelCagr].map((s, i) => (
-            <div key={i} className={`rounded-lg p-8 sd-${i + 1}`} style={{ border: '1px solid var(--border-light)', background: 'rgba(255,255,255,0.5)' }}>
+            <div key={i} className={`rounded-lg p-8 sd-${i + 1}`} style={{ border: '1px solid var(--border-light)', background: 'var(--card-light)' }}>
               <span className="font-display text-[2.5rem] font-bold" style={{ color: 'var(--text-dark)' }}>{s.val}</span>
               <p className="mt-2 font-body text-[0.9375rem]" style={{ color: 'var(--text-body)' }}>{s.label}</p>
               <p className="mt-1 font-mono text-[11px]" style={{ color: 'var(--text-muted)' }}>{s.sub}</p>
@@ -37,7 +37,7 @@ export default function MarketSnapshot() {
 
         {/* Charts */}
         <div ref={r3.ref} className={`mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 ${r3.cls}`}>
-          <div className="rounded-lg p-6" style={{ border: '1px solid var(--border-light)', background: 'rgba(255,255,255,0.5)' }}>
+          <div className="rounded-lg p-6" style={{ border: '1px solid var(--border-light)', background: 'var(--card-light)' }}>
             <h3 className="font-body text-[15px] font-semibold" style={{ color: 'var(--text-dark)' }}>Hospitality Market Trajectory</h3>
             <p className="font-mono text-[11px] mb-4" style={{ color: 'var(--text-muted)' }}>USD Billions · Mordor Intelligence</p>
             <ResponsiveContainer width="100%" height={280}>
@@ -51,7 +51,7 @@ export default function MarketSnapshot() {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-          <div className="rounded-lg p-6" style={{ border: '1px solid var(--border-light)', background: 'rgba(255,255,255,0.5)' }}>
+          <div className="rounded-lg p-6" style={{ border: '1px solid var(--border-light)', background: 'var(--card-light)' }}>
             <h3 className="font-body text-[15px] font-semibold" style={{ color: 'var(--text-dark)' }}>India Hostel Count Growth</h3>
             <p className="font-mono text-[11px] mb-4" style={{ color: 'var(--text-muted)' }}>Number of hostels · BW Businessworld</p>
             <ResponsiveContainer width="100%" height={280}>
@@ -84,9 +84,9 @@ export default function MarketSnapshot() {
         {/* Tailwinds — colored bullet dots, no emoji */}
         <div ref={r5.ref} className={`mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 ${r5.cls}`}>
           {MARKET.tailwinds.map((tw, i) => {
-            const colors = ['#C4523E', '#C9A84C', '#5A8A6A', '#6A7A9A'];
+            const colors = ['#C4523E', '#C9A84C', '#5A8A6A', '#8A8A8A'];
             return (
-              <div key={i} className={`rounded-lg p-5 sd-${i + 1}`} style={{ border: '1px solid var(--border-light)', background: 'rgba(255,255,255,0.3)' }}>
+              <div key={i} className={`rounded-lg p-5 sd-${i + 1}`} style={{ border: '1px solid var(--border-light)', background: 'var(--card-light)' }}>
                 <div className="w-2 h-2 rounded-full mb-3" style={{ background: colors[i] }} />
                 <h4 className="font-body text-[14px] font-semibold" style={{ color: 'var(--text-dark)' }}>{tw.t}</h4>
                 <p className="mt-1 font-body text-[13px] leading-relaxed" style={{ color: 'var(--text-body)' }}>{tw.d}</p>
