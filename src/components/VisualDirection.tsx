@@ -9,7 +9,7 @@ function DirCard({ d }: { d: typeof DIRECTIONS[0] }) {
         <div className="flex items-center gap-2">
           <span className="font-mono text-[13px] tracking-[0.15em] uppercase" style={{ color: 'var(--text-muted)' }}>Direction {d.id}</span>
           {d.id === 'B' && (
-            <span className="px-2 py-0.5 rounded font-mono text-[11px] tracking-wider uppercase" style={{ background: 'rgba(196,82,62,0.08)', border: '1px solid rgba(196,82,62,0.2)', color: 'var(--accent)' }}>Recommended</span>
+            <span className="px-2 py-0.5 rounded font-mono text-[11px] tracking-wider uppercase" style={{ background: 'var(--accent-soft)', border: '1px solid var(--accent-soft)', color: 'var(--accent)' }}>Recommended</span>
           )}
         </div>
         <h3 className="font-display text-[1.5rem] font-bold mt-1" style={{ color: 'var(--text-dark)' }}>{d.name}</h3>

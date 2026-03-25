@@ -40,7 +40,7 @@ export default function QuickWinsTimeline() {
               </div>
               <div className="ml-5 pl-5 space-y-3" style={{ borderLeft: '2px solid var(--border-light)' }}>
                 {phase.items.map((item, i) => (
-                  <div key={i} className="relative rounded-lg p-4" style={{ background: 'rgba(255,255,255,0.6)', border: '1px solid var(--border-light)' }}>
+                  <div key={i} className="relative rounded-lg p-4" style={{ background: 'var(--card-light)', border: '1px solid var(--border-light)' }}>
                     <div className="absolute -left-[27px] top-4 w-3 h-3 rounded-full border-2" style={{ borderColor: phase.color, background: 'var(--bg-light)' }} />
                     <h4 className="font-body text-[15px] font-semibold" style={{ color: 'var(--text-dark)' }}>{item.t}</h4>
                     <p className="font-body text-[14px] mt-1 leading-relaxed" style={{ color: 'var(--text-body)' }}>{item.d}</p>

@@ -45,7 +45,7 @@ export default function WhyRaktim() {
           <div className="lg:col-span-2 space-y-3">
             {skills.map((item, i) => (
               <div key={i} className="rounded-lg p-4 flex items-start gap-3" style={{ background: 'var(--bg-card-dark)', border: '1px solid var(--border-dark)' }}>
-                <div className="w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5" style={{ background: 'rgba(196,82,62,0.1)' }}>
+                <div className="w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5" style={{ background: 'var(--accent-soft)' }}>
                   <span className="font-mono text-[11px] font-bold" style={{ color: 'var(--accent)' }}>{i + 1}</span>
                 </div>
                 <div>
@@ -63,13 +63,13 @@ export default function WhyRaktim() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {CAREER.map((c, i) => (
               <div key={i} className={`rounded-lg p-5 sd-${i + 1}`} style={{
-                background: c.highlight ? 'rgba(196,82,62,0.06)' : 'var(--bg-card-dark)',
-                border: c.highlight ? '2px solid rgba(196,82,62,0.25)' : '1px solid var(--border-dark)',
+                background: c.highlight ? 'var(--accent-faint)' : 'var(--bg-card-dark)',
+                border: c.highlight ? '2px solid var(--accent-soft)' : '1px solid var(--border-dark)',
               }}>
                 <div className="flex items-start justify-between mb-2">
                   <span className="font-mono text-[13px] font-medium" style={{ color: 'var(--accent)', opacity: 0.7 }}>{c.year}</span>
                   {c.highlight && (
-                    <span className="px-2 py-0.5 rounded font-mono text-[11px] tracking-wider uppercase" style={{ background: 'rgba(196,82,62,0.1)', color: 'var(--accent)' }}>Origin</span>
+                    <span className="px-2 py-0.5 rounded font-mono text-[11px] tracking-wider uppercase" style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}>Origin</span>
                   )}
                 </div>
                 <h4 className="font-body text-[15px] font-semibold" style={{ color: 'var(--text-light)' }}>{c.role}</h4>
@@ -102,7 +102,7 @@ export default function WhyRaktim() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {QUOTES.slice(0, 2).map((q, i) => (
               <div key={i} className="rounded-lg p-6 flex flex-col" style={{ background: 'var(--bg-card-dark)', border: '1px solid var(--border-dark)' }}>
-                <div className="font-display text-[3rem] leading-none mb-2" style={{ color: 'rgba(196,82,62,0.15)' }}>"</div>
+                <div className="font-display text-[3rem] leading-none mb-2" style={{ color: 'var(--accent)', opacity: 0.15 }}>"</div>
                 <p className="font-body text-[16px] italic leading-relaxed flex-1" style={{ color: 'var(--text-light-body)' }}>{q.text}</p>
                 <div className="mt-4 pt-3" style={{ borderTop: '1px solid var(--border-dark)' }}>
                   <span className="font-body text-[14px] font-semibold" style={{ color: 'var(--text-light-body)' }}>{q.author}</span>
@@ -115,7 +115,7 @@ export default function WhyRaktim() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             {QUOTES.slice(2).map((q, i) => (
               <div key={i} className="rounded-lg p-5 flex flex-col" style={{ background: 'var(--bg-card-dark)', border: '1px solid var(--border-dark)' }}>
-                <div className="font-display text-[2rem] leading-none mb-1.5" style={{ color: 'rgba(196,82,62,0.12)' }}>"</div>
+                <div className="font-display text-[2rem] leading-none mb-1.5" style={{ color: 'var(--accent)', opacity: 0.12 }}>"</div>
                 <p className="font-body text-[15px] italic leading-relaxed flex-1" style={{ color: 'var(--text-light-body)' }}>{q.text}</p>
                 <div className="mt-3 pt-2.5" style={{ borderTop: '1px solid var(--border-dark)' }}>
                   <span className="font-body text-[13px] font-semibold" style={{ color: 'var(--text-light-body)' }}>{q.author}</span>
@@ -128,7 +128,7 @@ export default function WhyRaktim() {
 
         {/* CTA */}
         <div className="mt-16 text-center">
-          <div className="h-px w-16 mx-auto mb-8" style={{ background: 'rgba(196,82,62,0.25)' }} />
+          <div className="h-px w-16 mx-auto mb-8" style={{ background: 'var(--accent-soft)' }} />
           <p className="font-display text-[1.25rem] italic max-w-lg mx-auto leading-relaxed" style={{ color: 'var(--text-light-body)' }}>
             "I started this journey at 18 in a building that was still being painted. I have spent a decade building the skills, the judgment, and the systems thinking required to do what The Hosteller needs now."
           </p>
