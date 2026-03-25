@@ -10,15 +10,15 @@ function BrandLogo({ name }: { name: string }) {
       <span className="font-display text-[10px] font-bold" style={{ color: 'var(--text-muted)' }}>{name.charAt(0)}</span>
     </div>
   );
-  return <img src={`/images/${slug}-logo.png`} alt="" className="w-7 h-7 rounded object-contain shrink-0 p-0.5" style={{ background: 'rgba(255,255,255,0.8)' }} onError={() => setOk(false)} />;
+  return <img src={`/images/${slug}-logo.png`} alt="" className="w-7 h-7 rounded object-contain shrink-0 p-0.5" style={{ background: 'var(--card-light)' }} onError={() => setOk(false)} />;
 }
 
 function Card({ b, large }: { b: typeof BENCHMARKS[0]; large?: boolean }) {
   const warn = b.cat === 'cautionary';
   return (
     <div className="rounded-lg overflow-hidden flex flex-col h-full lift" style={{
-      background: warn ? 'rgba(196,82,62,0.06)' : 'rgba(255,255,255,0.5)',
-      border: warn ? '1px solid rgba(196,82,62,0.15)' : '1px solid var(--border-light)',
+      background: warn ? 'var(--accent-faint)' : 'var(--card-light)',
+      border: warn ? '1px solid var(--accent-soft)' : '1px solid var(--border-light)',
     }}>
       <div className={`${large ? 'p-6' : 'p-5'} flex flex-col flex-1`}>
         <div className="flex items-start justify-between mb-3">
@@ -26,25 +26,26 @@ function Card({ b, large }: { b: typeof BENCHMARKS[0]; large?: boolean }) {
             <BrandLogo name={b.name} />
             <span className="font-mono text-[11px] tracking-[0.15em] uppercase" style={{ color: warn ? 'rgba(196,82,62,0.6)' : 'var(--text-muted)' }}>{b.geo}</span>
           </div>
-          {b.badge && <span className="font-mono text-[11px] px-2 py-0.5 rounded" style={{ color: '#5A8A6A', background: 'rgba(90,138,106,0.08)', border: '1px solid rgba(90,138,106,0.15)' }}>{b.badge}</span>}
+          {b.badge && <span className="font-mono text-[11px] px-2 py-0.5 rounded" style={{ color: 'var(--success)', background: 'var(--success-soft)', border: '1px solid var(--success-faint)' }}>{b.badge}</span>}
           {warn && <span className="font-mono text-[11px] px-2 py-0.5 rounded uppercase tracking-wider" style={{ color: 'var(--accent)', background: 'rgba(196,82,62,0.08)', border: '1px solid rgba(196,82,62,0.15)' }}>Cautionary</span>}
         </div>
         <h3 className="font-display text-[1.25rem] font-semibold" style={{ color: warn ? 'var(--accent)' : 'var(--text-dark)' }}>{b.name}</h3>
-        <div className="mt-3 py-3 px-4 rounded-lg" style={{ background: warn ? 'rgba(196,82,62,0.04)' : 'var(--bg-light)', border: warn ? 'none' : '1px solid var(--border-light)' }}>
+        <div className="mt-3 py-3 px-4 rounded-lg" style={{ background: warn ? 'var(--accent-faint)' : 'var(--bg-light)', border: warn ? 'none' : '1px solid var(--border-light)' }}>
           <span className="font-display font-bold" style={{ fontSize: large ? '1.75rem' : '1.5rem', color: 'var(--accent)' }}>{b.headline}</span>
           <p className="font-mono text-[13px] mt-0.5" style={{ color: 'var(--text-muted)' }}>{b.headlineSub}</p>
         </div>
         <div className="mt-3 flex flex-wrap gap-1.5">
           {b.details.map((d, i) => (
             <span key={i} className="px-2 py-0.5 rounded text-[13px]" style={{
-              background: warn ? 'rgba(196,82,62,0.04)' : 'rgba(26,26,26,0.03)',
-              border: warn ? '1px solid rgba(196,82,62,0.1)' : '1px solid rgba(26,26,26,0.06)',
-              color: warn ? 'rgba(196,82,62,0.6)' : 'var(--text-body)',
+              background: warn ? 'var(--accent-faint)' : 'var(--bg-light)',
+              border: warn ? '1px solid var(--accent-soft)' : '1px solid var(--border-light)',
+              color: warn ? 'var(--accent)' : 'var(--text-body)',
+              opacity: warn ? 0.6 : 1,
             }}>{d}</span>
           ))}
         </div>
-        <div className="mt-auto pt-3 mt-4" style={{ borderTop: warn ? '1px solid rgba(196,82,62,0.1)' : '1px solid var(--border-light)' }}>
-          <p className="font-body text-[14px] leading-relaxed" style={{ color: warn ? 'rgba(196,82,62,0.6)' : 'var(--text-body)' }}>{b.lesson}</p>
+        <div className="mt-auto pt-3 mt-4" style={{ borderTop: warn ? '1px solid var(--accent-soft)' : '1px solid var(--border-light)' }}>
+          <p className="font-body text-[14px] leading-relaxed" style={{ color: warn ? 'var(--accent)' : 'var(--text-body)', opacity: warn ? 0.6 : 1 }}>{b.lesson}</p>
         </div>
       </div>
     </div>
