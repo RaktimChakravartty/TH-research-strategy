@@ -263,4 +263,7 @@ export const PROOF = [
 export const QUOTES = [
   { text: 'A valuable creative thinker and someone to seek out for branding projects.', author: 'Ankita Deb', ctx: 'ZS Associates, Year-End 2022' },
   { text: 'As Raktim continues to grow, seeing him lead and present work will be a great next step in his career.', author: 'Kevin Mullucks', ctx: 'ZS Associates, Mid-Year 2023 — identified CD-level potential' },
+  { text: 'Working with Raktim is always a pleasure. He has a positive attitude and can be trusted to deliver great work against difficult timelines consistently.', author: 'Emily Lockwood', ctx: 'ZS Associates, Mid-Year 2023' },
+  { text: 'One of the valuable designers for the team, with great design skills, thought process, and technically strong.', author: 'Mohammed I', ctx: 'ZS Associates, Year-End 2022' },
+  { text: 'Raktim assumed leadership of the ZS Connection film project, served as sole point of contact, and demonstrated quick decision-making throughout.', author: 'Arpit Jeslani', ctx: 'ZS Associates, Mid-Year 2023' },
 ];
