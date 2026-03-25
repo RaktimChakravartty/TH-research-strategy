@@ -24,10 +24,10 @@ function Card({ b, large }: { b: typeof BENCHMARKS[0]; large?: boolean }) {
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-2.5">
             <BrandLogo name={b.name} />
-            <span className="font-mono text-[11px] tracking-[0.15em] uppercase" style={{ color: warn ? 'rgba(196,82,62,0.6)' : 'var(--text-muted)' }}>{b.geo}</span>
+            <span className="font-mono text-[11px] tracking-[0.15em] uppercase" style={{ color: warn ? 'var(--accent)' : 'var(--text-muted)', opacity: warn ? 0.6 : 1 }}>{b.geo}</span>
           </div>
           {b.badge && <span className="font-mono text-[11px] px-2 py-0.5 rounded" style={{ color: 'var(--success)', background: 'var(--success-soft)', border: '1px solid var(--success-faint)' }}>{b.badge}</span>}
-          {warn && <span className="font-mono text-[11px] px-2 py-0.5 rounded uppercase tracking-wider" style={{ color: 'var(--accent)', background: 'rgba(196,82,62,0.08)', border: '1px solid rgba(196,82,62,0.15)' }}>Cautionary</span>}
+          {warn && <span className="font-mono text-[11px] px-2 py-0.5 rounded uppercase tracking-wider" style={{ color: 'var(--accent)', background: 'var(--accent-soft)', border: '1px solid var(--accent-soft)' }}>Cautionary</span>}
         </div>
         <h3 className="font-display text-[1.25rem] font-semibold" style={{ color: warn ? 'var(--accent)' : 'var(--text-dark)' }}>{b.name}</h3>
         <div className="mt-3 py-3 px-4 rounded-lg" style={{ background: warn ? 'var(--accent-faint)' : 'var(--bg-light)', border: warn ? 'none' : '1px solid var(--border-light)' }}>
@@ -93,7 +93,7 @@ export default function InternationalBenchmarks() {
         </div>
 
         {/* OYO */}
-        <div ref={r4.ref} className={`mt-10 rounded-lg p-6 flex items-start gap-4 ${r4.cls}`} style={{ border: '1px solid var(--border-light)', background: 'rgba(255,255,255,0.3)' }}>
+        <div ref={r4.ref} className={`mt-10 rounded-lg p-6 flex items-start gap-4 ${r4.cls}`} style={{ border: '1px solid var(--border-light)', background: 'var(--card-light)' }}>
           <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ background: 'var(--bg-dark)' }}>
             <span className="font-mono text-[13px] font-bold" style={{ color: 'var(--accent)' }}>IN</span>
           </div>

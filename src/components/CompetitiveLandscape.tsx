@@ -16,7 +16,7 @@ function BrandCard({ brand, isPrimary }: { brand: typeof COMPETITORS.hosteller; 
         </div>
         {isPrimary && (
           <span className="px-2 py-0.5 rounded font-mono text-[11px] tracking-wider uppercase"
-            style={{ background: 'rgba(196,82,62,0.12)', color: 'var(--accent)' }}>Subject</span>
+            style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}>Subject</span>
         )}
       </div>
       <div className="space-y-2 mb-4 flex-1">
