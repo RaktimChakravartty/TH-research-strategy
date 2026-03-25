@@ -48,7 +48,7 @@ export default function Cover() {
                 onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-light-muted)')}>
                 {n.label}
               </button>
-              {i < NAV.length - 1 && <span className="mx-2.5" style={{ color: 'rgba(232,226,218,0.12)' }}> · </span>}
+              {i < NAV.length - 1 && <span className="mx-2.5" style={{ color: 'var(--border-dark)' }}> · </span>}
             </span>
           ))}
         </div>
@@ -81,20 +81,20 @@ export default function Cover() {
               style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-dark)', padding: '1.25rem' }}>
               <div className="font-display text-[1.75rem] font-bold" style={{ color: 'var(--text-light)' }}>{s.value}</div>
               <div className="font-body text-[0.6875rem] uppercase tracking-widest mt-1" style={{ color: 'var(--text-light-muted)' }}>{s.label}</div>
-              <div className="font-mono text-[11px] mt-0.5" style={{ color: 'rgba(196,82,62,0.4)' }}>{s.sub}</div>
+              <div className="font-mono text-[11px] mt-0.5" style={{ color: 'var(--accent)', opacity: 0.4 }}>{s.sub}</div>
             </div>
           ))}
         </div>
 
         {/* Source */}
-        <p className="mt-6 font-mono text-[10px]" style={{ color: 'rgba(232,226,218,0.2)' }}>
+        <p className="mt-6 font-mono text-[10px]" style={{ color: 'var(--text-light-muted)', opacity: 0.65 }}>
           Source: BW Travel (Jan 2026), Tracxn, Entrackr, YourStory/Inc42 (Nov 2024). Revenue FY2025.
         </p>
 
         {/* Scroll */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5">
-          <span className="font-mono text-[10px] tracking-[0.3em] uppercase" style={{ color: 'rgba(232,226,218,0.15)' }}>Scroll</span>
-          <div className="w-px h-6" style={{ background: 'linear-gradient(to bottom, rgba(232,226,218,0.12), transparent)' }} />
+          <span className="font-mono text-[10px] tracking-[0.3em] uppercase" style={{ color: 'var(--text-light-muted)', opacity: 0.5 }}>Scroll</span>
+          <div className="w-px h-6" style={{ background: 'linear-gradient(to bottom, var(--border-dark), transparent)' }} />
         </div>
       </div>
     </section>
