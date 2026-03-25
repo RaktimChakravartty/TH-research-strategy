@@ -96,15 +96,29 @@ export default function WhyRaktim() {
 
         {/* Quotes — ALL available */}
         <div ref={r5.ref} className={`mt-12 ${r5.cls}`}>
-          <h3 className="font-display text-[1.5rem] font-semibold mb-2" style={{ color: 'var(--text-light)' }}>What Colleagues Said</h3>
-          <p className="font-body text-[15px] mb-6" style={{ color: 'var(--text-light-muted)' }}>From formal performance reviews at ZS Associates (2022–2023).</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {QUOTES.map((q, i) => (
+          <h3 className="font-display text-[1.5rem] font-semibold mb-2" style={{ color: 'var(--text-light)' }}>What Others Said</h3>
+          <p className="font-body text-[15px] mb-6" style={{ color: 'var(--text-light-muted)' }}>From formal performance reviews and peer recommendations at ZS Associates (2022–2023).</p>
+          {/* First row: 2 featured quotes (Kevin + Emily) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {QUOTES.slice(0, 2).map((q, i) => (
               <div key={i} className="rounded-lg p-6 flex flex-col" style={{ background: 'var(--bg-card-dark)', border: '1px solid var(--border-dark)' }}>
                 <div className="font-display text-[3rem] leading-none mb-2" style={{ color: 'rgba(196,82,62,0.15)' }}>"</div>
                 <p className="font-body text-[16px] italic leading-relaxed flex-1" style={{ color: 'var(--text-light-body)' }}>{q.text}</p>
                 <div className="mt-4 pt-3" style={{ borderTop: '1px solid var(--border-dark)' }}>
                   <span className="font-body text-[14px] font-semibold" style={{ color: 'var(--text-light-body)' }}>{q.author}</span>
+                  <span className="font-mono text-[11px] block mt-0.5" style={{ color: 'var(--text-light-muted)' }}>{q.ctx}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Second row: 3 additional quotes */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+            {QUOTES.slice(2).map((q, i) => (
+              <div key={i} className="rounded-lg p-5 flex flex-col" style={{ background: 'var(--bg-card-dark)', border: '1px solid var(--border-dark)' }}>
+                <div className="font-display text-[2rem] leading-none mb-1.5" style={{ color: 'rgba(196,82,62,0.12)' }}>"</div>
+                <p className="font-body text-[15px] italic leading-relaxed flex-1" style={{ color: 'var(--text-light-body)' }}>{q.text}</p>
+                <div className="mt-3 pt-2.5" style={{ borderTop: '1px solid var(--border-dark)' }}>
+                  <span className="font-body text-[13px] font-semibold" style={{ color: 'var(--text-light-body)' }}>{q.author}</span>
                   <span className="font-mono text-[11px] block mt-0.5" style={{ color: 'var(--text-light-muted)' }}>{q.ctx}</span>
                 </div>
               </div>
