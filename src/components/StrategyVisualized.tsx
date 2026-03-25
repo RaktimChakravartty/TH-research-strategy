@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { STRATEGY_LAYERS, TOUCHPOINTS } from '../data/constants';
 import { useReveal } from '../hooks/useReveal';
+import Icon from './Icons';
 
+const LAYER_ICONS = ['foundation', 'map-pin', 'camera', 'smartphone', 'users', 'award'];
 const LAYER_COLORS = ['#C4523E', '#D06A4E', '#C9A84C', '#D4B86A', '#5A8A6A', '#4A7A8A'];
+const TOUCHPOINT_ICONS = ['check-circle', 'coffee', 'smartphone', 'instagram', 'users'];
 
 export default function StrategyVisualized() {
   const [active, setActive] = useState(1);
@@ -12,103 +15,115 @@ export default function StrategyVisualized() {
   return (
     <section className="section-dark">
       <div className="section-pad">
+        {/* Header */}
         <div ref={r1.ref} className={r1.cls}>
-          <span className="font-mono text-[12px] tracking-[0.4em] uppercase" style={{ color: 'var(--accent-gold)' }}>06</span>
-          <h2 className="mt-3 font-display font-bold" style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', color: 'var(--text-light)', letterSpacing: '-0.03em' }}>The Brand Operating System</h2>
-          <p className="mt-3 font-body text-[16px] leading-[1.65] max-w-2xl" style={{ color: 'var(--text-light-body)' }}>Six layers, each building on the one below. Adapted from Generator, MEININGER, and citizenM — customized for self-operated properties across India.</p>
+          <div className="flex items-center gap-2 mb-1">
+            <Icon name="layers" size={16} style={{ color: 'var(--accent-gold)' }} />
+            <span className="sec-num">06</span>
+          </div>
+          <h2 className="sec-title sec-title-dark">The Brand Operating System</h2>
+          <p className="sec-desc sec-desc-dark">Six layers, each building on the one below. Adapted from Generator, MEININGER, and citizenM — customized for self-operated properties across India.</p>
         </div>
 
-        <div ref={r3.ref} className={`mt-12 grid grid-cols-1 lg:grid-cols-5 gap-8 ${r3.cls}`}>
-          {/* Pyramid — takes 3 cols */}
-          <div className="lg:col-span-3 flex flex-col items-center justify-center py-8">
-            <div className="w-full max-w-md">
-              {STRATEGY_LAYERS.slice().reverse().map((l, i) => {
-                const w = 40 + i * 10;
-                const isActive = active === l.id;
-                const color = LAYER_COLORS[l.id - 1];
-                return (
-                  <div key={l.id}
-                    className="mx-auto cursor-pointer flex items-center justify-center transition-all duration-300"
-                    style={{
-                      width: `${w}%`,
-                      height: isActive ? '64px' : '48px',
-                      background: isActive ? color : `${color}40`,
-                      borderRadius: i === 0 ? '12px 12px 0 0' : i === 5 ? '0 0 12px 12px' : '0',
-                      borderBottom: i < 5 ? '2px solid rgba(0,0,0,0.3)' : 'none',
-                      transform: isActive ? 'scale(1.06)' : 'scale(1)',
-                      boxShadow: isActive ? `0 0 40px ${color}30, inset 0 1px 0 rgba(255,255,255,0.15)` : 'none',
-                      zIndex: isActive ? 10 : 1,
-                      position: 'relative',
-                    }}
-                    onClick={() => setActive(l.id)}>
-                    <span className="font-display text-[13px] text-white tracking-wide transition-opacity" style={{ fontWeight: isActive ? 600 : 400, opacity: isActive ? 1 : 0.5 }}>
-                      {l.name}
-                    </span>
+        {/* Interactive layer selector — horizontal cards */}
+        <div ref={r3.ref} className={`mt-10 ${r3.cls}`}>
+          {/* Layer tabs */}
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mb-6">
+            {STRATEGY_LAYERS.map((l, i) => {
+              const isActive = active === l.id;
+              const color = LAYER_COLORS[i];
+              return (
+                <button key={l.id} onClick={() => setActive(l.id)}
+                  className="rounded-xl p-3 text-center transition-all relative overflow-hidden"
+                  style={{
+                    background: isActive ? `${color}18` : 'var(--bg-card-dark)',
+                    border: isActive ? `1.5px solid ${color}50` : '1px solid var(--border-dark)',
+                    transform: isActive ? 'scale(1.02)' : 'scale(1)',
+                  }}>
+                  {/* Active glow */}
+                  {isActive && <div className="absolute inset-0 rounded-xl" style={{ background: `radial-gradient(circle at center, ${color}10, transparent 70%)` }} />}
+                  <div className="relative z-10">
+                    <div className="icon-box mx-auto mb-2" style={{ background: isActive ? `${color}25` : 'var(--gold-faint)', width: 36, height: 36 }}>
+                      <Icon name={LAYER_ICONS[i]} size={18} style={{ color: isActive ? color : 'var(--text-light-muted)' }} />
+                    </div>
+                    <div className="font-mono text-[10px] tracking-wider mb-0.5" style={{ color: isActive ? color : 'var(--text-light-muted)' }}>0{l.id}</div>
+                    <div className="font-display text-[12px] font-semibold leading-tight" style={{ color: isActive ? 'var(--text-light)' : 'var(--text-light-muted)' }}>{l.name}</div>
                   </div>
-                );
-              })}
-            </div>
-
-            {/* Active layer detail below pyramid */}
-            <div className="mt-8 text-center w-full max-w-md transition-all">
-              <div className="inline-block px-3 py-1 rounded-full mb-3" style={{ background: `${LAYER_COLORS[active - 1]}20` }}>
-                <span className="font-mono text-[12px] tracking-[0.2em] uppercase font-medium" style={{ color: LAYER_COLORS[active - 1] }}>Layer {active}</span>
-              </div>
-              <h3 className="font-display text-[1.25rem] font-semibold" style={{ color: 'var(--text-light)' }}>{current.name}</h3>
-              <p className="font-body text-[15px] mt-2 leading-relaxed" style={{ color: 'var(--text-light-body)' }}>{current.desc}</p>
-            </div>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Deliverables panel — takes 2 cols */}
-          <div className="lg:col-span-2">
-            <div className="rounded-lg p-6" style={{ background: 'var(--bg-card-dark)', border: '1px solid var(--border-dark)' }}>
-              <span className="font-mono text-[11px] tracking-[0.3em] uppercase block mb-4" style={{ color: 'var(--accent-gold)', opacity: 0.6 }}>Deliverables</span>
-              {STRATEGY_LAYERS.map(l => {
-                const isActive = active === l.id;
-                return (
-                  <button key={l.id} onClick={() => setActive(l.id)}
-                    className="w-full text-left transition-all mb-1"
-                    style={{ opacity: isActive ? 1 : 0.3 }}>
-                    <div className="flex items-center gap-3 py-2.5 px-3 rounded-lg transition-all" style={{ background: isActive ? `${LAYER_COLORS[l.id - 1]}10` : 'transparent' }}>
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all" style={{ background: isActive ? LAYER_COLORS[l.id - 1] : `${LAYER_COLORS[l.id - 1]}30` }}>
-                        <span className="font-mono text-white text-[12px] font-bold">{l.id}</span>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <span className="font-display text-[14px] font-semibold block" style={{ color: isActive ? 'var(--text-light)' : 'var(--text-light-muted)' }}>{l.name}</span>
-                        {isActive && (
-                          <div className="mt-2 flex flex-wrap gap-1.5">
-                            {l.deliverables.map((d, i) => (
-                              <span key={i} className="px-2 py-0.5 rounded text-[12px] font-mono" style={{ background: `${LAYER_COLORS[l.id - 1]}15`, border: `1px solid ${LAYER_COLORS[l.id - 1]}25`, color: LAYER_COLORS[l.id - 1] }}>{d}</span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
+          {/* Active layer detail panel */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            {/* Description card */}
+            <div className="lg:col-span-2 card-dark" style={{ borderColor: `${LAYER_COLORS[active - 1]}30` }}>
+              <div className="flex items-start gap-4">
+                <div className="icon-box shrink-0" style={{ background: `${LAYER_COLORS[active - 1]}20`, width: 48, height: 48, borderRadius: 12 }}>
+                  <Icon name={LAYER_ICONS[active - 1]} size={24} style={{ color: LAYER_COLORS[active - 1] }} />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-mono text-[11px] tracking-wider" style={{ color: LAYER_COLORS[active - 1] }}>Layer {active}</span>
+                    <span className="w-1 h-1 rounded-full" style={{ background: LAYER_COLORS[active - 1] }} />
+                    <span className="font-mono text-[11px]" style={{ color: 'var(--text-light-muted)' }}>{current.name}</span>
+                  </div>
+                  <h3 className="font-display text-[1.35rem] font-semibold mb-3" style={{ color: 'var(--text-light)' }}>{current.name}</h3>
+                  <p className="font-body text-[15px] leading-[1.7]" style={{ color: 'var(--text-light-body)' }}>{current.desc}</p>
+                </div>
+              </div>
+
+              {/* Visual indicator bar */}
+              <div className="mt-5 h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--border-dark)' }}>
+                <div className="h-full rounded-full transition-all duration-500" style={{ width: `${(active / 6) * 100}%`, background: `linear-gradient(90deg, ${LAYER_COLORS[0]}, ${LAYER_COLORS[active - 1]})` }} />
+              </div>
+            </div>
+
+            {/* Deliverables card */}
+            <div className="card-dark">
+              <div className="flex items-center gap-2 mb-4">
+                <Icon name="check-circle" size={16} style={{ color: 'var(--accent-gold)' }} />
+                <span className="font-mono text-[11px] tracking-[0.3em] uppercase" style={{ color: 'var(--accent-gold)' }}>Deliverables</span>
+              </div>
+              <div className="space-y-2">
+                {current.deliverables.map((d, i) => (
+                  <div key={i} className="flex items-center gap-3 py-2 px-3 rounded-lg" style={{ background: `${LAYER_COLORS[active - 1]}08` }}>
+                    <div className="w-6 h-6 rounded-md flex items-center justify-center shrink-0" style={{ background: `${LAYER_COLORS[active - 1]}20` }}>
+                      <Icon name="file-text" size={13} style={{ color: LAYER_COLORS[active - 1] }} />
                     </div>
-                  </button>
-                );
-              })}
+                    <span className="font-body text-[14px]" style={{ color: 'var(--text-light-body)' }}>{d}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
         {/* Touchpoints */}
-        <div ref={r2.ref} className={`mt-16 ${r2.cls}`}>
-          <h3 className="font-display text-[1.25rem] font-semibold mb-2" style={{ color: 'var(--text-light)', letterSpacing: '-0.02em' }}>Guest Touchpoint Transformation</h3>
-          <p className="font-body text-[15px] mb-8" style={{ color: 'var(--text-light-muted)' }}>Five key moments, before and after the brand operating system.</p>
-          <div className="space-y-3">
+        <div ref={r2.ref} className={`mt-14 ${r2.cls}`}>
+          <div className="flex items-center gap-2 mb-2">
+            <Icon name="refresh" size={16} style={{ color: 'var(--accent-gold)' }} />
+            <h3 className="font-display text-[1.15rem] font-semibold" style={{ color: 'var(--text-light)', letterSpacing: '-0.02em' }}>Guest Touchpoint Transformation</h3>
+          </div>
+          <p className="font-body text-[14px] mb-6" style={{ color: 'var(--text-light-muted)' }}>Five key moments, before and after the brand operating system.</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
             {TOUCHPOINTS.map((tp, i) => (
-              <div key={i} className="grid grid-cols-[1fr_auto_1fr] gap-4 items-center">
-                <div className="rounded-lg p-4" style={{ background: 'var(--accent-faint)', border: '1px solid var(--accent-soft)' }}>
-                  <span className="font-mono text-[10px] tracking-[0.2em] uppercase block mb-1.5" style={{ color: 'var(--accent)', opacity: 0.6 }}>Before</span>
-                  <p className="font-body text-[14px] leading-relaxed" style={{ color: 'var(--accent)', opacity: 0.6 }}>{tp.before}</p>
+              <div key={i} className="card-dark text-center">
+                <div className="icon-box mx-auto mb-3" style={{ background: 'var(--gold-faint)' }}>
+                  <Icon name={TOUCHPOINT_ICONS[i]} size={18} style={{ color: 'var(--accent-gold)' }} />
                 </div>
-                <div className="flex flex-col items-center">
-                  <span className="font-display text-[12px] font-semibold text-center max-w-[80px] leading-tight" style={{ color: 'var(--text-light-body)' }}>{tp.name}</span>
-                  <span className="text-[20px] mt-1" style={{ color: 'var(--accent-gold)' }}>→</span>
+                <h4 className="font-display text-[13px] font-semibold mb-3" style={{ color: 'var(--text-light)' }}>{tp.name}</h4>
+                <div className="rounded-lg p-3 mb-2" style={{ background: 'var(--accent-faint)' }}>
+                  <span className="font-mono text-[9px] tracking-wider uppercase block mb-1" style={{ color: 'var(--accent)', opacity: 0.7 }}>Before</span>
+                  <p className="font-body text-[12px] leading-relaxed" style={{ color: 'var(--text-light-body)' }}>{tp.before}</p>
                 </div>
-                <div className="rounded-lg p-4" style={{ background: 'var(--success-faint)', border: '1px solid var(--success-soft)' }}>
-                  <span className="font-mono text-[10px] tracking-[0.2em] uppercase block mb-1.5" style={{ color: 'var(--success)', opacity: 0.7 }}>After</span>
-                  <p className="font-body text-[14px] leading-relaxed" style={{ color: 'var(--success)', opacity: 0.7 }}>{tp.after}</p>
+                <div className="flex justify-center my-1">
+                  <Icon name="arrow-right" size={14} style={{ color: 'var(--accent-gold)', opacity: 0.5, transform: 'rotate(90deg)' }} />
+                </div>
+                <div className="rounded-lg p-3" style={{ background: 'var(--success-faint)' }}>
+                  <span className="font-mono text-[9px] tracking-wider uppercase block mb-1" style={{ color: 'var(--success)', opacity: 0.8 }}>After</span>
+                  <p className="font-body text-[12px] leading-relaxed" style={{ color: 'var(--text-light-body)' }}>{tp.after}</p>
                 </div>
               </div>
             ))}
