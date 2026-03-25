@@ -25,12 +25,12 @@ export default function MarketSnapshot() {
         </div>
 
         {/* Stat cards */}
-        <div ref={r2.ref} className={`mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 ${r2.cls}`}>
+        <div ref={r2.ref} className={`mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 ${r2.cls}`}>
           {[MARKET.travel, MARKET.hospitality, MARKET.hostelCagr].map((s, i) => (
             <div key={i} className={`rounded-lg p-8 sd-${i + 1}`} style={{ border: '1px solid var(--border-light)', background: 'var(--card-light)' }}>
-              <span className="font-display text-[2.5rem] font-bold" style={{ color: 'var(--text-dark)' }}>{s.val}</span>
-              <p className="mt-2 font-body text-[0.9375rem]" style={{ color: 'var(--text-body)' }}>{s.label}</p>
-              <p className="mt-1 font-mono text-[11px]" style={{ color: 'var(--text-muted)' }}>{s.sub}</p>
+              <span className="font-display font-bold" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'var(--text-dark)' }}>{s.val}</span>
+              <p className="mt-3 font-body text-[16px] leading-snug" style={{ color: 'var(--text-body)' }}>{s.label}</p>
+              <p className="mt-2 font-mono text-[12px]" style={{ color: 'var(--accent)', opacity: 0.7 }}>{s.sub}</p>
             </div>
           ))}
         </div>
