@@ -96,32 +96,32 @@ export default function BrandImpact() {
         </div>
 
         {/* THE MONEY SLIDE */}
-        <div ref={r3.ref} className={`mt-10 rounded-lg p-8 md:p-10 ${r3.cls}`} style={{
+        <div ref={r3.ref} className={`mt-12 rounded-lg p-8 md:p-12 ${r3.cls}`} style={{
           background: 'var(--bg-card-dark)',
           border: '1px solid var(--accent-soft)',
         }}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
             <div>
-              <span className="font-mono text-[13px] tracking-[0.15em] uppercase" style={{ color: 'var(--accent)', opacity: 0.6 }}>Total brand-driven impact</span>
-              <div ref={lowCount.ref} className="mt-2 flex items-baseline gap-1">
-                <span className="font-display font-bold" style={{ fontSize: '3rem', color: 'var(--text-light)' }}>
-                  ₹{lowCount.count}–<span ref={highCount.ref as React.Ref<HTMLSpanElement>}>{highCount.count}</span>
+              <span className="font-mono text-[12px] tracking-[0.2em] uppercase" style={{ color: 'var(--accent)', opacity: 0.6 }}>Total brand-driven impact</span>
+              <div ref={lowCount.ref} className="mt-3 flex items-baseline gap-2">
+                <span className="font-display font-bold" style={{ fontSize: 'clamp(2.5rem, 5vw, 3.75rem)', color: 'var(--text-light)', letterSpacing: '-0.02em' }}>
+                  <span style={{ color: 'var(--accent)' }}>₹</span>{lowCount.count}–<span ref={highCount.ref as React.Ref<HTMLSpanElement>}>{highCount.count}</span>
                 </span>
                 <span className="font-mono text-[16px]" style={{ color: 'var(--accent)' }}>Cr/yr</span>
               </div>
             </div>
             <div>
-              <span className="font-mono text-[13px] tracking-[0.15em] uppercase" style={{ color: 'var(--text-light-muted)' }}>Brand function cost</span>
-              <div className="mt-2">
-                <span className="font-display text-[1.5rem] font-bold" style={{ color: 'var(--text-light-body)' }}>₹1.38–2.10</span>
-                <span className="font-mono text-[13px] ml-1" style={{ color: 'var(--text-light-muted)' }}>Cr/yr</span>
+              <span className="font-mono text-[12px] tracking-[0.2em] uppercase" style={{ color: 'var(--text-light-muted)' }}>Brand function cost</span>
+              <div className="mt-3">
+                <span className="font-display text-[1.75rem] font-bold" style={{ color: 'var(--text-light-body)' }}>₹1.38–2.10</span>
+                <span className="font-mono text-[14px] ml-1" style={{ color: 'var(--text-light-muted)' }}>Cr/yr</span>
               </div>
-              <span className="font-mono text-[11px] mt-1 block" style={{ color: 'var(--text-light-muted)', opacity: 0.6 }}>11.5–17.5% of brand & marketing</span>
+              <span className="font-mono text-[12px] mt-2 block" style={{ color: 'var(--text-light-muted)', opacity: 0.6 }}>11.5–17.5% of brand & marketing</span>
             </div>
             <div>
-              <span className="font-mono text-[13px] tracking-[0.15em] uppercase" style={{ color: 'var(--accent-gold)', opacity: 0.7 }}>Return on investment</span>
-              <div ref={roiLow.ref} className="mt-2 flex items-baseline gap-1">
-                <span className="font-display font-bold" style={{ fontSize: '3rem', color: 'var(--accent-gold)' }}>
+              <span className="font-mono text-[12px] tracking-[0.2em] uppercase" style={{ color: 'var(--accent-gold)', opacity: 0.8 }}>Return on investment</span>
+              <div ref={roiLow.ref} className="mt-3 flex items-baseline gap-2">
+                <span className="font-display font-bold" style={{ fontSize: 'clamp(2.5rem, 5vw, 3.75rem)', color: 'var(--accent-gold)', letterSpacing: '-0.02em' }}>
                   {roiLow.count}–<span ref={roiHigh.ref as React.Ref<HTMLSpanElement>}>{roiHigh.count}</span>×
                 </span>
                 <span className="font-mono text-[14px]" style={{ color: 'var(--accent-gold)', opacity: 0.5 }}>ROI</span>
