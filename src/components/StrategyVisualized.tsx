@@ -87,17 +87,17 @@ export default function StrategyVisualized() {
           <div className="space-y-3">
             {TOUCHPOINTS.map((tp, i) => (
               <div key={i} className="grid grid-cols-[1fr_auto_1fr] gap-3 items-start">
-                <div className="rounded-lg p-4" style={{ background: 'rgba(196,82,62,0.06)', border: '1px solid rgba(196,82,62,0.1)' }}>
-                  <span className="font-mono text-[11px] tracking-wider uppercase block mb-1.5" style={{ color: 'rgba(196,82,62,0.5)' }}>Before</span>
-                  <p className="font-body text-[15px] leading-relaxed" style={{ color: 'rgba(196,82,62,0.55)' }}>{tp.before}</p>
+                <div className="rounded-lg p-4" style={{ background: 'var(--accent-faint)', border: '1px solid var(--accent-soft)' }}>
+                  <span className="font-mono text-[11px] tracking-wider uppercase block mb-1.5" style={{ color: 'var(--accent)', opacity: 0.5 }}>Before</span>
+                  <p className="font-body text-[15px] leading-relaxed" style={{ color: 'var(--accent)', opacity: 0.55 }}>{tp.before}</p>
                 </div>
                 <div className="flex flex-col items-center pt-4">
                   <span className="font-body text-[13px] font-semibold text-center max-w-[80px] leading-tight" style={{ color: 'var(--text-light-body)' }}>{tp.name}</span>
                   <span className="text-[16px] mt-1" style={{ color: 'var(--accent)' }}>→</span>
                 </div>
-                <div className="rounded-lg p-4" style={{ background: 'rgba(90,138,106,0.06)', border: '1px solid rgba(90,138,106,0.1)' }}>
-                  <span className="font-mono text-[11px] tracking-wider uppercase block mb-1.5" style={{ color: 'rgba(90,138,106,0.6)' }}>After</span>
-                  <p className="font-body text-[15px] leading-relaxed" style={{ color: 'rgba(90,138,106,0.65)' }}>{tp.after}</p>
+                <div className="rounded-lg p-4" style={{ background: 'var(--success-faint)', border: '1px solid var(--success-soft)' }}>
+                  <span className="font-mono text-[11px] tracking-wider uppercase block mb-1.5" style={{ color: 'var(--success)', opacity: 0.6 }}>After</span>
+                  <p className="font-body text-[15px] leading-relaxed" style={{ color: 'var(--success)', opacity: 0.65 }}>{tp.after}</p>
                 </div>
               </div>
             ))}
