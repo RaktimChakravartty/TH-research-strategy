@@ -8,6 +8,14 @@
   --bg-card-dark: #161616;
   --accent: #C4523E;
   --accent-gold: #C9A84C;
+  --accent-soft: rgba(196,82,62,0.12);
+  --accent-faint: rgba(196,82,62,0.06);
+  --gold-soft: rgba(201,168,76,0.12);
+  --gold-faint: rgba(201,168,76,0.06);
+  --success: #5A8A6A;
+  --success-soft: rgba(90,138,106,0.10);
+  --success-faint: rgba(90,138,106,0.06);
+  --warn-soft: rgba(201,168,76,0.10);
   --text-dark: #1A1A1A;
   --text-body: #4A4A4A;
   --text-muted: #8A8A8A;
@@ -16,6 +24,9 @@
   --text-light-muted: rgba(232,226,218,0.3);
   --border-light: #E0DBD4;
   --border-dark: rgba(255,255,255,0.08);
+  --card-light: rgba(255,255,255,0.5);
+  --card-light-hover: rgba(255,255,255,0.7);
+  --overlay: rgba(12,12,12,0.92);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
