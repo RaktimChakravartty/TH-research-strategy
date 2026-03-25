@@ -29,15 +29,15 @@ function BrandCard({ brand, isPrimary }: { brand: typeof COMPETITORS.hosteller; 
       </div>
       <div className="h-px my-3" style={{ background: 'var(--border-dark)' }} />
       <div className="mb-3">
-        <span className="font-mono text-[11px] tracking-[0.15em] uppercase block mb-2" style={{ color: 'rgba(90,138,106,0.7)' }}>Strengths</span>
+        <span className="font-mono text-[11px] tracking-[0.15em] uppercase block mb-2" style={{ color: 'var(--success)', opacity: 0.7 }}>Strengths</span>
         <div className="flex flex-wrap gap-1.5">{brand.strengths.map((s, i) => (
-          <span key={i} className="px-2 py-0.5 rounded text-[13px]" style={{ background: 'rgba(90,138,106,0.08)', border: '1px solid rgba(90,138,106,0.15)', color: 'rgba(90,138,106,0.85)' }}>{s}</span>
+          <span key={i} className="px-2 py-0.5 rounded text-[13px]" style={{ background: 'var(--success-soft)', border: '1px solid var(--success-faint)', color: 'var(--success)' }}>{s}</span>
         ))}</div>
       </div>
       <div>
-        <span className="font-mono text-[11px] tracking-[0.15em] uppercase block mb-2" style={{ color: 'rgba(201,168,76,0.7)' }}>Gaps</span>
+        <span className="font-mono text-[11px] tracking-[0.15em] uppercase block mb-2" style={{ color: 'var(--accent-gold)', opacity: 0.7 }}>Gaps</span>
         <div className="flex flex-wrap gap-1.5">{brand.gaps.map((g, i) => (
-          <span key={i} className="px-2 py-0.5 rounded text-[13px]" style={{ background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.15)', color: 'rgba(201,168,76,0.85)' }}>{g}</span>
+          <span key={i} className="px-2 py-0.5 rounded text-[13px]" style={{ background: 'var(--gold-faint)', border: '1px solid var(--gold-soft)', color: 'var(--accent-gold)' }}>{g}</span>
         ))}</div>
       </div>
     </div>
@@ -68,7 +68,7 @@ function HBar({ label, items }: { label: string; items: { name: string; val: num
             {it.val === 0 ? (
               <span className="font-mono text-[13px] italic" style={{ color: 'var(--text-light-muted)' }}>Not reported</span>
             ) : (
-              <div className="flex-1 h-6 rounded overflow-hidden" style={{ background: 'rgba(255,255,255,0.04)' }}>
+              <div className="flex-1 h-6 rounded overflow-hidden" style={{ background: 'var(--border-dark)' }}>
                 <div className="h-full rounded flex items-center justify-end pr-2.5 bar-grow" style={{
                   width: vis ? `${(it.val / max) * 100}%` : '0%',
                   backgroundColor: it.color,
