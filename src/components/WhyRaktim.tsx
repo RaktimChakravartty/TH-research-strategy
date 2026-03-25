@@ -81,14 +81,14 @@ export default function WhyRaktim() {
         </div>
 
         {/* Proof Points */}
-        <div ref={r4.ref} className={`mt-12 ${r4.cls}`}>
-          <h3 className="font-display text-[1.5rem] font-semibold mb-6" style={{ color: 'var(--text-light)' }}>By the Numbers</h3>
+        <div ref={r4.ref} className={`mt-14 ${r4.cls}`}>
+          <h3 className="font-display text-[1.5rem] font-semibold mb-8" style={{ color: 'var(--text-light)' }}>By the Numbers</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {PROOF.map((p, i) => (
-              <div key={i} className="rounded-lg p-5 text-center" style={{ background: 'var(--bg-card-dark)', border: '1px solid var(--border-dark)' }}>
-                <span className="font-display text-[2rem] font-bold" style={{ color: 'var(--accent)' }}>{p.val}</span>
-                <p className="font-body text-[13px] mt-1.5 font-medium" style={{ color: 'var(--text-light-body)' }}>{p.label}</p>
-                <p className="font-mono text-[11px] mt-0.5" style={{ color: 'var(--text-light-muted)' }}>{p.sub}</p>
+              <div key={i} className="rounded-lg p-6 text-center" style={{ background: 'var(--bg-card-dark)', border: '1px solid var(--border-dark)' }}>
+                <span className="font-display text-[2.25rem] font-bold" style={{ color: 'var(--accent)' }}>{p.val}</span>
+                <p className="font-body text-[14px] mt-2 font-medium leading-snug" style={{ color: 'var(--text-light-body)' }}>{p.label}</p>
+                <p className="font-mono text-[11px] mt-1" style={{ color: 'var(--text-light-muted)' }}>{p.sub}</p>
               </div>
             ))}
           </div>
