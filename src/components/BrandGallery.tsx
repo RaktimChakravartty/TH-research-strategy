@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { GALLERY } from '../data/constants';
 import { useReveal } from '../hooks/useReveal';
 import Icon from './Icons';
@@ -7,15 +7,27 @@ const CAT_ICONS: Record<string, string> = { 'Environmental Branding': 'map-pin',
 const BRAND_ICONS: Record<string, string> = { 'Generator Hostels': 'hotel', 'Generator': 'hotel', 'citizenM': 'globe', 'Ace Hotel': 'coffee', 'The Hoxton': 'star', '25hours Hotels': 'clock', 'Standard Hotels': 'award', 'MEININGER': 'hotel', 'Airbnb': 'heart', 'WeWork': 'briefcase', 'Marriott Bonvoy': 'shield', 'Zostel': 'map-pin', 'goSTOPS': 'coffee', 'Selina': 'sun' };
 const IMAGE_MAP: Record<string, string> = { 'Generator Hostels': '/images/generator-hostels.jpg', 'Generator': '/images/generator-hostels.jpg', 'citizenM': '/images/citizenm.jpg', 'Ace Hotel': '/images/ace-hotel.jpg', 'The Hoxton': '/images/the-hoxton.jpg', '25hours Hotels': '/images/25hours-hotels.jpg', 'Standard Hotels': '/images/standard-hotels.jpg', 'MEININGER': '/images/meininger-hotels.jpg', 'Airbnb': '/images/airbnb.jpg', 'WeWork': '/images/wework.jpg', 'Marriott Bonvoy': '/images/marriott-bonvoy.jpg', 'Zostel': '/images/zostel.jpg', 'goSTOPS': '/images/gostops.jpg', 'Selina': '/images/selina.jpg' };
 
+const BRAND_URLS: Record<string, string> = {
+  'Generator Hostels': 'https://staygenerator.com', 'Generator': 'https://staygenerator.com',
+  'citizenM': 'https://www.citizenm.com', 'Ace Hotel': 'https://acehotel.com',
+  'The Hoxton': 'https://thehoxton.com', '25hours Hotels': 'https://www.25hours-hotels.com',
+  'Standard Hotels': 'https://www.standardhotels.com', 'MEININGER': 'https://www.meininger-hotels.com',
+  'Airbnb': 'https://www.airbnb.com', 'WeWork': 'https://www.wework.com',
+  'Marriott Bonvoy': 'https://www.marriott.com', 'Zostel': 'https://www.zostel.com',
+  'goSTOPS': 'https://www.gostops.com', 'Selina': 'https://www.selina.com',
+};
+
 type Item = { brand: string; note: string; ref: string };
 
-function GalleryCard({ item, onOpen }: { item: Item; onOpen: (item: Item) => void }) {
+function GalleryCard({ item }: { item: Item }) {
   const src = IMAGE_MAP[item.brand] || null;
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const icon = BRAND_ICONS[item.brand] || 'star';
+  const url = BRAND_URLS[item.brand] || '#';
+
   return (
-    <div className="group relative overflow-hidden cursor-pointer" style={{ aspectRatio: '4/3', borderRadius: 'var(--radius-lg)', background: 'var(--bg-dark-elevated)' }} onClick={() => onOpen(item)}>
+    <a href={url} target="_blank" rel="noreferrer" className="group relative overflow-hidden cursor-pointer block" style={{ aspectRatio: '4/3', borderRadius: 'var(--radius-lg)', background: 'var(--bg-dark-elevated)' }}>
       {src && !failed ? (
         <>
           {!loaded && <div className="absolute inset-0 flex items-center justify-center"><div className="w-5 h-5 border-2 rounded-full animate-spin" style={{ borderColor: 'var(--border-dark)', borderTopColor: 'var(--accent)' }} /></div>}
@@ -33,14 +45,14 @@ function GalleryCard({ item, onOpen }: { item: Item; onOpen: (item: Item) => voi
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex flex-col justify-end p-5" style={{ background: 'linear-gradient(to top, rgba(29,29,31,0.95), transparent 60%)' }}>
         <span className="typ-caption font-semibold" style={{ color: 'var(--text-on-dark)' }}>{item.brand}</span>
         <p className="typ-caption mt-1" style={{ color: 'var(--text-on-dark-secondary)', fontSize: 12 }}>{item.note}</p>
+        <span className="typ-caption mt-2" style={{ color: 'var(--accent)', fontSize: 11 }}>Visit website ›</span>
       </div>
-    </div>
+    </a>
   );
 }
 
 export default function BrandGallery() {
   const [cat, setCat] = useState(GALLERY.categories[0]);
-  const [lightbox, setLightbox] = useState<Item | null>(null);
   const r1 = useReveal(), r2 = useReveal();
   const items = GALLERY.items[cat as keyof typeof GALLERY.items] || [];
 
@@ -51,7 +63,7 @@ export default function BrandGallery() {
           <p className="typ-eyebrow" style={{ color: 'var(--accent)' }}>Reference Gallery</p>
           <h2 className="typ-display mt-3" style={{ color: 'var(--text-on-dark)' }}>What good<br />looks like.</h2>
           <p className="typ-body-large mt-4" style={{ color: 'var(--text-on-dark-secondary)', maxWidth: '540px', margin: '16px auto 0' }}>
-            Hospitality brands that have solved consistency versus character.
+            Hospitality brands that have solved consistency versus character. Click any card to visit.
           </p>
         </div>
       </div>
@@ -73,28 +85,10 @@ export default function BrandGallery() {
             ))}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {items.map((item, i) => <GalleryCard key={`${cat}-${i}`} item={item} onOpen={setLightbox} />)}
+            {items.map((item, i) => <GalleryCard key={`${cat}-${i}`} item={item} />)}
           </div>
         </div>
       </div>
-
-      {lightbox && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center cursor-pointer" style={{ background: 'rgba(29,29,31,0.95)' }} onClick={() => setLightbox(null)}>
-          <div className="card-dark max-w-lg mx-4" onClick={e => e.stopPropagation()}>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="icon-box" style={{ background: 'rgba(255,255,255,0.06)' }}>
-                <Icon name={BRAND_ICONS[lightbox.brand] || 'star'} size={22} style={{ color: 'var(--text-on-dark-secondary)' }} />
-              </div>
-              <div className="flex-1">
-                <span className="typ-title" style={{ color: 'var(--text-on-dark)' }}>{lightbox.brand}</span>
-                <span className="typ-caption block" style={{ color: 'var(--text-on-dark-tertiary)' }}>{lightbox.ref}</span>
-              </div>
-              <button onClick={() => setLightbox(null)} className="typ-caption" style={{ color: 'var(--text-on-dark-tertiary)' }}>✕</button>
-            </div>
-            <p className="typ-body" style={{ color: 'var(--text-on-dark-secondary)' }}>{lightbox.note}</p>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
