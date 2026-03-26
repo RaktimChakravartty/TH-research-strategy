@@ -14,8 +14,6 @@ import WhyRaktim from './components/WhyRaktim';
 
 const COMPS = [Cover, MarketSnapshot, CompetitiveLandscape, InternationalBenchmarks, BrandGallery, VisualDirection, StrategyVisualized, QuickWinsTimeline, BrandImpact, WhyRaktim];
 
-const NAV_ICONS = ['compass', 'trending-up', 'target', 'globe', 'camera', 'palette', 'layers', 'calendar', 'bar-chart', 'award'];
-
 export default function App() {
   const [active, setActive] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -54,53 +52,40 @@ export default function App() {
 
   return (
     <div className="relative">
-      {/* Sidebar with icons */}
-      <nav className="fixed left-0 top-0 h-screen z-50 flex flex-col items-center justify-center gap-1"
-        style={{ width: '52px', background: 'var(--bg-dark)', borderRight: '1px solid var(--border-dark)' }}>
-        <div className="absolute top-4 left-0 w-full flex justify-center">
-          <Icon name="compass" size={16} style={{ color: 'var(--accent-gold)', opacity: 0.4 }} />
-        </div>
+      {/* Apple-style minimal dot nav — right side */}
+      <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-3">
         {SECTIONS.map((s, i) => (
-          <button key={s.id} onClick={() => scrollTo(i)} className="group relative flex items-center justify-center w-9 h-9 rounded-lg transition-all"
-            style={{ background: active === i ? 'var(--accent-soft)' : 'transparent' }}
-            title={s.label}>
-            <Icon name={NAV_ICONS[i]} size={16} style={{
-              color: active === i ? 'var(--accent)' : 'var(--text-light-muted)',
-              transition: 'color 0.2s ease',
+          <button key={s.id} onClick={() => scrollTo(i)} className="group relative flex items-center justify-center w-3 h-3" title={s.label}>
+            <span className="block rounded-full transition-all duration-500" style={{
+              width: active === i ? 10 : 6,
+              height: active === i ? 10 : 6,
+              background: active === i ? 'var(--accent)' : 'var(--text-tertiary)',
+              opacity: active === i ? 1 : 0.3,
             }} />
-            <span className="absolute left-14 px-3 py-2 rounded-lg text-[12px] font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
-              style={{ background: 'var(--bg-card-dark)', color: 'var(--text-light)', border: '1px solid var(--border-dark)', boxShadow: '0 4px 16px rgba(0,0,0,0.4)' }}>
-              <span style={{ color: 'var(--accent-gold)', opacity: 0.5 }}>{String(i).padStart(2, '0')}</span> {s.label}
+            <span className="absolute right-6 px-3 py-1.5 rounded-lg typ-caption opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
+              style={{ background: 'var(--bg-dark)', color: 'var(--text-on-dark)', boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
+              {s.label}
             </span>
           </button>
         ))}
       </nav>
 
-      {/* Sections */}
-      <div ref={containerRef} className="scroll-container" style={{ marginLeft: '52px' }}>
+      {/* Content */}
+      <div ref={containerRef} className="scroll-container">
         {COMPS.map((Comp, i) => (
-          <React.Fragment key={i}>
-            <div data-idx={i} id={SECTIONS[i].id}><Comp /></div>
-            {i < COMPS.length - 1 && (
-              <div className="relative h-px">
-                <div className="absolute inset-x-0 top-0 h-px" style={{ background: 'linear-gradient(to right, transparent, rgba(201,168,76,0.08), transparent)' }} />
-              </div>
-            )}
-          </React.Fragment>
+          <div key={i} data-idx={i} id={SECTIONS[i].id}><Comp /></div>
         ))}
-        {/* Footer */}
-        <div className="section-dark py-16 text-center">
-          <div className="max-w-md mx-auto mb-10 px-4">
-            <div className="icon-box mx-auto mb-4" style={{ background: 'var(--gold-faint)', width: 44, height: 44 }}>
-              <Icon name="download" size={22} style={{ color: 'var(--accent-gold)' }} />
-            </div>
-            <h3 className="font-display text-[1.1rem] font-semibold mb-2" style={{ color: 'var(--text-light)' }}>Export This Deck</h3>
-            <p className="font-body text-[14px] mb-5" style={{ color: 'var(--text-light-muted)' }}>Download the full strategy in your preferred format</p>
-            <div className="flex justify-center gap-3">
-              <button onClick={() => window.print()}
-                className="font-mono text-[11px] tracking-wider uppercase px-5 py-2.5 rounded-lg transition-all flex items-center gap-2"
-                style={{ background: 'var(--accent-gold)', color: 'var(--bg-dark)', border: 'none', fontWeight: 600 }}>
-                <Icon name="file-text" size={14} /> Print / PDF
+
+        {/* Footer — Apple minimal */}
+        <footer className="section-alt">
+          <div className="section-pad text-center" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
+            <p className="typ-headline" style={{ color: 'var(--text-primary)' }}>Ready to build the brand.</p>
+            <p className="typ-body-large mt-4" style={{ color: 'var(--text-secondary)', maxWidth: '560px', margin: '16px auto 0' }}>
+              This strategy is ready for implementation. Export it, share it, or let's discuss next steps.
+            </p>
+            <div className="mt-10 flex justify-center gap-4 flex-wrap">
+              <button onClick={() => window.print()} className="btn-primary">
+                <Icon name="download" size={18} /> Export PDF
               </button>
               <button onClick={() => {
                 const html = document.documentElement.outerHTML;
@@ -108,32 +93,26 @@ export default function App() {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a'); a.href = url; a.download = 'hosteller-strategy.html'; a.click();
                 URL.revokeObjectURL(url);
-              }}
-                className="font-mono text-[11px] tracking-wider uppercase px-5 py-2.5 rounded-lg transition-all flex items-center gap-2"
-                style={{ border: '1px solid var(--border-dark)', color: 'var(--text-light-muted)', background: 'var(--bg-card-dark)' }}>
-                <Icon name="download" size={14} /> HTML
+              }} className="btn-secondary">
+                Download HTML ›
               </button>
             </div>
           </div>
-
-          <div className="h-px w-12 mx-auto mb-6" style={{ background: 'var(--accent-gold)', opacity: 0.2 }} />
-
-          <p className="font-mono text-[10px] tracking-[0.35em] uppercase" style={{ color: 'var(--text-light-muted)' }}>
-            Prepared by Raktim Chakravartty · March 2026 · Confidential
-          </p>
-          <div className="mt-3 flex justify-center items-center gap-6">
-            <a href="https://thehosteller.raktim.co" target="_blank" rel="noreferrer"
-              className="font-mono text-[12px] transition-colors flex items-center gap-1.5"
-              style={{ color: 'var(--accent-gold)', opacity: 0.6 }}
-              onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-              onMouseLeave={e => (e.currentTarget.style.opacity = '0.6')}>
-              <Icon name="external-link" size={12} /> thehosteller.raktim.co
-            </a>
-            <span className="font-mono text-[12px] flex items-center gap-1.5" style={{ color: 'var(--text-light-muted)' }}>
-              <Icon name="message" size={12} /> hello@raktim.co
-            </span>
+          <div className="sep" />
+          <div className="section-pad" style={{ paddingTop: '32px', paddingBottom: '32px' }}>
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="typ-caption" style={{ color: 'var(--text-tertiary)' }}>
+                Prepared by Raktim Chakravartty · March 2026 · Confidential
+              </p>
+              <div className="flex items-center gap-6">
+                <a href="https://thehosteller.raktim.co" target="_blank" rel="noreferrer" className="typ-caption" style={{ color: 'var(--accent)' }}>
+                  thehosteller.raktim.co
+                </a>
+                <span className="typ-caption" style={{ color: 'var(--text-tertiary)' }}>hello@raktim.co</span>
+              </div>
+            </div>
           </div>
-        </div>
+        </footer>
       </div>
     </div>
   );

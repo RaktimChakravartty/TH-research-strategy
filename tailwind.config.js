@@ -4,9 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['Sora', 'system-ui', 'sans-serif'],
-        body: ['"DM Sans"', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'Helvetica Neue', 'sans-serif'],
+        mono: ['"JetBrains Mono"', '"SF Mono"', 'monospace'],
       },
     },
   },

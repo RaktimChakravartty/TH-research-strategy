@@ -4,7 +4,6 @@ import { useReveal } from '../hooks/useReveal';
 import Icon from './Icons';
 
 const LEVER_ICONS = ['trending-up', 'mobile', 'repeat', 'hotel'];
-const LEVER_COLORS = ['#C4523E', '#D06A4E', '#C9A84C', '#5A8A6A'];
 
 function useCountUp(end: number, duration = 1500) {
   const [count, setCount] = useState(0);
@@ -19,8 +18,7 @@ function useCountUp(end: number, duration = 1500) {
         const start = performance.now();
         const animate = (now: number) => {
           const p = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          setCount(Math.round(eased * end));
+          setCount(Math.round((1 - Math.pow(1 - p, 3)) * end));
           if (p < 1) requestAnimationFrame(animate);
         };
         requestAnimationFrame(animate);
@@ -32,7 +30,7 @@ function useCountUp(end: number, duration = 1500) {
   return { count, ref };
 }
 
-function AnimBar({ pct, color, delay }: { pct: number; color: string; delay: number }) {
+function AnimBar({ pct, delay }: { pct: number; delay: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [vis, setVis] = useState(false);
   useEffect(() => {
@@ -43,8 +41,8 @@ function AnimBar({ pct, color, delay }: { pct: number; color: string; delay: num
     return () => obs.disconnect();
   }, []);
   return (
-    <div ref={ref} className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--border-dark)' }}>
-      <div className="h-full rounded-full bar-grow" style={{ width: vis ? `${pct}%` : '0%', backgroundColor: color, transitionDelay: `${delay}ms` }} />
+    <div ref={ref} className="h-2 overflow-hidden" style={{ background: 'var(--bg-secondary)', borderRadius: 8 }}>
+      <div className="h-full bar-grow" style={{ width: vis ? `${pct}%` : '0%', background: 'var(--accent)', borderRadius: 8, transitionDelay: `${delay}ms` }} />
     </div>
   );
 }
@@ -54,131 +52,93 @@ export default function BrandImpact() {
   const totalLow = IMPACT.reduce((s, d) => s + d.low, 0);
   const totalHigh = IMPACT.reduce((s, d) => s + d.high, 0);
   const maxVal = Math.max(...IMPACT.map(d => d.high));
+  const lowC = useCountUp(totalLow);
+  const highC = useCountUp(totalHigh);
 
-  const lowCount = useCountUp(totalLow);
-  const highCount = useCountUp(totalHigh);
-  const roiLow = useCountUp(8);
-  const roiHigh = useCountUp(15);
-
-  const handleExport = useCallback((format: string) => {
-    if (format === 'pdf') {
-      window.print();
-    } else if (format === 'json') {
-      const data = { impact: IMPACT, totalRange: `₹${totalLow}–${totalHigh} Cr/yr`, roi: '8–15×', exportedAt: new Date().toISOString() };
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'brand-impact-data.json'; a.click();
-      URL.revokeObjectURL(url);
-    } else if (format === 'csv') {
-      const rows = [['Lever', 'Detail', 'Low (Cr)', 'High (Cr)'], ...IMPACT.map(i => [i.lever, i.detail, String(i.low), String(i.high)])];
-      const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'brand-impact-data.csv'; a.click();
-      URL.revokeObjectURL(url);
-    }
+  const handleExport = useCallback((fmt: string) => {
+    if (fmt === 'pdf') { window.print(); return; }
+    const data = fmt === 'json'
+      ? JSON.stringify({ impact: IMPACT, total: `₹${totalLow}–${totalHigh} Cr/yr`, roi: '8–15×', exportedAt: new Date().toISOString() }, null, 2)
+      : [['Lever', 'Detail', 'Low', 'High'], ...IMPACT.map(i => [i.lever, i.detail, String(i.low), String(i.high)])].map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+    const blob = new Blob([data], { type: fmt === 'json' ? 'application/json' : 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = `brand-impact.${fmt}`; a.click();
+    URL.revokeObjectURL(url);
   }, [totalLow, totalHigh]);
 
   return (
-    <section className="section-dark">
-      <div className="section-pad">
-        {/* Header */}
+    <section className="section-alt">
+      <div className="section-pad text-center">
         <div ref={r1.ref} className={r1.cls}>
-          <div className="flex items-center gap-2 mb-1">
-            <Icon name="bar-chart" size={16} style={{ color: 'var(--accent-gold)' }} />
-            <span className="sec-num">08</span>
-          </div>
-          <h2 className="sec-title sec-title-dark">How Brand Drives Business</h2>
-          <p className="sec-desc sec-desc-dark">Not projections — structural levers with quantifiable ranges based on current operational data.</p>
+          <p className="typ-eyebrow" style={{ color: 'var(--accent)' }}>Brand Impact</p>
+          <h2 className="typ-display mt-3">Brand drives<br />business.</h2>
+          <p className="typ-body-large mt-4" style={{ color: 'var(--text-secondary)', maxWidth: '560px', margin: '16px auto 0' }}>
+            Not projections — structural levers with quantifiable ranges based on current operational data.
+          </p>
         </div>
-
-        {/* Impact lever cards */}
-        <div ref={r2.ref} className={`mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 ${r2.cls}`}>
+      </div>
+      <div className="section-pad-wide" style={{ paddingTop: 0 }}>
+        <div ref={r2.ref} className={`grid grid-cols-1 md:grid-cols-2 gap-5 ${r2.cls}`}>
           {IMPACT.map((item, i) => (
-            <div key={i} className={`card-dark sd-${i + 1}`}>
-              <div className="flex items-start gap-4 mb-4">
-                <div className="icon-box shrink-0" style={{ background: `${LEVER_COLORS[i]}15` }}>
-                  <Icon name={LEVER_ICONS[i]} size={20} style={{ color: LEVER_COLORS[i] }} />
+            <div key={i} className={`card sd-${i + 1}`}>
+              <div className="flex items-start gap-4 mb-5">
+                <div className="icon-box" style={{ background: 'var(--accent-bg)' }}>
+                  <Icon name={LEVER_ICONS[i]} size={22} style={{ color: 'var(--accent)' }} />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-display text-[15px] font-semibold" style={{ color: 'var(--text-light)' }}>{item.lever}</h4>
-                  <p className="font-body text-[13px] mt-1 leading-relaxed" style={{ color: 'var(--text-light-muted)' }}>{item.detail}</p>
+                  <h4 className="typ-title">{item.lever}</h4>
+                  <p className="typ-caption mt-1" style={{ color: 'var(--text-secondary)' }}>{item.detail}</p>
                 </div>
                 <div className="text-right shrink-0">
-                  <span className="font-display text-[1.3rem] font-bold" style={{ color: LEVER_COLORS[i] }}>
-                    ₹{item.low}–{item.high}
-                  </span>
-                  <span className="font-mono text-[10px] block" style={{ color: 'var(--text-light-muted)' }}>Cr/yr</span>
+                  <span className="text-[24px] font-bold" style={{ color: 'var(--accent)', letterSpacing: '-0.02em' }}>₹{item.low}–{item.high}</span>
+                  <span className="typ-caption block" style={{ color: 'var(--text-tertiary)' }}>Cr/yr</span>
                 </div>
               </div>
-              <AnimBar pct={(item.high / maxVal) * 100} color={LEVER_COLORS[i]} delay={i * 150} />
+              <AnimBar pct={(item.high / maxVal) * 100} delay={i * 150} />
             </div>
           ))}
         </div>
 
-        {/* Total + ROI summary */}
-        <div ref={r3.ref} className={`mt-8 rounded-xl p-6 md:p-8 ${r3.cls}`} style={{ background: 'var(--bg-card-dark)', border: '1.5px solid var(--gold-soft)' }}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-            <div className="flex items-center gap-4">
-              <div className="icon-box" style={{ background: 'var(--gold-faint)', width: 48, height: 48 }}>
-                <Icon name="dollar" size={24} style={{ color: 'var(--accent-gold)' }} />
+        {/* Total */}
+        <div ref={r3.ref} className={`mt-8 card ${r3.cls}`} style={{ background: 'var(--bg-dark)', padding: 'clamp(32px, 5vw, 56px)' }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center">
+            <div>
+              <div className="icon-box mx-auto mb-3" style={{ background: 'rgba(255,255,255,0.06)' }}>
+                <Icon name="dollar" size={24} style={{ color: 'var(--accent)' }} />
               </div>
-              <div>
-                <span className="font-mono text-[11px] tracking-[0.25em] uppercase" style={{ color: 'var(--accent-gold)' }}>Total Impact</span>
-                <div ref={lowCount.ref} className="mt-1">
-                  <span className="font-display font-bold" style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', color: 'var(--text-light)', letterSpacing: '-0.03em' }}>
-                    <span style={{ color: 'var(--accent-gold)' }}>₹</span>{lowCount.count}–<span ref={highCount.ref as React.Ref<HTMLSpanElement>}>{highCount.count}</span>
-                  </span>
-                  <span className="font-mono text-[13px] ml-1" style={{ color: 'var(--accent-gold)', opacity: 0.7 }}>Cr/yr</span>
-                </div>
+              <p className="typ-eyebrow" style={{ color: 'var(--text-on-dark-tertiary)' }}>Total Impact</p>
+              <div ref={lowC.ref} className="mt-2">
+                <span className="stat-number" style={{ color: 'var(--text-on-dark)' }}>₹{lowC.count}–<span ref={highC.ref as React.Ref<HTMLSpanElement>}>{highC.count}</span></span>
+                <span className="typ-body ml-1" style={{ color: 'var(--text-on-dark-tertiary)' }}>Cr/yr</span>
               </div>
             </div>
-
-            <div className="flex items-center gap-4">
-              <div className="icon-box" style={{ background: 'var(--accent-faint)', width: 48, height: 48 }}>
-                <Icon name="tag" size={22} style={{ color: 'var(--accent)' }} />
+            <div>
+              <div className="icon-box mx-auto mb-3" style={{ background: 'rgba(255,255,255,0.06)' }}>
+                <Icon name="tag" size={24} style={{ color: 'var(--text-on-dark-secondary)' }} />
               </div>
-              <div>
-                <span className="font-mono text-[11px] tracking-[0.25em] uppercase" style={{ color: 'var(--text-light-muted)' }}>Cost</span>
-                <div className="mt-1">
-                  <span className="font-display text-[1.4rem] font-bold" style={{ color: 'var(--text-light-body)' }}>₹1.38–2.10</span>
-                  <span className="font-mono text-[12px] ml-1" style={{ color: 'var(--text-light-muted)' }}>Cr/yr</span>
-                </div>
+              <p className="typ-eyebrow" style={{ color: 'var(--text-on-dark-tertiary)' }}>Cost</p>
+              <div className="mt-2">
+                <span className="text-[32px] font-bold" style={{ color: 'var(--text-on-dark-secondary)', letterSpacing: '-0.03em' }}>₹1.38–2.10</span>
+                <span className="typ-body ml-1" style={{ color: 'var(--text-on-dark-tertiary)' }}>Cr/yr</span>
               </div>
             </div>
-
-            <div className="flex items-center gap-4">
-              <div className="icon-box" style={{ background: 'var(--success-faint)', width: 48, height: 48 }}>
-                <Icon name="zap" size={24} style={{ color: 'var(--success)' }} />
+            <div>
+              <div className="icon-box mx-auto mb-3" style={{ background: 'rgba(52,199,89,0.1)' }}>
+                <Icon name="zap" size={24} style={{ color: 'var(--green)' }} />
               </div>
-              <div>
-                <span className="font-mono text-[11px] tracking-[0.25em] uppercase" style={{ color: 'var(--accent-gold)' }}>ROI</span>
-                <div ref={roiLow.ref} className="mt-1">
-                  <span className="font-display font-bold" style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', color: 'var(--accent-gold)', letterSpacing: '-0.03em' }}>
-                    {roiLow.count}–<span ref={roiHigh.ref as React.Ref<HTMLSpanElement>}>{roiHigh.count}</span>×
-                  </span>
-                </div>
+              <p className="typ-eyebrow" style={{ color: 'var(--text-on-dark-tertiary)' }}>ROI</p>
+              <div className="mt-2">
+                <span className="stat-number" style={{ color: 'var(--green)' }}>8–15×</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Export CTA */}
-        <div ref={r4.ref} className={`mt-8 flex flex-wrap justify-center gap-3 ${r4.cls}`}>
-          {[
-            { label: 'Print / PDF', format: 'pdf', icon: 'file-text' },
-            { label: 'JSON', format: 'json', icon: 'download' },
-            { label: 'CSV', format: 'csv', icon: 'grid' },
-          ].map(e => (
-            <button key={e.format} onClick={() => handleExport(e.format)}
-              className="font-mono text-[11px] tracking-wider uppercase px-5 py-2.5 rounded-lg transition-all flex items-center gap-2"
-              style={{ border: '1px solid var(--border-dark)', color: 'var(--text-light-muted)', background: 'var(--bg-card-dark)' }}
-              onMouseEnter={ev => { ev.currentTarget.style.borderColor = 'var(--accent-gold)'; ev.currentTarget.style.color = 'var(--accent-gold)'; }}
-              onMouseLeave={ev => { ev.currentTarget.style.borderColor = 'var(--border-dark)'; ev.currentTarget.style.color = 'var(--text-light-muted)'; }}>
-              <Icon name={e.icon} size={14} />
-              {e.label}
-            </button>
-          ))}
+        {/* Export */}
+        <div ref={r4.ref} className={`mt-8 flex justify-center gap-3 ${r4.cls}`}>
+          <button onClick={() => handleExport('pdf')} className="btn-primary"><Icon name="file-text" size={16} /> Export PDF</button>
+          <button onClick={() => handleExport('json')} className="btn-secondary">JSON ›</button>
+          <button onClick={() => handleExport('csv')} className="btn-secondary">CSV ›</button>
         </div>
       </div>
     </section>
