@@ -23,47 +23,45 @@ export default function QuickWinsTimeline() {
 
   return (
     <section className="section-alt">
-      <div className="section-pad text-center">
+      <div className="section-pad">
         <div ref={r1.ref} className={r1.cls}>
-          <p className="typ-eyebrow" style={{ color: 'var(--accent)' }}>First 90 Days</p>
+          <p className="typ-eyebrow" style={{ color: 'var(--accent)' }}>07 · First 90 Days</p>
           <h2 className="typ-display mt-3">Credibility is built<br />in the first quarter.</h2>
-          <p className="typ-body-large mt-4" style={{ color: 'var(--text-secondary)', maxWidth: '540px', margin: '16px auto 0' }}>
+          <p className="typ-body-large mt-4 mx-auto" style={{ color: 'var(--text-secondary)', maxWidth: '540px' }}>
             Strategic transformation takes 12 months. This is the foundation.
           </p>
         </div>
-      </div>
-      <div className="section-pad-wide" style={{ paddingTop: 0 }}>
-        {/* All 3 phases visible at once */}
-        <div ref={r2.ref} className={`grid grid-cols-1 lg:grid-cols-3 gap-5 ${r2.cls}`}>
+
+        {/* All 3 phases visible simultaneously — Kanban style */}
+        <div ref={r2.ref} className={`mt-12 grid grid-cols-1 lg:grid-cols-3 gap-5 text-left ${r2.cls}`}>
           {QUICK_WINS.map((phase, pi) => (
             <div key={pi} className={`card sd-${pi + 1}`} style={{ padding: 0, overflow: 'hidden' }}>
               {/* Phase header */}
-              <div className="p-7 pb-0">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="icon-box" style={{ background: 'var(--accent-bg)', width: 44, height: 44 }}>
-                    <Icon name={PHASE_ICONS[pi]} size={22} style={{ color: 'var(--accent)' }} />
+              <div className="p-6 pb-0">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="icon-box" style={{ background: 'var(--accent-bg)', width: 40, height: 40 }}>
+                    <Icon name={PHASE_ICONS[pi]} size={20} style={{ color: 'var(--accent)' }} />
                   </div>
                   <div>
                     <span className="typ-eyebrow" style={{ color: 'var(--accent)', fontSize: 11 }}>{phase.phase}</span>
-                    <h3 className="typ-title mt-0.5">{phase.title}</h3>
+                    <h3 className="typ-title mt-0.5" style={{ fontSize: 17 }}>{phase.title}</h3>
                   </div>
                 </div>
-                {/* Progress bar */}
-                <div className="h-1.5" style={{ background: 'var(--bg-secondary)', borderRadius: 8 }}>
-                  <div className="h-full" style={{ width: `${((pi + 1) / 3) * 100}%`, background: 'var(--accent)', borderRadius: 8 }} />
+                <div className="h-1.5" style={{ background: 'rgba(0,0,0,0.04)', borderRadius: 6 }}>
+                  <div className="h-full" style={{ width: `${((pi + 1) / 3) * 100}%`, background: 'var(--accent)', borderRadius: 6 }} />
                 </div>
               </div>
 
-              {/* Tasks — always visible */}
-              <div className="px-7 pt-5 pb-7 space-y-3">
+              {/* All tasks visible */}
+              <div className="p-6 pt-4 space-y-2.5">
                 {phase.items.map((item, i) => (
-                  <div key={i} className="flex items-start gap-3 p-3" style={{ background: 'var(--bg-secondary)', borderRadius: 'var(--radius-sm)' }}>
-                    <div className="icon-box shrink-0" style={{ background: 'var(--accent-bg)', width: 32, height: 32, borderRadius: 8 }}>
-                      <Icon name={TASK_ICONS[pi]?.[i] || 'check-circle'} size={15} style={{ color: 'var(--accent)' }} />
+                  <div key={i} className="flex items-start gap-3 p-3" style={{ background: 'rgba(0,0,0,0.02)', borderRadius: 'var(--radius-sm)' }}>
+                    <div className="icon-box shrink-0" style={{ background: 'var(--accent-bg)', width: 30, height: 30, borderRadius: 8 }}>
+                      <Icon name={TASK_ICONS[pi]?.[i] || 'check-circle'} size={14} style={{ color: 'var(--accent)' }} />
                     </div>
                     <div>
-                      <h4 className="typ-caption font-semibold">{item.t}</h4>
-                      <p className="typ-caption mt-0.5" style={{ color: 'var(--text-secondary)' }}>{item.d}</p>
+                      <h4 className="typ-caption font-semibold" style={{ fontSize: 14 }}>{item.t}</h4>
+                      <p className="typ-caption mt-0.5" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>{item.d}</p>
                     </div>
                   </div>
                 ))}
@@ -72,15 +70,15 @@ export default function QuickWinsTimeline() {
           ))}
         </div>
 
-        <div ref={r3.ref} className={`mt-8 flex flex-col md:flex-row gap-4 items-center justify-between ${r3.cls}`}>
-          <div className="card-flat flex items-center gap-3 flex-1" style={{ padding: '20px 24px' }}>
-            <Icon name="book-open" size={18} style={{ color: 'var(--text-tertiary)' }} />
-            <p className="typ-caption" style={{ color: 'var(--text-secondary)' }}>
-              Drawn from <strong>Holiday Inn</strong>, <strong>Sheraton</strong>, <strong>Generator</strong>, and <strong>MEININGER</strong> transformation playbooks.
+        <div ref={r3.ref} className={`mt-8 flex flex-col md:flex-row gap-4 items-center justify-center ${r3.cls}`}>
+          <div className="card text-left flex items-center gap-3 flex-1" style={{ padding: '16px 20px', background: 'var(--bg-dark)' }}>
+            <Icon name="book-open" size={16} style={{ color: 'var(--text-on-dark-tertiary)' }} />
+            <p className="typ-caption" style={{ color: 'var(--text-on-dark-secondary)', fontSize: 14 }}>
+              Drawn from <strong style={{ color: 'var(--text-on-dark)' }}>Holiday Inn</strong>, <strong style={{ color: 'var(--text-on-dark)' }}>Sheraton</strong>, <strong style={{ color: 'var(--text-on-dark)' }}>Generator</strong>, and <strong style={{ color: 'var(--text-on-dark)' }}>MEININGER</strong> playbooks.
             </p>
           </div>
           <button onClick={handleExport} className="btn-secondary shrink-0">
-            <Icon name="download" size={16} /> Export plan ›
+            <Icon name="download" size={16} /> Export plan
           </button>
         </div>
       </div>
