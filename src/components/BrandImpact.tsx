@@ -108,8 +108,8 @@ export default function BrandImpact() {
               </div>
               <p className="typ-eyebrow" style={{ color: 'var(--text-on-dark-tertiary)' }}>Total Impact</p>
               <div ref={lowC.ref} className="mt-2">
-                <span className="stat-number" style={{ color: 'var(--text-on-dark)' }}>₹{lowC.count}–<span ref={highC.ref as React.Ref<HTMLSpanElement>}>{highC.count}</span></span>
-                <span className="typ-body ml-1" style={{ color: 'var(--text-on-dark-tertiary)' }}>Cr/yr</span>
+                <span style={{ fontSize: 'clamp(56px, 8vw, 80px)', fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1, color: 'var(--text-on-dark)' }}>₹{lowC.count}–<span ref={highC.ref as React.Ref<HTMLSpanElement>}>{highC.count}</span></span>
+                <span className="typ-body-large block mt-1" style={{ color: 'var(--text-on-dark-tertiary)' }}>Cr/yr</span>
               </div>
             </div>
             <div>
@@ -128,7 +128,7 @@ export default function BrandImpact() {
               </div>
               <p className="typ-eyebrow" style={{ color: 'var(--text-on-dark-tertiary)' }}>ROI</p>
               <div className="mt-2">
-                <span className="stat-number" style={{ color: 'var(--green)' }}>8–15×</span>
+                <span style={{ fontSize: 'clamp(56px, 8vw, 80px)', fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1, color: 'var(--green)' }}>8–15×</span>
               </div>
             </div>
           </div>
