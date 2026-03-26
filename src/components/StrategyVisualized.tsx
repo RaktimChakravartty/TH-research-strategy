@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { STRATEGY_LAYERS, TOUCHPOINTS } from '../data/constants';
 import { useReveal } from '../hooks/useReveal';
 import Icon from './Icons';
@@ -7,9 +6,7 @@ const LAYER_ICONS = ['foundation', 'map-pin', 'camera', 'smartphone', 'users', '
 const TP_ICONS = ['check-circle', 'coffee', 'smartphone', 'instagram', 'users'];
 
 export default function StrategyVisualized() {
-  const [active, setActive] = useState(1);
   const r1 = useReveal(), r2 = useReveal(), r3 = useReveal();
-  const current = STRATEGY_LAYERS.find(l => l.id === active)!;
 
   return (
     <section className="section-dark">
@@ -23,51 +20,29 @@ export default function StrategyVisualized() {
         </div>
       </div>
       <div className="section-pad-wide" style={{ paddingTop: 0 }}>
-        {/* Layer grid */}
-        <div ref={r3.ref} className={r3.cls}>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
-            {STRATEGY_LAYERS.map((l, i) => {
-              const isActive = active === l.id;
-              return (
-                <button key={l.id} onClick={() => setActive(l.id)}
-                  className="text-left transition-all" style={{
-                    padding: '24px',
-                    borderRadius: 'var(--radius-lg)',
-                    background: isActive ? 'var(--bg-dark-elevated)' : 'rgba(255,255,255,0.03)',
-                    border: isActive ? '1.5px solid rgba(255,255,255,0.12)' : '1px solid var(--border-dark)',
-                    transform: isActive ? 'scale(1.02)' : 'scale(1)',
-                    transition: 'all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                  }}>
-                  <div className="icon-box mb-3" style={{ background: isActive ? 'rgba(196,82,62,0.15)' : 'rgba(255,255,255,0.04)', width: 40, height: 40 }}>
-                    <Icon name={LAYER_ICONS[i]} size={20} style={{ color: isActive ? 'var(--accent)' : 'var(--text-on-dark-tertiary)' }} />
+        {/* All 6 layers visible */}
+        <div ref={r3.ref} className={`grid grid-cols-1 md:grid-cols-2 gap-5 ${r3.cls}`}>
+          {STRATEGY_LAYERS.map((l, i) => (
+            <div key={l.id} className={`card-dark sd-${i + 1}`} style={{ borderLeft: '3px solid var(--accent)' }}>
+              <div className="flex items-start gap-4">
+                <div className="icon-box shrink-0" style={{ background: 'rgba(196,82,62,0.15)', width: 48, height: 48 }}>
+                  <Icon name={LAYER_ICONS[i]} size={24} style={{ color: 'var(--accent)' }} />
+                </div>
+                <div className="flex-1">
+                  <p className="typ-eyebrow" style={{ color: 'var(--accent)', fontSize: 11 }}>Layer {l.id}</p>
+                  <h3 className="typ-title mt-1" style={{ color: 'var(--text-on-dark)' }}>{l.name}</h3>
+                  <p className="typ-body mt-2" style={{ color: 'var(--text-on-dark-secondary)' }}>{l.desc}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {l.deliverables.map((d, j) => (
+                      <span key={j} className="flex items-center gap-1.5 typ-caption px-3 py-1.5" style={{ background: 'rgba(255,255,255,0.06)', borderRadius: 980, color: 'var(--text-on-dark-secondary)' }}>
+                        <Icon name="file-text" size={12} style={{ color: 'var(--accent)' }} /> {d}
+                      </span>
+                    ))}
                   </div>
-                  <span className="typ-eyebrow block mb-1" style={{ color: isActive ? 'var(--accent)' : 'var(--text-on-dark-tertiary)', fontSize: 10 }}>Layer {l.id}</span>
-                  <span className="typ-caption font-semibold block" style={{ color: isActive ? 'var(--text-on-dark)' : 'var(--text-on-dark-secondary)' }}>{l.name}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Active layer detail */}
-          <div className="card-dark" style={{ borderLeft: '3px solid var(--accent)' }}>
-            <div className="flex items-start gap-4">
-              <div className="icon-box shrink-0" style={{ background: 'rgba(196,82,62,0.15)', width: 48, height: 48 }}>
-                <Icon name={LAYER_ICONS[active - 1]} size={24} style={{ color: 'var(--accent)' }} />
-              </div>
-              <div className="flex-1">
-                <p className="typ-eyebrow" style={{ color: 'var(--accent)', fontSize: 11 }}>Layer {active}</p>
-                <h3 className="typ-headline mt-1" style={{ color: 'var(--text-on-dark)', fontSize: '24px' }}>{current.name}</h3>
-                <p className="typ-body mt-3" style={{ color: 'var(--text-on-dark-secondary)' }}>{current.desc}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {current.deliverables.map((d, i) => (
-                    <span key={i} className="flex items-center gap-1.5 typ-caption px-3 py-1.5" style={{ background: 'rgba(255,255,255,0.06)', borderRadius: 980, color: 'var(--text-on-dark-secondary)' }}>
-                      <Icon name="file-text" size={12} style={{ color: 'var(--accent)' }} /> {d}
-                    </span>
-                  ))}
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
 
         {/* Touchpoints */}
@@ -84,7 +59,9 @@ export default function StrategyVisualized() {
                 <div className="py-2.5 px-3 mb-2" style={{ background: 'var(--accent-bg)', borderRadius: 'var(--radius-sm)' }}>
                   <p className="typ-caption" style={{ color: 'var(--accent)', fontSize: 12 }}>{tp.before}</p>
                 </div>
-                <Icon name="arrow-right" size={14} style={{ color: 'var(--text-on-dark-tertiary)', transform: 'rotate(90deg)', margin: '4px auto', display: 'block' }} />
+                <div className="flex justify-center my-1">
+                  <div className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--text-on-dark-tertiary)' }} />
+                </div>
                 <div className="py-2.5 px-3" style={{ background: 'var(--green-bg)', borderRadius: 'var(--radius-sm)' }}>
                   <p className="typ-caption" style={{ color: 'var(--green)', fontSize: 12 }}>{tp.after}</p>
                 </div>
