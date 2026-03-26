@@ -7,13 +7,18 @@ const BRAND_ICONS: Record<string, string> = { 'The Hosteller': 'hotel', 'Zostel'
 
 function BrandCard({ brand, isPrimary }: { brand: typeof COMPETITORS.hosteller; isPrimary?: boolean }) {
   return (
-    <div className="card-dark flex flex-col h-full" style={{ borderLeft: isPrimary ? '3px solid var(--accent)' : undefined }}>
+    <div className="card-dark flex flex-col h-full" style={{
+      borderLeft: isPrimary ? '3px solid var(--accent)' : undefined,
+      opacity: isPrimary ? 1 : 0.7,
+      transform: isPrimary ? 'scale(1.02)' : 'scale(1)',
+      boxShadow: isPrimary ? '0 8px 40px rgba(196,82,62,0.12)' : 'none',
+    }}>
       <div className="flex items-center gap-3 mb-5">
         <div className="icon-box" style={{ background: isPrimary ? 'rgba(196,82,62,0.15)' : 'rgba(255,255,255,0.06)' }}>
           <Icon name={BRAND_ICONS[brand.name] || 'hotel'} size={22} style={{ color: isPrimary ? 'var(--accent)' : 'var(--text-on-dark-tertiary)' }} />
         </div>
         <div>
-          <h3 className="typ-title" style={{ color: 'var(--text-on-dark)' }}>{brand.name}</h3>
+          <h3 className={isPrimary ? 'typ-headline' : 'typ-title'} style={{ color: 'var(--text-on-dark)', fontSize: isPrimary ? '24px' : undefined }}>{brand.name}</h3>
           <span className="typ-caption" style={{ color: 'var(--text-on-dark-tertiary)' }}>{brand.model}</span>
         </div>
       </div>
