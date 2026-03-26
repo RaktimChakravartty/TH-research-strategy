@@ -16,6 +16,39 @@ const BRAND_URLS: Record<string, string> = {
   'goSTOPS': 'https://www.gostops.com', 'Selina': 'https://www.selina.com',
 };
 
+// Category-specific images: key is "category::brand"
+const CAT_IMAGE_MAP: Record<string, string> = {
+  // Environmental Branding — lobby/interior/signage images
+  'Environmental Branding::Generator Hostels': '/images/generator-lobby.jpg',
+  'Environmental Branding::citizenM': '/images/citizenm-lobby.jpg',
+  'Environmental Branding::Ace Hotel': '/images/ace-hotel.jpg',
+  'Environmental Branding::The Hoxton': '/images/hoxton-openhouse.jpg',
+  'Environmental Branding::25hours Hotels': '/images/25hours-design.jpg',
+  'Environmental Branding::WeWork': '/images/wework.jpg',
+  // Digital Identity — website/app screenshots
+  'Digital Identity::Generator Hostels': '/images/generator-hostels.jpg',
+  'Digital Identity::citizenM': '/images/citizenm.jpg',
+  'Digital Identity::Airbnb': '/images/airbnb.jpg',
+  'Digital Identity::Zostel': '/images/zostel-zoworld.jpg',
+  'Digital Identity::Marriott Bonvoy': '/images/marriott-bonvoy.jpg',
+  'Digital Identity::Ace Hotel': '/images/ace-reader.jpg',
+  // Content Systems — editorial/social/content
+  'Content Systems::Standard Hotels': '/images/standard-hotels.jpg',
+  'Content Systems::Ace Hotel': '/images/ace-reader.jpg',
+  'Content Systems::Airbnb': '/images/airbnb-icons.jpg',
+  'Content Systems::Generator': '/images/generator-hostels.jpg',
+  'Content Systems::The Hoxton': '/images/the-hoxton.jpg',
+  'Content Systems::25hours Hotels': '/images/25hours-design.jpg',
+  // Visual Language — brand identity/logo systems
+  'Visual Language::Generator Hostels': '/images/generator-brandpdf.jpg',
+  'Visual Language::citizenM': '/images/citizenm.jpg',
+  'Visual Language::Marriott Bonvoy': '/images/marriott-bonvoy.jpg',
+  'Visual Language::Airbnb': '/images/airbnb.jpg',
+  'Visual Language::goSTOPS': '/images/gostops.jpg',
+  'Visual Language::WeWork': '/images/wework.jpg',
+};
+
+// Fallback: brand-only lookup
 const IMAGE_MAP: Record<string, string> = {
   'Generator Hostels': '/images/generator-hostels.jpg', 'Generator': '/images/generator-hostels.jpg',
   'citizenM': '/images/citizenm.jpg', 'Ace Hotel': '/images/ace-hotel.jpg',
@@ -26,10 +59,14 @@ const IMAGE_MAP: Record<string, string> = {
   'goSTOPS': '/images/gostops.jpg', 'Selina': '/images/selina.jpg',
 };
 
+function getImage(category: string, brand: string): string | null {
+  return CAT_IMAGE_MAP[`${category}::${brand}`] || IMAGE_MAP[brand] || null;
+}
+
 type Item = { brand: string; note: string; ref: string };
 
-function GalleryCard({ item, onLightbox }: { item: Item; onLightbox: (item: Item) => void }) {
-  const src = IMAGE_MAP[item.brand] || null;
+function GalleryCard({ item, category, onLightbox }: { item: Item; category: string; onLightbox: (item: Item) => void }) {
+  const src = getImage(category, item.brand);
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const icon = BRAND_ICONS[item.brand] || 'star';
@@ -66,7 +103,7 @@ function GalleryCard({ item, onLightbox }: { item: Item; onLightbox: (item: Item
 
 export default function BrandGallery() {
   const [cat, setCat] = useState(GALLERY.categories[0]);
-  const [lightbox, setLightbox] = useState<Item | null>(null);
+  const [lightbox, setLightbox] = useState<(Item & { _cat?: string }) | null>(null);
   const r1 = useReveal(), r2 = useReveal();
   const items = GALLERY.items[cat as keyof typeof GALLERY.items] || [];
 
@@ -99,7 +136,7 @@ export default function BrandGallery() {
             ))}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {items.map((item, i) => <GalleryCard key={`${cat}-${i}`} item={item} onLightbox={setLightbox} />)}
+            {items.map((item, i) => <GalleryCard key={`${cat}-${i}`} item={item} category={cat} onLightbox={(it) => setLightbox({ ...it, _cat: cat })} />)}
           </div>
         </div>
       </div>
@@ -108,8 +145,8 @@ export default function BrandGallery() {
       {lightbox && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center" style={{ background: 'rgba(12,12,12,0.95)' }} onClick={() => setLightbox(null)}>
           <div className="max-w-2xl w-full mx-4" onClick={e => e.stopPropagation()}>
-            {IMAGE_MAP[lightbox.brand] && (
-              <img src={IMAGE_MAP[lightbox.brand]} alt={lightbox.brand}
+            {getImage(lightbox._cat || '', lightbox.brand) && (
+              <img src={getImage(lightbox._cat || '', lightbox.brand)!} alt={lightbox.brand}
                 className="w-full rounded-xl object-cover mb-4" style={{ maxHeight: '60vh' }}
                 onError={e => (e.currentTarget.style.display = 'none')} />
             )}
