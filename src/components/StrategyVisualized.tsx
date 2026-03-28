@@ -71,6 +71,9 @@ export default function StrategyVisualized() {
             ))}
           </div>
         </div>
+        <p className="typ-mono mt-8 text-center" style={{ color: 'var(--text-on-dark-tertiary)', fontSize: 11, opacity: 0.5 }}>
+          Framework informed by: Generator Hostels brand manual · citizenM two-layer model · MEININGER centralized governance · Marriott Bonvoy architecture
+        </p>
       </div>
     </section>
   );

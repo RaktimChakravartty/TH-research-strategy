@@ -128,6 +128,10 @@ export default function WhyRaktim() {
           </div>
         </div>
 
+        <p className="typ-mono mt-10 text-center" style={{ color: 'var(--text-on-dark-tertiary)', fontSize: 11, opacity: 0.5 }}>
+          Sources: ZS Associates performance reviews (2022–2023) · LinkedIn recommendations · Direct client records · Independent practice portfolio
+        </p>
+
         {/* CTA */}
         <div className="mt-14">
           <div className="sep" style={{ maxWidth: '64px', margin: '0 auto 32px', background: 'var(--border-dark)' }} />
@@ -139,7 +143,9 @@ export default function WhyRaktim() {
               View full strategy
             </a>
           </div>
-          <p className="typ-caption mt-4" style={{ color: 'var(--text-on-dark-tertiary)', fontSize: 14 }}>hello@raktim.co · +91 84478 99705</p>
+          <p className="typ-caption mt-4" style={{ color: 'var(--text-on-dark-tertiary)', fontSize: 14 }}>
+            <a href="mailto:hello@raktim.co" style={{ color: 'var(--text-on-dark-tertiary)' }}>hello@raktim.co</a> · +91 84478 99705
+          </p>
         </div>
       </div>
     </section>

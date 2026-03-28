@@ -139,6 +139,9 @@ export default function BrandGallery() {
             {items.map((item, i) => <GalleryCard key={`${cat}-${i}`} item={item} category={cat} onLightbox={(it) => setLightbox({ ...it, _cat: cat })} />)}
           </div>
         </div>
+        <p className="typ-mono mt-8 text-center" style={{ color: 'var(--text-on-dark-tertiary)', fontSize: 11, opacity: 0.5 }}>
+          Sources: Brand websites · Design press (Dezeen, It's Nice That, Creative Review) · Direct brand observation
+        </p>
       </div>
 
       {/* Lightbox */}

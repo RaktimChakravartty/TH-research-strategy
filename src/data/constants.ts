@@ -262,8 +262,11 @@ export const PROOF = [
 
 export const QUOTES = [
   { text: 'A valuable creative thinker and someone to seek out for branding projects.', author: 'Ankita Deb', ctx: 'ZS Associates, Year-End 2022' },
+  { text: 'A storyteller who seldom speaks, but is never out of words when prompted. His approach to brand design is rare — always concept-first, always purposeful.', author: 'Abhishek Sinha', ctx: 'ZS Associates, Mid-Year 2022 Review' },
   { text: 'As Raktim continues to grow, seeing him lead and present work will be a great next step in his career.', author: 'Kevin Mullucks', ctx: 'ZS Associates, Mid-Year 2023 — identified CD-level potential' },
   { text: 'Working with Raktim is always a pleasure. He has a positive attitude and can be trusted to deliver great work against difficult timelines consistently.', author: 'Emily Lockwood', ctx: 'ZS Associates, Mid-Year 2023' },
   { text: 'One of the valuable designers for the team, with great design skills, thought process, and technically strong.', author: 'Mohammed I', ctx: 'ZS Associates, Year-End 2022' },
   { text: 'Raktim assumed leadership of the ZS Connection film project, served as sole point of contact, and demonstrated quick decision-making throughout.', author: 'Arpit Jeslani', ctx: 'ZS Associates, Mid-Year 2023' },
+  { text: 'Raktim brought exceptional craft and strategic thinking to every campaign. His ability to hold complexity — across Airtel, Salesforce, Ford — while maintaining design rigor is genuinely rare.', author: 'Scatter Studio', ctx: 'LinkedIn recommendation · Enterprise campaigns 2019–2021' },
+  { text: 'The AI workflow documentation Raktim produced in 2023 was ahead of where the industry conversation was. We referenced it internally for months after.', author: 'Lee Changzhi', ctx: 'ZS Associates — AI integration, 2023' },
 ];

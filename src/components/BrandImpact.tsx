@@ -135,6 +135,9 @@ export default function BrandImpact() {
           <button onClick={() => handleExport('json')} className="btn-secondary">JSON</button>
           <button onClick={() => handleExport('csv')} className="btn-secondary">CSV</button>
         </div>
+        <p className="typ-mono mt-6 text-center" style={{ color: 'var(--text-tertiary)', fontSize: 11, opacity: 0.5 }}>
+          Calculations based on: The Hosteller operational data FY25 · Industry OTA commission benchmarks (15–25%) · citizenM, Generator, MEININGER ADR uplift precedent
+        </p>
       </div>
     </section>
   );

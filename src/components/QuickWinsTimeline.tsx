@@ -81,6 +81,9 @@ export default function QuickWinsTimeline() {
             <Icon name="download" size={16} /> Export plan
           </button>
         </div>
+        <p className="typ-mono mt-6 text-center" style={{ color: 'var(--text-tertiary)', fontSize: 11, opacity: 0.5 }}>
+          Methodology: Holiday Inn first 90 days framework · Sheraton brand integration playbook · Generator rollout sequence · MEININGER centralization model
+        </p>
       </div>
     </section>
   );

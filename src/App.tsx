@@ -94,7 +94,8 @@ export default function App() {
             </div>
             <div className="sep" style={{ margin: '48px auto 24px', background: 'var(--border-dark)' }} />
             <p className="typ-caption" style={{ color: 'var(--text-on-dark-tertiary)' }}>
-              Prepared by Raktim Chakravartty · March 2026 · Confidential · hello@raktim.co
+              Prepared by Raktim Chakravartty · March 2026 · Confidential ·{' '}
+              <a href="mailto:hello@raktim.co" style={{ color: 'var(--text-on-dark-tertiary)' }}>hello@raktim.co</a>
             </p>
           </div>
         </footer>

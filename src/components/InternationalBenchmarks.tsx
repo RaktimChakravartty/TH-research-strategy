@@ -100,6 +100,9 @@ export default function InternationalBenchmarks() {
             <p className="typ-body mt-2" style={{ color: 'var(--text-secondary)' }}>OYO hired COLLINS to restructure brand architecture. After rebrand: PRISM (2025), heading toward IPO with Rs.6,650Cr fresh issue, Rs.6,463Cr revenue FY2025, Rs.623Cr net profit.</p>
           </div>
         </div>
+        <p className="typ-mono mt-8 text-center" style={{ color: 'var(--text-tertiary)', fontSize: 11, opacity: 0.5 }}>
+          Sources: CoStar · Skift · Company annual reports · Crunchbase · Brookfield press release May 2025
+        </p>
       </div>
     </section>
   );

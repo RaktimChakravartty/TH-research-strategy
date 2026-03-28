@@ -138,6 +138,9 @@ export default function CompetitiveLandscape() {
             "No competitor currently holds both operational foundation <span style={{ color: 'var(--accent)' }} className="font-semibold not-italic">and</span> brand system. That's the opportunity."
           </p>
         </div>
+        <p className="typ-mono mt-8 text-center" style={{ color: 'var(--text-on-dark-tertiary)', fontSize: 11, opacity: 0.5 }}>
+          Sources: Company websites · Tracxn · Entrackr · LinkedIn · Inc42 · YourStory · Snapshot March 2026
+        </p>
       </div>
     </section>
   );

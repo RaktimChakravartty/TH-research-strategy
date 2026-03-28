@@ -109,6 +109,9 @@ export default function MarketSnapshot() {
             </div>
           ))}
         </div>
+        <p className="typ-mono mt-8 text-center" style={{ color: 'var(--text-tertiary)', fontSize: 11, opacity: 0.5 }}>
+          Sources: Phocuswright 2024 · Mordor Intelligence · Future Market Insights · IBEF · BW Businessworld/Travel
+        </p>
       </div>
     </section>
   );

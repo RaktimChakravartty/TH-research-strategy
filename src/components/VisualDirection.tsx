@@ -98,6 +98,9 @@ export default function VisualDirection() {
           <p className="typ-caption italic mx-auto" style={{ color: 'var(--text-tertiary)', maxWidth: '600px', fontSize: 14 }}>
             All three share common requirements: design manual, environmental standards, photography guidelines, template systems. The direction determines aesthetic character. The system determines whether it holds.
           </p>
+          <p className="typ-mono mt-6" style={{ color: 'var(--text-tertiary)', fontSize: 11, opacity: 0.5 }}>
+            Sources: Generator design manual · KesselsKramer case study · Ace Hotel editorial platform · 25hours brand audit · goSTOPS brand identity
+          </p>
         </div>
       </div>
     </section>
