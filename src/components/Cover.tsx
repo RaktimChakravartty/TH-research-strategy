@@ -7,57 +7,60 @@ const STAT_ICONS = ['hotel', 'bed', 'users', 'repeat', 'mobile', 'rupee'];
 export default function Cover() {
   const [logoErr, setLogoErr] = useState(false);
 
+  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
   return (
     <section className="section-dark" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-      <div className="section-pad" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
+      <div className="section-pad" style={{ paddingTop: '80px', paddingBottom: '64px' }}>
         {/* Logo */}
         {!logoErr && (
-          <div className="anim-up anim-up-1 mb-6">
-            <img src="/images/the-hosteller-logo.png" alt="The Hosteller" className="mx-auto h-10 w-auto object-contain"
-              style={{ opacity: 0.7 }} onError={() => setLogoErr(true)} />
+          <div className="anim-up anim-up-1 mb-5">
+            <img src="/images/the-hosteller-logo.png" alt="The Hosteller" className="mx-auto h-8 w-auto object-contain"
+              style={{ opacity: 0.6 }} onError={() => setLogoErr(true)} />
           </div>
         )}
 
-        {/* Eyebrow */}
-        <p className="typ-eyebrow anim-up anim-up-1" style={{ color: 'var(--text-on-dark-tertiary)' }}>
-          Brand Strategy & Research · March 2026
-        </p>
-
-        {/* Hero */}
-        <h1 className="typ-hero mt-5 anim-up anim-up-2" style={{ color: 'var(--text-on-dark)' }}>
-          The Hosteller
+        {/* Hero title */}
+        <h1 className="typ-hero anim-up anim-up-2" style={{ color: 'var(--text-on-dark)' }}>
+          The Hosteller.
         </h1>
 
-        <p className="typ-body-large mt-5 anim-up anim-up-3 mx-auto" style={{ color: 'var(--text-on-dark-secondary)', maxWidth: '580px' }}>
-          India's largest self-operated hostel chain. 72+ properties, 5,100 beds, ₹73 Cr revenue. A brand ready for its next chapter.
+        <p className="typ-body-large mt-4 anim-up anim-up-2 mx-auto" style={{ color: 'var(--text-on-dark-secondary)', maxWidth: '520px' }}>
+          Brand strategy and research for India's largest self-operated hostel chain.
         </p>
 
-        {/* CTA */}
-        <div className="mt-8 anim-up anim-up-3">
-          <button className="btn-primary" onClick={() => document.getElementById('market')?.scrollIntoView({ behavior: 'smooth' })}>
-            Explore the strategy
-          </button>
-        </div>
-
-        {/* Stats */}
-        <div className="mt-16 anim-up anim-up-4">
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mx-auto" style={{ maxWidth: '820px' }}>
+        {/* Stat cards — 6 in a row */}
+        <div className="mt-12 anim-up anim-up-3">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mx-auto" style={{ maxWidth: '780px' }}>
             {HERO_STATS.map((s, i) => (
-              <div key={i} className="py-5 px-2 text-center" style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 'var(--radius-md)' }}>
-                <Icon name={STAT_ICONS[i]} size={18} style={{ color: 'var(--gold)', margin: '0 auto 8px', display: 'block' }} />
-                <div className="text-[22px] font-semibold font-display" style={{ color: 'var(--text-on-dark)', letterSpacing: '-0.02em' }}>{s.value}</div>
-                <div className="typ-caption mt-1" style={{ color: 'var(--text-on-dark-tertiary)', fontSize: 13 }}>{s.label}</div>
+              <div key={i} className="py-4 px-2 text-center" style={{ background: 'rgba(255,255,255,0.04)', borderRadius: 'var(--radius-sm)' }}>
+                <Icon name={STAT_ICONS[i]} size={14} style={{ color: 'var(--gold)', margin: '0 auto 6px', display: 'block', opacity: 0.7 }} />
+                <div className="font-display font-bold" style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.5rem', color: 'var(--text-on-dark)', letterSpacing: '-0.02em' }}>{s.value}</div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 500, letterSpacing: '0.06em', textTransform: 'uppercase' as const, color: 'var(--text-on-dark-tertiary)', marginTop: 4 }}>{s.label}</div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Source + Author */}
-        <p className="typ-caption mt-6 anim-up anim-up-4" style={{ color: 'var(--text-on-dark-tertiary)', fontSize: 13 }}>
-          Source: BW Travel, Tracxn, Entrackr, YourStory/Inc42 · Revenue FY2025
+        {/* Nav links */}
+        <div className="mt-8 anim-up anim-up-4" style={{ color: 'var(--text-on-dark-tertiary)', fontSize: 13 }}>
+          {['market', 'competitive', 'benchmarks', 'gallery', 'direction', 'strategy', 'quickwins', 'impact', 'whyraktim'].map((id, i) => (
+            <span key={id}>
+              {i > 0 && <span style={{ opacity: 0.3 }}> · </span>}
+              <button onClick={() => scrollTo(id)} style={{ background: 'none', border: 'none', color: 'var(--text-on-dark-tertiary)', cursor: 'pointer', fontSize: 13, fontFamily: "'DM Sans', sans-serif", transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--gold)')} onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-on-dark-tertiary)')}>
+                {id === 'whyraktim' ? 'Why Me' : id === 'quickwins' ? '90 Days' : id.charAt(0).toUpperCase() + id.slice(1)}
+              </button>
+            </span>
+          ))}
+        </div>
+
+        {/* Source */}
+        <p className="anim-up anim-up-4 mt-10" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: 'var(--text-on-dark-tertiary)', opacity: 0.3 }}>
+          Sources: BW Travel · Tracxn · Entrackr · YourStory · Inc42 · Revenue FY2025
         </p>
-        <p className="typ-caption mt-3 anim-up anim-up-4" style={{ color: 'var(--text-on-dark-tertiary)', fontSize: 13 }}>
-          Prepared by <span className="font-medium" style={{ color: 'var(--text-on-dark-secondary)' }}>Raktim Chakravartty</span> · Creative Director
+        <p className="anim-up anim-up-4 mt-2" style={{ fontSize: 13, color: 'var(--text-on-dark-tertiary)' }}>
+          Prepared by <span style={{ color: 'var(--text-on-dark-secondary)', fontWeight: 500 }}>Raktim Chakravartty</span>
         </p>
       </div>
     </section>

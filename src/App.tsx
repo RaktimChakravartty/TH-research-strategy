@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { SECTIONS } from './data/constants';
 import Icon from './components/Icons';
 import Cover from './components/Cover';
@@ -51,21 +51,21 @@ export default function App() {
 
   return (
     <div className="relative">
-      {/* Solid dark left sidebar */}
-      <nav className="fixed left-0 top-0 h-screen z-50 flex flex-col items-center justify-center gap-1"
-        style={{ width: '48px', background: '#0C0C0C', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+      {/* Sidebar nav — desktop only */}
+      <nav className="sidebar fixed left-0 top-0 h-screen z-50 flex flex-col items-center justify-center gap-1"
+        style={{ width: '48px', background: '#1C1C1C', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
         {SECTIONS.map((s, i) => (
           <button key={s.id} onClick={() => scrollTo(i)}
-            className="group relative flex items-center justify-center w-9 h-9 rounded-lg transition-all"
-            style={{ background: active === i ? 'rgba(196,82,62,0.15)' : 'transparent' }}
+            className="group relative flex items-center justify-center w-8 h-8 rounded-lg transition-all"
+            style={{ background: active === i ? 'rgba(212,168,75,0.12)' : 'transparent' }}
             title={s.label}>
-            <Icon name={NAV_ICONS[i]} size={15} style={{
-              color: active === i ? 'var(--accent)' : 'rgba(240,235,227,0.3)',
+            <Icon name={NAV_ICONS[i]} size={14} style={{
+              color: active === i ? 'var(--gold)' : 'rgba(240,235,227,0.25)',
               transition: 'color 0.2s',
             }} />
             <span className="absolute left-12 px-3 py-1.5 rounded-lg typ-caption opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
-              style={{ background: '#1A1A1A', color: '#F0EBE3', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 16px rgba(0,0,0,0.5)' }}>
-              <span className="typ-mono" style={{ color: 'var(--accent)', opacity: 0.5, fontSize: 11 }}>{String(i).padStart(2, '0')}</span> {s.label}
+              style={{ background: '#262626', color: '#F0EBE3', border: '1px solid rgba(255,255,255,0.06)', boxShadow: '0 4px 16px rgba(0,0,0,0.4)' }}>
+              <span className="typ-mono" style={{ color: 'var(--gold)', opacity: 0.5, fontSize: 10 }}>{String(i).padStart(2, '0')}</span> {s.label}
             </span>
           </button>
         ))}
@@ -79,22 +79,19 @@ export default function App() {
 
         {/* Footer */}
         <footer className="section-dark">
-          <div className="section-pad" style={{ paddingTop: '64px', paddingBottom: '64px' }}>
-            <p className="typ-display" style={{ color: 'var(--text-on-dark)' }}>Ready to build the brand.</p>
-            <p className="typ-body-large mt-4" style={{ color: 'var(--text-on-dark-secondary)', maxWidth: '560px', margin: '16px auto 0' }}>
-              This strategy is ready for implementation. Export, share, or discuss next steps.
-            </p>
-            <div className="mt-10 flex justify-center gap-4 flex-wrap">
+          <div className="section-pad" style={{ paddingTop: '48px', paddingBottom: '48px' }}>
+            <h2 className="typ-display" style={{ color: 'var(--text-on-dark)' }}>Ready to build the brand.</h2>
+            <div className="mt-8 flex justify-center gap-3 flex-wrap">
               <button onClick={() => window.print()} className="btn-primary">
-                <Icon name="download" size={16} /> Export PDF
+                <Icon name="download" size={14} /> Export PDF
               </button>
               <a href="https://thehosteller.raktim.co" target="_blank" rel="noreferrer" className="btn-secondary">
                 View Full Strategy
               </a>
             </div>
-            <div className="sep" style={{ margin: '48px auto 24px', background: 'var(--border-dark)' }} />
-            <p className="typ-caption" style={{ color: 'var(--text-on-dark-tertiary)' }}>
-              Prepared by Raktim Chakravartty · March 2026 · Confidential ·{' '}
+            <div className="sep" style={{ margin: '32px auto 20px', background: 'var(--border-dark)' }} />
+            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: 'var(--text-on-dark-tertiary)' }}>
+              Raktim Chakravartty · March 2026 · Confidential ·{' '}
               <a href="mailto:hello@raktim.co" style={{ color: 'var(--text-on-dark-tertiary)' }}>hello@raktim.co</a>
             </p>
           </div>
